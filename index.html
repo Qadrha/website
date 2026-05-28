@@ -101,13 +101,17 @@
       <!-- Logo -->
       <div class="flex items-center gap-4 cursor-pointer">
         <div class="w-12 h-12 bg-[#0a0f1e] border border-[#1a2b45] rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(0,196,255,0.15)] shrink-0 overflow-hidden">
-          <!-- AR logo: notch points left; EN logo: notch points right — toggled via JS -->
+          <!-- Q mark — Qadrha brand rebrand 2026-05 -->
           <svg id="logo-svg" width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M35 30H65V70H35V30ZM40 35V65H60V35H40Z" fill="#F4F7FB"/>
-            <rect x="42" y="22" width="6" height="6" fill="#F4F7FB"/>
-            <rect x="52" y="22" width="6" height="6" fill="#F4F7FB"/>
-            <rect x="35" y="65" width="30" height="5" fill="#F4F7FB"/>
-            <rect id="logo-notch" x="15" y="47.5" width="30" height="6" fill="#00C4FF"/>
+            <defs>
+              <linearGradient id="qgNav" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00d4ff"/>
+                <stop offset="100%" stop-color="#0090cc"/>
+              </linearGradient>
+            </defs>
+            <path d="M 68.9 51.3 A 22 22 0 1 0 58.6 60.3 Q 68 72 80 76"
+                  stroke="url(#qgNav)" stroke-width="9.5" stroke-linecap="round" fill="none"/>
+            <circle cx="80" cy="76" r="4.8" fill="url(#qgNav)"/>
           </svg>
         </div>
         <div class="flex flex-col justify-center" id="logo-text-wrap">
@@ -279,12 +283,11 @@
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
 
       <div class="flex items-center gap-3">
+        <!-- Q mark — footer (small, muted) -->
         <svg width="18" height="18" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
-          <path d="M35 30H65V70H35V30ZM40 35V65H60V35H40Z" fill="#F4F7FB"/>
-          <rect x="42" y="22" width="6" height="6" fill="#F4F7FB"/>
-          <rect x="52" y="22" width="6" height="6" fill="#F4F7FB"/>
-          <rect x="35" y="65" width="30" height="5" fill="#F4F7FB"/>
-          <rect x="15" y="47.5" width="30" height="6" fill="#00C4FF"/>
+          <path d="M 68.9 51.3 A 22 22 0 1 0 58.6 60.3 Q 68 72 80 76"
+                stroke="#00c4ff" stroke-width="9.5" stroke-linecap="round" fill="none"/>
+          <circle cx="80" cy="76" r="4.8" fill="#00c4ff"/>
         </svg>
         <span id="footer-copy" class="text-sm font-bold text-gray-500">© 2026 قدرها. جميع الحقوق محفوظة.</span>
       </div>
@@ -304,7 +307,6 @@
       ar: {
         htmlLang: 'ar', htmlDir: 'rtl',
         logoName: 'قدرها', logoSub: 'Qadrha',
-        logoNotchX: '15',
         navLink: 'كيف نعمل؟',
         langLabel: 'EN',
         ctaBtn: 'حمل التطبيق',
@@ -355,7 +357,6 @@
       en: {
         htmlLang: 'en', htmlDir: 'ltr',
         logoName: 'Qadrha', logoSub: 'AI Assessment',
-        logoNotchX: '55',
         navLink: 'How it works',
         langLabel: 'عربي',
         ctaBtn: 'Download App',
@@ -417,10 +418,9 @@
       // Font
       document.body.style.fontFamily = lang === 'ar' ? "'Tajawal', sans-serif" : "'Inter', sans-serif";
 
-      // Logo
+      // Logo text (Q mark is language-agnostic — no SVG manipulation needed)
       document.getElementById('logo-name').textContent = s.logoName;
       document.getElementById('logo-sub').textContent  = s.logoSub;
-      document.getElementById('logo-notch').setAttribute('x', s.logoNotchX);
 
       // Logo text align
       const logoWrap = document.getElementById('logo-text-wrap');
