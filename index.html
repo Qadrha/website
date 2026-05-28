@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary Meta -->
-  <title>قدرها | Qadrha — حقك في كل حادث</title>
-  <meta name="description" content="الذكاء الاصطناعي يقيّم أضرار سيارتك في ثوانٍ. نحدد القيمة الحقيقية ونتتبع مواعيد ساما لضمان حقك بالكامل.">
-  <meta name="keywords" content="تأمين سيارات, حادث سيارة, تقييم أضرار, ساما, مطالبات تأمين, قدرها, Qadrha, Saudi Arabia, car insurance, SAMA claims">
+  <title>قدرها | Qadrha — رفيقك الذكي لسيارتك</title>
+  <meta name="description" content="تتبع صيانة سيارتك، تحقق من ضمانها، واعرف قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي. قدرها، مساعدك الذكي لكل ما يخص سيارتك.">
+  <meta name="keywords" content="صيانة سيارة, ضمان سيارة, قيمة سيارة, مستشار ذكي, تشخيص أعطال, إستمارة, car maintenance, car warranty, car value, AI car advisor, fault diagnosis, Saudi Arabia, قدرها, Qadrha">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://qadrha.com/">
-  <meta property="og:title" content="قدرها | Qadrha — حقك في كل حادث">
-  <meta property="og:description" content="AI-powered car damage assessment. Qadrha determines the true value of your damage and tracks SAMA deadlines to guarantee your full rights.">
+  <meta property="og:title" content="قدرها | Qadrha — رفيقك الذكي لسيارتك">
+  <meta property="og:description" content="AI-powered car companion. Qadrha tracks your maintenance, verifies your warranty, and reveals your car's true value.">
   <meta property="og:image" content="https://qadrha.com/og-image.jpg">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://qadrha.com/">
-  <meta property="twitter:title" content="قدرها | Qadrha — حقك في كل حادث">
-  <meta property="twitter:description" content="AI-powered car damage assessment. Qadrha tracks SAMA deadlines so insurance companies can't delay your claim.">
+  <meta property="twitter:title" content="قدرها | Qadrha — رفيقك الذكي لسيارتك">
+  <meta property="twitter:description" content="Track maintenance. Verify warranty. Know your car's value. All powered by AI — in Saudi Arabia.">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -42,25 +42,27 @@
       font-family: var(--font-en);
     }
 
-    .notch-accent {
-      width: 40px; height: 6px;
-      background-color: #00c4ff;
-      border-radius: 2px;
+    /* Brand accent bar */
+    .q-accent {
+      width: 40px; height: 5px;
+      background: linear-gradient(90deg, #00c4ff, #0077ff);
+      border-radius: 3px;
     }
 
-    /* Scanning animation for AI card */
-    @keyframes scan {
-      0%   { top: 10%; opacity: 1; }
-      50%  { top: 85%; opacity: 1; }
-      100% { top: 10%; opacity: 1; }
+    /* Milestone track animation */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(1.3); }
     }
-    .scan-line {
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: #00c4ff;
-      box-shadow: 0 0 20px #00c4ff;
-      animation: scan 2s ease-in-out infinite;
+    .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+    /* Score bar fill animation */
+    @keyframes fill-bar {
+      from { width: 0; }
+      to   { width: 87%; }
+    }
+    .score-fill {
+      animation: fill-bar 1.4s ease-out 0.4s both;
     }
 
     /* Lang toggle pill */
@@ -75,13 +77,7 @@
       transition: all 0.2s;
       background: transparent;
     }
-    .lang-btn:hover {
-      border-color: #00c4ff;
-      color: #00c4ff;
-    }
-
-    /* Smooth section transitions */
-    [data-ar], [data-en] { transition: opacity 0.15s; }
+    .lang-btn:hover { border-color: #00c4ff; color: #00c4ff; }
 
     /* Gradient glow bg */
     .hero-glow {
@@ -101,7 +97,7 @@
       <!-- Logo -->
       <div class="flex items-center gap-4 cursor-pointer">
         <div class="w-12 h-12 bg-[#0a0f1e] border border-[#1a2b45] rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(0,196,255,0.15)] shrink-0 overflow-hidden">
-          <!-- Q mark — Qadrha brand rebrand 2026-05 -->
+          <!-- Q mark — Qadrha brand -->
           <svg id="logo-svg" width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="qgNav" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
@@ -122,7 +118,7 @@
 
       <!-- Nav right -->
       <div class="flex items-center gap-4">
-        <a href="#how-it-works" id="nav-link" class="hidden md:block text-sm font-bold text-gray-400 hover:text-white transition">كيف نعمل؟</a>
+        <a href="#features" id="nav-link" class="hidden md:block text-sm font-bold text-gray-400 hover:text-white transition">المميزات</a>
 
         <!-- Language Toggle -->
         <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-btn">
@@ -144,14 +140,14 @@
   <div class="relative overflow-hidden">
     <div class="hero-glow"></div>
     <header class="pt-40 pb-20 px-6 flex flex-col items-center text-center max-w-5xl mx-auto relative z-10">
-      <div class="notch-accent mb-8 shadow-[0_0_15px_#00c4ff]"></div>
+      <div class="q-accent mb-8 shadow-[0_0_15px_#00c4ff]"></div>
       <h1 id="hero-h1" class="text-6xl md:text-[7rem] font-black leading-[1.1] tracking-tight mb-8 text-[#f4f7fb]">
-        حقك في <br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00c4ff] to-[#0077ff]">كل حادث</span>
+        اعرف سيارتك.<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00c4ff] to-[#0077ff]">احمِ قيمتها.</span>
       </h1>
       <p id="hero-sub" class="text-xl md:text-2xl text-gray-400 font-medium max-w-2xl mb-12 leading-relaxed">
-        الذكاء الاصطناعي يقيّم أضرار سيارتك في ثوانٍ.<br>
-        نحدد القيمة الحقيقية ونتتبع مواعيد "ساما" لضمان حقك بالكامل.
+        قدرها يتتبع صيانة سيارتك، يكشف فجوات الضمان،<br>
+        ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 items-center">
         <button id="hero-cta-primary" class="bg-[#00c4ff] text-[#0d1b2e] font-black text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,196,255,0.35)]">
@@ -168,53 +164,86 @@
   <!-- ── HOW IT WORKS ───────────────────────────────────────────────────── -->
   <section id="how-it-works" class="py-20 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-16">
-      <h2 id="hiw-title" class="text-4xl md:text-5xl font-black mb-4 text-[#f4f7fb]">بكل بساطة وسرعة</h2>
-      <p id="hiw-sub" class="text-xl text-gray-400">ثلاث خطوات فقط تفصلك عن معرفة حقك الحقيقي</p>
+      <h2 id="hiw-title" class="text-4xl md:text-5xl font-black mb-4 text-[#f4f7fb]">ابدأ في ثلاث خطوات</h2>
+      <p id="hiw-sub" class="text-xl text-gray-400">من رفع الإستمارة إلى معرفة القيمة الحقيقية</p>
     </div>
 
     <div id="steps-row" class="flex flex-col md:flex-row gap-6 justify-center items-stretch w-full">
 
-      <!-- Step 1 -->
+      <!-- Step 1 — Add Car -->
       <div class="flex-1 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00c4ff]/50 transition-colors group">
         <div class="w-12 h-12 rounded-full bg-[#0d1b2e] border-2 border-[#00c4ff] text-[#00c4ff] flex items-center justify-center font-black text-xl mb-6 shadow-[0_0_15px_rgba(0,196,255,0.2)]" style="font-family:'Inter',sans-serif">1</div>
-        <h3 id="s1-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">صوّر الحادث</h3>
-        <p id="s1-body" class="text-gray-400 text-sm leading-relaxed mb-10">التقط صوراً واضحة للأضرار في سيارتك مباشرة من موقع الحادث.</p>
-        <div class="bg-[#111623] rounded-3xl p-6 border border-gray-700 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300">
-          <div class="text-5xl mb-3">🚗</div>
-          <p id="s1-card-label" class="text-xs text-white font-bold mb-4">لا توجد مطالبات نشطة</p>
-          <div class="bg-[#4db8ff] text-white font-bold py-2.5 rounded-xl text-sm shadow-[0_0_15px_rgba(77,184,255,0.3)] flex justify-center items-center gap-1">
-            <span id="s1-card-btn-icon" class="text-lg leading-none">+</span>
-            <span id="s1-card-btn">مطالبة جديدة</span>
+        <h3 id="s1-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">أضف سيارتك</h3>
+        <p id="s1-body" class="text-gray-400 text-sm leading-relaxed mb-10">ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.</p>
+        <!-- Vehicle card mockup -->
+        <div class="bg-[#111623] rounded-3xl p-5 border border-gray-700 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300 text-right">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-[#00c4ff] font-bold bg-[#00c4ff]/10 px-2 py-1 rounded-lg" style="font-family:'Inter',sans-serif">2022</span>
+            <span class="text-gray-500 text-xs">🚗</span>
           </div>
+          <p id="s1-car-name" class="text-white font-black text-lg leading-tight mb-1">هافال دارجو</p>
+          <p class="text-[#00c4ff] font-bold text-xs tracking-wider" style="font-family:'Inter',sans-serif">ABC-1234 ← ن م م</p>
         </div>
       </div>
 
-      <!-- Step 2 -->
+      <!-- Step 2 — Maintenance -->
       <div class="flex-1 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00c4ff]/50 transition-colors group">
         <div class="w-12 h-12 rounded-full bg-[#0d1b2e] border-2 border-gray-700 text-gray-400 flex items-center justify-center font-black text-xl mb-6 group-hover:border-[#00c4ff] group-hover:text-[#00c4ff] transition-colors" style="font-family:'Inter',sans-serif">2</div>
-        <h3 id="s2-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">الذكاء الاصطناعي يحلل</h3>
-        <p id="s2-body" class="text-gray-400 text-sm leading-relaxed mb-10">خوارزمياتنا المتقدمة تحلل الصور فوراً وتقارنها بأسعار الإصلاح الحقيقية.</p>
-        <div class="bg-[#050a14] rounded-3xl p-6 border border-gray-700 w-full mt-auto shadow-lg relative overflow-hidden h-[160px] flex items-center justify-center group-hover:-translate-y-2 transition-transform duration-300">
-          <svg class="w-20 h-20 text-[#00c4ff]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0118.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          <div class="scan-line"></div>
+        <h3 id="s2-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">تتبع الصيانة والضمان</h3>
+        <p id="s2-body" class="text-gray-400 text-sm leading-relaxed mb-10">سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.</p>
+        <!-- Maintenance timeline mockup -->
+        <div class="bg-[#050a14] rounded-3xl p-5 border border-gray-700 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300 text-right">
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3 flex-row-reverse">
+              <div class="w-6 h-6 rounded-full bg-[#1a7a4a] flex items-center justify-center text-xs text-white font-bold shrink-0">✓</div>
+              <div class="flex-1">
+                <p class="text-white text-xs font-bold" id="s2-m1">40,000 كم — موثّق</p>
+                <p class="text-gray-500 text-[10px]">تغيير زيت + فلتر هواء</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 flex-row-reverse">
+              <div class="w-6 h-6 rounded-full bg-[#00c4ff] flex items-center justify-center pulse-dot shrink-0">
+                <span class="text-[#0d1b2e] text-xs font-black">🚗</span>
+              </div>
+              <div class="flex-1">
+                <p class="text-[#00c4ff] text-xs font-bold" id="s2-m2">50,000 كم — أنت هنا</p>
+                <p class="text-gray-500 text-[10px]">فحص الفرامل + تبديل الإطارات</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 flex-row-reverse opacity-40">
+              <div class="w-6 h-6 rounded-full border border-gray-600 flex items-center justify-center text-xs text-gray-500 shrink-0">◎</div>
+              <div class="flex-1">
+                <p class="text-gray-400 text-xs font-bold" id="s2-m3">60,000 كم — قادم</p>
+                <p class="text-gray-600 text-[10px]">تبديل شمعات + فحص شامل</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Step 3 -->
+      <!-- Step 3 — Car Value Score -->
       <div class="flex-1 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00c4ff]/50 transition-colors group">
         <div class="w-12 h-12 rounded-full bg-[#0d1b2e] border-2 border-gray-700 text-gray-400 flex items-center justify-center font-black text-xl mb-6 group-hover:border-[#00c4ff] group-hover:text-[#00c4ff] transition-colors" style="font-family:'Inter',sans-serif">3</div>
-        <h3 id="s3-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">احصل على حقك</h3>
-        <p id="s3-body" class="text-gray-400 text-sm leading-relaxed mb-10">نصدر لك تقريراً بالقيمة التقديرية، مع تتبع المهلة النظامية لرد التأمين.</p>
-        <div id="s3-card" class="bg-[#0d1b2e] rounded-3xl p-6 border border-[#00c4ff]/40 w-full mt-auto shadow-[0_0_20px_rgba(0,196,255,0.1)] text-right group-hover:-translate-y-2 transition-transform duration-300">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 rounded-full bg-[#16a34a] animate-pulse"></span>
-            <span id="s3-label" class="text-gray-400 text-xs font-bold">التقييم الاستشاري</span>
+        <h3 id="s3-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">اعرف قيمة سيارتك</h3>
+        <p id="s3-body" class="text-gray-400 text-sm leading-relaxed mb-10">الذكاء الاصطناعي يحسب نقاط جواز سيارتك بناءً على سجل الصيانة ويكشف قيمتها السوقية.</p>
+        <!-- Car passport score mockup -->
+        <div class="bg-[#0d1b2e] rounded-3xl p-5 border border-[#00c4ff]/40 w-full mt-auto shadow-[0_0_20px_rgba(0,196,255,0.1)] group-hover:-translate-y-2 transition-transform duration-300">
+          <div class="flex items-center justify-between mb-3">
+            <span id="s3-score-label" class="text-gray-400 text-xs font-bold">نقاط جواز السيارة</span>
+            <span class="text-[#00c4ff] font-black text-2xl" style="font-family:'Inter',sans-serif">87<span class="text-sm text-gray-500 font-normal">/100</span></span>
           </div>
-          <div class="text-3xl font-black text-white flex items-baseline gap-2" style="font-family:'Inter',sans-serif">
-            12,500 <span id="s3-currency" class="text-sm text-gray-500 font-bold" style="font-family:'Tajawal',sans-serif">ر.س</span>
+          <div class="h-2 bg-[#1a2b45] rounded-full overflow-hidden mb-3">
+            <div class="score-fill h-full bg-gradient-to-l from-[#00c4ff] to-[#0077ff] rounded-full"></div>
+          </div>
+          <div class="flex gap-2 flex-row-reverse">
+            <div class="flex items-center gap-1">
+              <div class="w-2 h-2 rounded-full bg-[#1a7a4a]"></div>
+              <span id="s3-verified" class="text-gray-400 text-[10px]">4 موثّق</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="w-2 h-2 rounded-full bg-[#c06020]"></div>
+              <span id="s3-partial" class="text-gray-400 text-[10px]">1 جزئي</span>
+            </div>
           </div>
         </div>
       </div>
@@ -222,56 +251,84 @@
     </div>
   </section>
 
-  <!-- ── THREE LAYERS ───────────────────────────────────────────────────── -->
-  <section class="py-20 px-6 max-w-7xl mx-auto border-t border-[#1a2b45] mt-10">
+  <!-- ── FEATURES ───────────────────────────────────────────────────────── -->
+  <section id="features" class="py-20 px-6 max-w-7xl mx-auto border-t border-[#1a2b45] mt-10">
     <div class="text-center mb-16">
-      <h2 id="tl-title" class="text-4xl md:text-5xl font-black mb-4 text-[#f4f7fb]">ثلاث طبقات. هدف واحد.</h2>
-      <p id="tl-sub" class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">نجمع بين دقة الذكاء الاصطناعي وشفافية البيانات لضمان حصولك على تقييم عادل ومحايد.</p>
+      <h2 id="feat-title" class="text-4xl md:text-5xl font-black mb-4 text-[#f4f7fb]">كل ما تحتاجه لسيارتك</h2>
+      <p id="feat-sub" class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">مجموعة متكاملة من الأدوات الذكية — مبنية للسوق السعودي.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-      <div id="tl1" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
-        <h3 id="tl1-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">تحليل ذكي ودقيق.</h3>
-        <p id="tl1-body" class="text-base text-gray-400 leading-relaxed">نعتمد على الذكاء الاصطناعي لمقارنة الأضرار بأسعار السوق الحقيقية، لنمنحك تقديراً عادلاً ومحايداً.</p>
+      <!-- Feature 1: Maintenance Roadmap -->
+      <div id="feat1" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
+        <div class="text-4xl mb-4">🔧</div>
+        <h3 id="feat1-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">مسار الصيانة.</h3>
+        <p id="feat1-body" class="text-base text-gray-400 leading-relaxed">جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة — كلما رفعت أكثر، ارتفعت نقاطك.</p>
       </div>
 
-      <div id="tl2" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
-        <h3 id="tl2-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">شفافية الاستحقاق.</h3>
-        <p id="tl2-body" class="text-base text-gray-400 leading-relaxed">نوضح لك الأرقام بشفافية تامة لتكون على دراية كاملة بالقيمة التقديرية لإصلاح مركبتك.</p>
+      <!-- Feature 2: Warranty Check -->
+      <div id="feat2" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
+        <div class="text-4xl mb-4">🛡</div>
+        <h3 id="feat2-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">فحص الضمان.</h3>
+        <p id="feat2-body" class="text-base text-gray-400 leading-relaxed">كشف فجوات الصيانة التي قد تبطل ضمان سيارتك مع توصيات استباقية لحمايته قبل فوات الأوان.</p>
       </div>
 
-      <div id="tl3" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
-        <h3 id="tl3-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">تمكين المستخدم.</h3>
-        <p id="tl3-body" class="text-base text-gray-400 leading-relaxed">المعرفة قوة. نحن نزودك بالبيانات اللازمة لتتخذ قراراتك بثقة تامة أثناء عملية المطالبة.</p>
+      <!-- Feature 3: AI Advisor -->
+      <div id="feat3" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
+        <div class="text-4xl mb-4">✨</div>
+        <h3 id="feat3-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">مستشار ذكي.</h3>
+        <p id="feat3-body" class="text-base text-gray-400 leading-relaxed">اسأل عن أي عطل، صوّر ضوء التحذير، أو استفسر عن الصيانة — ردود فورية مدعومة بـ Gemini AI على خوادم السعودية.</p>
       </div>
 
-      <!-- SAMA Feature Card -->
+      <!-- Feature 4 — Car Passport (full width) -->
       <div class="md:col-span-3 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between relative overflow-hidden gap-8 group mt-2">
-        <div id="sama-stripe" class="absolute top-0 right-0 w-2 h-full bg-[#00c4ff]"></div>
+        <div id="passport-stripe" class="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-[#00c4ff] to-[#0077ff]"></div>
 
-        <div id="sama-text" class="w-full md:w-1/2 flex flex-col justify-center">
-          <h3 id="sama-title" class="text-3xl md:text-4xl font-black mb-4 text-[#f4f7fb]">تتبع آلي لمواعيد (ساما).</h3>
-          <p id="sama-body" class="text-base md:text-lg text-gray-400 mb-6 leading-relaxed">
-            يقارن نظامنا حالة مطالبتك بالمهل الزمنية المعتمدة نظامياً. في حال تأخر رد شركة التأمين،
-            <span class="text-[#00c4ff] font-bold" id="sama-highlight">نوضح لك متى وكيف يمكنك التصعيد رسمياً.</span>
+        <div id="passport-text" class="w-full md:w-1/2 flex flex-col justify-center">
+          <h3 id="passport-title" class="text-3xl md:text-4xl font-black mb-4 text-[#f4f7fb]">جواز سيارتك الرقمي.</h3>
+          <p id="passport-body" class="text-base md:text-lg text-gray-400 mb-6 leading-relaxed">
+            قدرها يبني سجلاً رقمياً موثقاً لسيارتك. كلما زادت الفواتير المرفوعة، ارتفعت نقاط الجواز —
+            <span class="text-[#00c4ff] font-bold" id="passport-highlight">مما يرفع قيمتها عند البيع ويمنحك ميزة تفاوضية حقيقية.</span>
           </p>
         </div>
 
-        <div class="w-full md:w-1/2 bg-[#111623] border border-gray-700 shadow-2xl p-5 md:p-6 rounded-3xl flex flex-col group-hover:-translate-y-2 transition-transform duration-500 max-w-lg" id="sama-card">
+        <!-- Score card mockup -->
+        <div class="w-full md:w-1/2 bg-[#111623] border border-gray-700 shadow-2xl p-5 md:p-6 rounded-3xl flex flex-col group-hover:-translate-y-2 transition-transform duration-500 max-w-lg" id="passport-card">
           <div class="flex items-center justify-between mb-4 border-b border-gray-800 pb-4">
-            <div class="flex items-center gap-2 text-red-400 font-bold text-sm">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-400 animate-pulse"></span>
-              <span id="sama-badge">تجاوز المهلة النظامية</span>
+            <div class="flex items-center gap-2 text-[#00c4ff] font-bold text-sm">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#00c4ff] animate-pulse"></span>
+              <span id="passport-badge">جواز السيارة · نشط</span>
             </div>
-            <span class="text-gray-500 text-xs" style="font-family:'Inter',sans-serif">Claim #4092</span>
+            <span class="text-gray-500 text-xs" style="font-family:'Inter',sans-serif">هافال دارجو 2022</span>
           </div>
-          <h4 id="sama-card-title" class="text-white font-bold text-lg mb-2">تأخر رد شركة التأمين</h4>
-          <p id="sama-card-body" class="text-gray-400 text-sm md:text-base mb-6 leading-relaxed">انقضت المدة المحددة للرد (14 يوماً). يمكنك الآن اتخاذ الإجراء النظامي لتصعيد المطالبة.</p>
-          <button class="w-full bg-[#00c4ff] text-[#0d1b2e] font-black py-3 rounded-xl hover:bg-[#00a3d9] transition-colors shadow-[0_0_15px_rgba(0,196,255,0.2)] flex items-center justify-center gap-2 text-base">
-            <span id="sama-btn">خطوات التصعيد لـ (ساما)</span>
-            <svg id="sama-arrow" class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-          </button>
+          <div class="flex items-end justify-between mb-3">
+            <div>
+              <p id="passport-card-label" class="text-gray-400 text-xs font-bold mb-1">نقاط الجواز</p>
+              <p class="text-white font-black text-4xl" style="font-family:'Inter',sans-serif">87<span class="text-base text-gray-500 font-normal">/100</span></p>
+            </div>
+            <div class="text-right">
+              <p id="passport-trend-label" class="text-gray-500 text-xs mb-1">التغيير</p>
+              <p class="text-[#00c4ff] font-bold text-sm">↑ +12 <span class="text-gray-500">نقطة</span></p>
+            </div>
+          </div>
+          <div class="h-2 bg-[#1a2b45] rounded-full overflow-hidden mb-4">
+            <div class="h-full w-[87%] bg-gradient-to-l from-[#00c4ff] to-[#0077ff] rounded-full"></div>
+          </div>
+          <div class="flex gap-3 flex-row-reverse text-xs">
+            <div class="flex items-center gap-1.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-[#1a7a4a]"></div>
+              <span id="passport-verified" class="text-gray-400">4 موثّق</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-[#c06020]"></div>
+              <span id="passport-partial" class="text-gray-400">1 جزئي</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-[#4a6a9a]"></div>
+              <span id="passport-claimed" class="text-gray-400">0 مُعلن</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -293,7 +350,7 @@
       </div>
 
       <div class="flex items-center gap-6 text-sm text-gray-500 font-medium">
-        <p id="footer-disclaimer" class="hidden md:block border-gray-700 italic text-xs" style="border-inline-end-width:1px; padding-inline-end:1.5rem; margin-inline-end:0.5rem">أداة معلوماتية استشارية • متوافقة مع نظام حماية البيانات</p>
+        <p id="footer-disclaimer" class="hidden md:block border-gray-700 italic text-xs" style="border-inline-end-width:1px; padding-inline-end:1.5rem; margin-inline-end:0.5rem">بيانات سيارتك تبقى في السعودية · متوافق مع نظام PDPL</p>
         <a href="#" id="footer-terms" class="hover:text-[#00c4ff] transition-colors">الشروط والأحكام</a>
         <a href="#" id="footer-privacy" class="hover:text-[#00c4ff] transition-colors">سياسة الخصوصية</a>
       </div>
@@ -307,100 +364,116 @@
       ar: {
         htmlLang: 'ar', htmlDir: 'rtl',
         logoName: 'قدرها', logoSub: 'Qadrha',
-        navLink: 'كيف نعمل؟',
+        navLink: 'المميزات',
         langLabel: 'EN',
         ctaBtn: 'حمل التطبيق',
-        heroH1: 'حقك في <br><span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00c4ff] to-[#0077ff]">كل حادث</span>',
-        heroSub: 'الذكاء الاصطناعي يقيّم أضرار سيارتك في ثوانٍ.<br>نحدد القيمة الحقيقية ونتتبع مواعيد "ساما" لضمان حقك بالكامل.',
+
+        heroH1: 'اعرف سيارتك.<br><span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00c4ff] to-[#0077ff]">احمِ قيمتها.</span>',
+        heroSub: 'قدرها يتتبع صيانة سيارتك، يكشف فجوات الضمان،<br>ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.',
         heroCTAPrimary: 'حمل التطبيق مجاناً',
         heroCTASecondary: 'كيف يعمل؟',
         heroArrowClass: 'w-4 h-4 rotate-180',
-        hiwTitle: 'بكل بساطة وسرعة',
-        hiwSub: 'ثلاث خطوات فقط تفصلك عن معرفة حقك الحقيقي',
-        s1Title: 'صوّر الحادث',
-        s1Body: 'التقط صوراً واضحة للأضرار في سيارتك مباشرة من موقع الحادث.',
-        s1CardLabel: 'لا توجد مطالبات نشطة',
-        s1CardBtn: 'مطالبة جديدة',
-        s2Title: 'الذكاء الاصطناعي يحلل',
-        s2Body: 'خوارزمياتنا المتقدمة تحلل الصور فوراً وتقارنها بأسعار الإصلاح الحقيقية.',
-        s3Title: 'احصل على حقك',
-        s3Body: 'نصدر لك تقريراً بالقيمة التقديرية، مع تتبع المهلة النظامية لرد التأمين.',
-        s3CardAlign: 'text-right',
-        s3Label: 'التقييم الاستشاري',
-        s3Currency: 'ر.س',
-        s3CurrencyFont: "'Tajawal', sans-serif",
-        tlTitle: 'ثلاث طبقات. هدف واحد.',
-        tlSub: 'نجمع بين دقة الذكاء الاصطناعي وشفافية البيانات لضمان حصولك على تقييم عادل ومحايد.',
-        tl1Title: 'تحليل ذكي ودقيق.',
-        tl1Body: 'نعتمد على الذكاء الاصطناعي لمقارنة الأضرار بأسعار السوق الحقيقية، لنمنحك تقديراً عادلاً ومحايداً.',
-        tl2Title: 'شفافية الاستحقاق.',
-        tl2Body: 'نوضح لك الأرقام بشفافية تامة لتكون على دراية كاملة بالقيمة التقديرية لإصلاح مركبتك.',
-        tl3Title: 'تمكين المستخدم.',
-        tl3Body: 'المعرفة قوة. نحن نزودك بالبيانات اللازمة لتتخذ قراراتك بثقة تامة أثناء عملية المطالبة.',
-        tlAlign: 'text-right',
-        samaStripePos: 'right-0',
-        samaTextPad: '',
-        samaCardAlign: '',
-        samaTitle: 'تتبع آلي لمواعيد (ساما).',
-        samaBody: 'يقارن نظامنا حالة مطالبتك بالمهل الزمنية المعتمدة نظامياً. في حال تأخر رد شركة التأمين،',
-        samaHighlight: 'نوضح لك متى وكيف يمكنك التصعيد رسمياً.',
-        samaBadge: 'تجاوز المهلة النظامية',
-        samaCardTitle: 'تأخر رد شركة التأمين',
-        samaCardBody: 'انقضت المدة المحددة للرد (14 يوماً). يمكنك الآن اتخاذ الإجراء النظامي لتصعيد المطالبة.',
-        samaBtn: 'خطوات التصعيد لـ (ساما)',
-        samaArrowClass: 'w-4 h-4 rotate-180',
+
+        hiwTitle: 'ابدأ في ثلاث خطوات',
+        hiwSub: 'من رفع الإستمارة إلى معرفة القيمة الحقيقية',
+
+        s1Title: 'أضف سيارتك',
+        s1Body: 'ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.',
+        s1CarName: 'هافال دارجو',
+
+        s2Title: 'تتبع الصيانة والضمان',
+        s2Body: 'سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.',
+        s2M1: '40,000 كم — موثّق',
+        s2M2: '50,000 كم — أنت هنا',
+        s2M3: '60,000 كم — قادم',
+
+        s3Title: 'اعرف قيمة سيارتك',
+        s3Body: 'الذكاء الاصطناعي يحسب نقاط جواز سيارتك بناءً على سجل الصيانة ويكشف قيمتها السوقية.',
+        s3ScoreLabel: 'نقاط جواز السيارة',
+        s3Verified: '4 موثّق',
+        s3Partial: '1 جزئي',
+
+        featTitle: 'كل ما تحتاجه لسيارتك',
+        featSub: 'مجموعة متكاملة من الأدوات الذكية — مبنية للسوق السعودي.',
+        feat1Title: 'مسار الصيانة.',
+        feat1Body: 'جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة — كلما رفعت أكثر، ارتفعت نقاطك.',
+        feat2Title: 'فحص الضمان.',
+        feat2Body: 'كشف فجوات الصيانة التي قد تبطل ضمان سيارتك مع توصيات استباقية لحمايته قبل فوات الأوان.',
+        feat3Title: 'مستشار ذكي.',
+        feat3Body: 'اسأل عن أي عطل، صوّر ضوء التحذير، أو استفسر عن الصيانة — ردود فورية مدعومة بـ Gemini AI على خوادم السعودية.',
+        featAlign: 'text-right',
+
+        passportStripePos: 'right-0',
+        passportTitle: 'جواز سيارتك الرقمي.',
+        passportBody: 'قدرها يبني سجلاً رقمياً موثقاً لسيارتك. كلما زادت الفواتير المرفوعة، ارتفعت نقاط الجواز —',
+        passportHighlight: 'مما يرفع قيمتها عند البيع ويمنحك ميزة تفاوضية حقيقية.',
+        passportBadge: 'جواز السيارة · نشط',
+        passportCardLabel: 'نقاط الجواز',
+        passportTrendLabel: 'التغيير',
+        passportVerified: '4 موثّق',
+        passportPartial: '1 جزئي',
+        passportClaimed: '0 مُعلن',
+
         footerCopy: '© 2026 قدرها. جميع الحقوق محفوظة.',
-        footerDisclaimer: 'أداة معلوماتية استشارية • متوافقة مع نظام حماية البيانات',
+        footerDisclaimer: 'بيانات سيارتك تبقى في السعودية · متوافق مع نظام PDPL',
         footerTerms: 'الشروط والأحكام',
         footerPrivacy: 'سياسة الخصوصية',
       },
       en: {
         htmlLang: 'en', htmlDir: 'ltr',
-        logoName: 'Qadrha', logoSub: 'AI Assessment',
-        navLink: 'How it works',
+        logoName: 'Qadrha', logoSub: 'Car AI',
+        navLink: 'Features',
         langLabel: 'عربي',
         ctaBtn: 'Download App',
-        heroH1: 'Your Right in <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00c4ff] to-[#0077ff]">Every Accident.</span>',
-        heroSub: 'AI assesses your car damages in seconds.<br>We determine the true value and track SAMA deadlines to guarantee your full rights.',
+
+        heroH1: 'Know Your Car.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00c4ff] to-[#0077ff]">Protect Its Value.</span>',
+        heroSub: 'Qadrha tracks your maintenance, detects warranty gaps,<br>and reveals your car\'s true value — all powered by AI.',
         heroCTAPrimary: 'Download Free',
         heroCTASecondary: 'How it works',
         heroArrowClass: 'w-4 h-4',
-        hiwTitle: 'Simple & Fast.',
-        hiwSub: 'Three simple steps to claim your true rights.',
-        s1Title: 'Snap the Damage',
-        s1Body: 'Take clear photos of the damage directly from the accident scene via the app.',
-        s1CardLabel: 'No Active Claims',
-        s1CardBtn: 'New Claim',
-        s2Title: 'AI Analyzes',
-        s2Body: 'Our advanced algorithms instantly analyze the photos and compare them to real repair prices.',
-        s3Title: 'Get Your Rights',
-        s3Body: 'We issue an advisory estimate report, with automated tracking of insurance regulatory deadlines.',
-        s3CardAlign: 'text-left',
-        s3Label: 'Advisory Estimate',
-        s3Currency: 'SAR',
-        s3CurrencyFont: "'Inter', sans-serif",
-        tlTitle: 'Three Layers. One Goal.',
-        tlSub: 'We combine AI precision and data transparency to ensure you get a fair and neutral assessment.',
-        tl1Title: 'Smart & Accurate.',
-        tl1Body: 'We rely on AI to compare damages to real market prices, giving you a fair and neutral estimate.',
-        tl2Title: 'Transparent Rights.',
-        tl2Body: 'We show you the numbers with complete transparency so you are fully aware of the estimated repair value.',
-        tl3Title: 'User Empowered.',
-        tl3Body: 'Knowledge is power. We provide you with the data you need to make confident decisions during your claim.',
-        tlAlign: 'text-left',
-        samaStripePos: 'left-0',
-        samaTextPad: 'pl-4',
-        samaCardAlign: 'ml-auto',
-        samaTitle: 'Automated SAMA Tracking.',
-        samaBody: 'Our system compares your claim status with official regulatory deadlines. If the insurer delays,',
-        samaHighlight: 'we show you exactly when and how to officially escalate.',
-        samaBadge: 'Deadline Exceeded',
-        samaCardTitle: 'Insurer Response Delayed',
-        samaCardBody: 'The regulatory response period (14 days) has passed. You can now take official action to escalate your claim.',
-        samaBtn: 'Escalate to SAMA',
-        samaArrowClass: 'w-4 h-4',
+
+        hiwTitle: 'Get Started in Three Steps',
+        hiwSub: 'From uploading your Istimara to knowing your car\'s true value',
+
+        s1Title: 'Add Your Car',
+        s1Body: 'Upload your Istimara photo and our AI extracts your car\'s data automatically.',
+        s1CarName: 'Haval Dargo',
+
+        s2Title: 'Track Maintenance & Warranty',
+        s2Body: 'Log service history, upload receipts, and check your warranty status — all in one place.',
+        s2M1: '40,000 km — Verified',
+        s2M2: '50,000 km — You are here',
+        s2M3: '60,000 km — Upcoming',
+
+        s3Title: 'Know Your Car\'s Value',
+        s3Body: 'AI calculates your Car Passport Score from service history and reveals its true market value.',
+        s3ScoreLabel: 'Car Passport Score',
+        s3Verified: '4 Verified',
+        s3Partial: '1 Partial',
+
+        featTitle: 'Everything Your Car Needs',
+        featSub: 'A complete suite of intelligent tools — built for the Saudi market.',
+        feat1Title: 'Maintenance Roadmap.',
+        feat1Body: 'A personalized maintenance schedule with smart reminders and verified receipt tracking — the more you upload, the higher your score.',
+        feat2Title: 'Warranty Check.',
+        feat2Body: 'Detects maintenance gaps that may void your car\'s warranty, with proactive recommendations to protect it before it\'s too late.',
+        feat3Title: 'AI Advisor.',
+        feat3Body: 'Ask about any fault, photo a warning light, or query maintenance — instant answers powered by Gemini AI on Saudi servers.',
+        featAlign: 'text-left',
+
+        passportStripePos: 'left-0',
+        passportTitle: 'Your Car\'s Digital Passport.',
+        passportBody: 'Qadrha builds a verified digital record for your car. More uploaded receipts = higher Passport Score =',
+        passportHighlight: 'higher resale value and real negotiating power when you sell.',
+        passportBadge: 'Car Passport · Active',
+        passportCardLabel: 'Passport Score',
+        passportTrendLabel: 'Change',
+        passportVerified: '4 Verified',
+        passportPartial: '1 Partial',
+        passportClaimed: '0 Claimed',
+
         footerCopy: '© 2026 Qadrha. All rights reserved.',
-        footerDisclaimer: 'Advisory Information Tool • PDPL Compliant',
+        footerDisclaimer: 'Your car data stays in Saudi Arabia · PDPL Compliant',
         footerTerms: 'Terms & Conditions',
         footerPrivacy: 'Privacy Policy',
       }
@@ -418,16 +491,13 @@
       // Font
       document.body.style.fontFamily = lang === 'ar' ? "'Tajawal', sans-serif" : "'Inter', sans-serif";
 
-      // Logo text (Q mark is language-agnostic — no SVG manipulation needed)
+      // Logo
       document.getElementById('logo-name').textContent = s.logoName;
       document.getElementById('logo-sub').textContent  = s.logoSub;
-
-      // Logo text align
-      const logoWrap = document.getElementById('logo-text-wrap');
-      logoWrap.style.textAlign = lang === 'ar' ? 'right' : 'left';
+      document.getElementById('logo-text-wrap').style.textAlign = lang === 'ar' ? 'right' : 'left';
 
       // Nav
-      document.getElementById('nav-link').textContent         = s.navLink;
+      document.getElementById('nav-link').textContent          = s.navLink;
       document.getElementById('lang-toggle-label').textContent = s.langLabel;
       document.getElementById('cta-btn').textContent           = s.ctaBtn;
 
@@ -441,70 +511,53 @@
       // How it works
       document.getElementById('hiw-title').textContent = s.hiwTitle;
       document.getElementById('hiw-sub').textContent   = s.hiwSub;
-
-      // Steps row direction
       document.getElementById('steps-row').style.direction = lang === 'ar' ? 'rtl' : 'ltr';
 
-      document.getElementById('s1-title').textContent      = s.s1Title;
-      document.getElementById('s1-body').textContent       = s.s1Body;
-      document.getElementById('s1-card-label').textContent = s.s1CardLabel;
-      document.getElementById('s1-card-btn').textContent   = s.s1CardBtn;
-
-      // Step 1 icon order
-      const iconEl = document.getElementById('s1-card-btn-icon');
-      iconEl.style.order = lang === 'ar' ? '1' : '-1';
+      document.getElementById('s1-title').textContent   = s.s1Title;
+      document.getElementById('s1-body').textContent    = s.s1Body;
+      document.getElementById('s1-car-name').textContent = s.s1CarName;
 
       document.getElementById('s2-title').textContent = s.s2Title;
       document.getElementById('s2-body').textContent  = s.s2Body;
-      document.getElementById('s3-title').textContent = s.s3Title;
-      document.getElementById('s3-body').textContent  = s.s3Body;
+      document.getElementById('s2-m1').textContent    = s.s2M1;
+      document.getElementById('s2-m2').textContent    = s.s2M2;
+      document.getElementById('s2-m3').textContent    = s.s2M3;
 
-      const s3Card = document.getElementById('s3-card');
-      s3Card.className = s3Card.className.replace(/text-(right|left)/, s.s3CardAlign);
+      document.getElementById('s3-title').textContent       = s.s3Title;
+      document.getElementById('s3-body').textContent        = s.s3Body;
+      document.getElementById('s3-score-label').textContent = s.s3ScoreLabel;
+      document.getElementById('s3-verified').textContent    = s.s3Verified;
+      document.getElementById('s3-partial').textContent     = s.s3Partial;
 
-      document.getElementById('s3-label').textContent    = s.s3Label;
-      document.getElementById('s3-currency').textContent = s.s3Currency;
-      document.getElementById('s3-currency').style.fontFamily = s.s3CurrencyFont;
-
-      // Three layers
-      document.getElementById('tl-title').textContent = s.tlTitle;
-      document.getElementById('tl-sub').textContent   = s.tlSub;
-
-      ['tl1','tl2','tl3'].forEach((id, i) => {
+      // Features
+      document.getElementById('feat-title').textContent = s.featTitle;
+      document.getElementById('feat-sub').textContent   = s.featSub;
+      ['feat1','feat2','feat3'].forEach(id => {
         const el = document.getElementById(id);
-        el.className = el.className.replace(/text-(right|left)/, s.tlAlign);
+        el.className = el.className.replace(/text-(right|left)/, s.featAlign);
         document.getElementById(id+'-title').textContent = s[id+'Title'];
         document.getElementById(id+'-body').textContent  = s[id+'Body'];
       });
 
-      // SAMA stripe
-      const stripe = document.getElementById('sama-stripe');
-      stripe.className = `absolute top-0 ${s.samaStripePos} w-2 h-full bg-[#00c4ff]`;
+      // Passport stripe (RTL: right / LTR: left)
+      document.getElementById('passport-stripe').className =
+        `absolute top-0 ${s.passportStripePos} w-2 h-full bg-gradient-to-b from-[#00c4ff] to-[#0077ff]`;
 
-      // SAMA text padding
-      const samaText = document.getElementById('sama-text');
-      samaText.className = `w-full md:w-1/2 flex flex-col justify-center ${s.samaTextPad}`;
-
-      document.getElementById('sama-title').textContent     = s.samaTitle;
-      document.getElementById('sama-body').childNodes[0].textContent = s.samaBody + ' ';
-      document.getElementById('sama-highlight').textContent = s.samaHighlight;
-      document.getElementById('sama-badge').textContent     = s.samaBadge;
-      document.getElementById('sama-card-title').textContent = s.samaCardTitle;
-      document.getElementById('sama-card-body').textContent  = s.samaCardBody;
-      document.getElementById('sama-btn').textContent        = s.samaBtn;
-      document.getElementById('sama-arrow').className        = s.samaArrowClass;
-
-      // SAMA card margin
-      const samaCard = document.getElementById('sama-card');
-      samaCard.className = samaCard.className
-        .replace(/m[lr]-auto/g, '')
-        .trim() + (s.samaCardAlign ? ' ' + s.samaCardAlign : '');
+      document.getElementById('passport-title').textContent     = s.passportTitle;
+      document.getElementById('passport-body').childNodes[0].textContent = s.passportBody + ' ';
+      document.getElementById('passport-highlight').textContent = s.passportHighlight;
+      document.getElementById('passport-badge').textContent     = s.passportBadge;
+      document.getElementById('passport-card-label').textContent = s.passportCardLabel;
+      document.getElementById('passport-trend-label').textContent = s.passportTrendLabel;
+      document.getElementById('passport-verified').textContent  = s.passportVerified;
+      document.getElementById('passport-partial').textContent   = s.passportPartial;
+      document.getElementById('passport-claimed').textContent   = s.passportClaimed;
 
       // Footer
-      document.getElementById('footer-copy').textContent        = s.footerCopy;
-      document.getElementById('footer-disclaimer').textContent  = s.footerDisclaimer;
-      document.getElementById('footer-terms').textContent       = s.footerTerms;
-      document.getElementById('footer-privacy').textContent     = s.footerPrivacy;
+      document.getElementById('footer-copy').textContent       = s.footerCopy;
+      document.getElementById('footer-disclaimer').textContent = s.footerDisclaimer;
+      document.getElementById('footer-terms').textContent      = s.footerTerms;
+      document.getElementById('footer-privacy').textContent    = s.footerPrivacy;
     }
 
     function toggleLang() {
