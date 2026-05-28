@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الشروط والأحكام | Qadrha Terms & Conditions</title>
+  <meta name="description" content="شروط وأحكام استخدام تطبيق قدرها. Qadrha Terms and Conditions." />
+  <link rel="icon" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --cyan: #00c4ff; --cyan2: #0090cc; --navy: #0a0f1e; --card: #0e1829; --border: #1a2b45; }
+    body { background: var(--navy); color: #d1d5db; font-family: 'Tajawal', 'Inter', sans-serif; }
+    .q-mark { background: linear-gradient(135deg, var(--cyan), var(--cyan2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-bottom: 1.5rem; }
+    h2 { color: #f1f5f9; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.75rem; }
+    h3 { color: #94a3b8; font-size: 0.95rem; font-weight: 700; margin: 1rem 0 0.4rem; }
+    p, li { font-size: 0.95rem; line-height: 1.9; color: #9ca3af; }
+    ul { list-style: none; padding: 0; }
+    ul li::before { content: "· "; color: var(--cyan); font-weight: 700; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .lang-toggle { cursor: pointer; background: var(--border); border: none; color: #94a3b8; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; transition: background 0.2s; }
+    .lang-toggle:hover { background: #243552; color: #e2e8f0; }
+    .highlight { color: var(--cyan); font-weight: 700; }
+    .badge { display: inline-block; background: rgba(0,196,255,0.12); border: 1px solid rgba(0,196,255,0.3); color: var(--cyan); font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.5rem; }
+    .warning-card { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+    .warning-card p { color: #fbbf24; }
+    [data-en] { display: none; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 border-b border-[#1a2b45] bg-[#0a0f1e]/95 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 no-underline">
+      <svg width="28" height="28" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="qg-nav" x1="0.1" y1="0.1" x2="0.9" y2="0.9">
+            <stop offset="0%"   stop-color="#00c4ff" />
+            <stop offset="100%" stop-color="#0090cc" />
+          </linearGradient>
+        </defs>
+        <path d="M 68.9 51.3 A 22 22 0 1 0 58.6 60.3 Q 68 72 80 76"
+              stroke="url(#qg-nav)" stroke-width="9.5" stroke-linecap="round" fill="none"/>
+        <circle cx="80" cy="76" r="4.8" fill="url(#qg-nav)"/>
+      </svg>
+      <span class="font-black text-white text-lg" data-ar>قدرها</span>
+      <span class="font-black text-white text-lg" data-en style="display:none">Qadrha</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <button class="lang-toggle" onclick="toggleLang()" id="lang-btn">EN</button>
+      <a href="index.html" class="text-sm font-bold text-gray-400 hover:text-white transition" data-ar>الرئيسية</a>
+      <a href="index.html" class="text-sm font-bold text-gray-400 hover:text-white transition" data-en style="display:none">Home</a>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto px-6 py-14">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="badge" data-ar>المملكة العربية السعودية</div>
+      <div class="badge" data-en style="display:none">Kingdom of Saudi Arabia</div>
+      <h1 class="text-3xl font-black text-white mt-4 mb-3" data-ar>الشروط والأحكام</h1>
+      <h1 class="text-3xl font-black text-white mt-4 mb-3" data-en style="display:none">Terms &amp; Conditions</h1>
+      <p class="text-gray-500 text-sm" data-ar>آخر تحديث: مايو ٢٠٢٦</p>
+      <p class="text-gray-500 text-sm" data-en style="display:none">Last updated: May 2026</p>
+    </div>
+
+    <!-- Intro -->
+    <div class="section-card">
+      <p data-ar>باستخدامك تطبيق <span class="highlight">قدرها</span>، فإنك توافق على الشروط والأحكام الواردة في هذه الوثيقة. يُرجى قراءتها بعناية قبل استخدام التطبيق. إذا لم توافق على أي من هذه الشروط، يُرجى الامتناع عن استخدام التطبيق.</p>
+      <p data-en style="display:none">By using the <span class="highlight">Qadrha</span> app, you agree to the terms and conditions set out in this document. Please read them carefully before using the app. If you do not agree to any of these terms, please refrain from using the app.</p>
+    </div>
+
+    <!-- 1. Service Description -->
+    <div class="section-card">
+      <h2 data-ar>١. وصف الخدمة</h2>
+      <h2 data-en style="display:none">1. Service Description</h2>
+      <p data-ar>قدرها تطبيق يساعدك على:</p>
+      <p data-en style="display:none">Qadrha is an app that helps you:</p>
+      <ul data-ar>
+        <li>تتبع جدول صيانة سيارتك وتواريخ استحقاقها</li>
+        <li>فهم وضع الضمان وإجراءات الفحص لسيارتك</li>
+        <li>تقدير قيمة سيارتك في السوق (Car Value Score)</li>
+        <li>الحصول على توصيات بشأن سيارتك عبر مساعد الذكاء الاصطناعي</li>
+        <li>رفع صورة الاستمارة لاستخراج بيانات السيارة تلقائياً</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Track your car's maintenance schedule and due dates</li>
+        <li>Understand your car's warranty status and inspection procedures</li>
+        <li>Estimate your car's market value (Car Value Score)</li>
+        <li>Receive car-related recommendations via the AI Advisor</li>
+        <li>Upload your Istimara to extract vehicle data automatically</li>
+      </ul>
+
+      <div class="warning-card">
+        <p data-ar>⚠ قدرها ليست شركة تأمين ولا تقدم أي استشارات تأمينية أو مالية أو قانونية. توصيات التطبيق استرشادية فقط ولا تُعدّ استشارة متخصصة.</p>
+        <p data-en style="display:none">⚠ Qadrha is not an insurance company and does not provide any insurance, financial, or legal advice. App recommendations are for general guidance only and do not constitute specialist advice.</p>
+      </div>
+    </div>
+
+    <!-- 2. Eligibility -->
+    <div class="section-card">
+      <h2 data-ar>٢. أهلية الاستخدام</h2>
+      <h2 data-en style="display:none">2. Eligibility</h2>
+      <ul data-ar>
+        <li>يجب أن يكون عمرك ١٨ عاماً أو أكثر</li>
+        <li>يجب أن تكون مقيماً في المملكة العربية السعودية أو تمتلك سيارة مسجلة فيها</li>
+        <li>يجب أن تمتلك رقم جوال سعودياً فعّالاً لاستقبال رمز OTP</li>
+        <li>يُحظر استخدام التطبيق لأغراض تجارية دون إذن كتابي مسبق</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>You must be 18 years of age or older</li>
+        <li>You must be a resident of the Kingdom of Saudi Arabia or own a vehicle registered there</li>
+        <li>You must have an active Saudi mobile number to receive the OTP code</li>
+        <li>Commercial use of the app is prohibited without prior written permission</li>
+      </ul>
+    </div>
+
+    <!-- 3. Account & Security -->
+    <div class="section-card">
+      <h2 data-ar>٣. الحساب والأمان</h2>
+      <h2 data-en style="display:none">3. Account &amp; Security</h2>
+      <ul data-ar>
+        <li>أنت مسؤول عن الحفاظ على أمان جهازك وحسابك</li>
+        <li>لا تشارك رمز OTP مع أي شخص — قدرها لن تطلب منك رمز التحقق أبداً</li>
+        <li>أخبرنا فوراً على <a href="mailto:support@qadrha.com">support@qadrha.com</a> إذا اشتبهت بأي استخدام غير مصرح به لحسابك</li>
+        <li>يحق لنا تعليق الحسابات التي تنتهك هذه الشروط</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>You are responsible for maintaining the security of your device and account</li>
+        <li>Never share your OTP code with anyone — Qadrha will never ask for it</li>
+        <li>Notify us immediately at <a href="mailto:support@qadrha.com">support@qadrha.com</a> if you suspect any unauthorized use of your account</li>
+        <li>We reserve the right to suspend accounts that violate these terms</li>
+      </ul>
+    </div>
+
+    <!-- 4. Acceptable Use -->
+    <div class="section-card">
+      <h2 data-ar>٤. الاستخدام المقبول</h2>
+      <h2 data-en style="display:none">4. Acceptable Use</h2>
+      <p data-ar>يُحظر عليك:</p>
+      <p data-en style="display:none">You must not:</p>
+      <ul data-ar>
+        <li>إدخال بيانات سيارة كاذبة أو مضللة</li>
+        <li>محاولة الوصول غير المصرح به إلى بيانات مستخدمين آخرين</li>
+        <li>استخدام التطبيق لأي نشاط غير قانوني</li>
+        <li>إساءة استخدام مساعد الذكاء الاصطناعي أو إرسال محتوى ضار أو مسيء</li>
+        <li>الاستخراج الآلي (scraping) لبيانات التطبيق</li>
+        <li>محاولة عكس هندسة (reverse engineer) التطبيق أو اختراق بنيته التحتية</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Enter false or misleading vehicle data</li>
+        <li>Attempt unauthorized access to other users' data</li>
+        <li>Use the app for any illegal activity</li>
+        <li>Misuse the AI Advisor or submit harmful or abusive content</li>
+        <li>Scrape or automatically extract app data</li>
+        <li>Attempt to reverse engineer the app or breach its infrastructure</li>
+      </ul>
+    </div>
+
+    <!-- 5. Content You Provide -->
+    <div class="section-card">
+      <h2 data-ar>٥. المحتوى الذي تقدمه</h2>
+      <h2 data-en style="display:none">5. Content You Provide</h2>
+      <p data-ar>عند رفع صورة الاستمارة أو إدخال بيانات سيارتك، فإنك تمنحنا ترخيصاً محدوداً ومؤقتاً لمعالجة هذه البيانات لتقديم الخدمة فقط. أنت تضمن أن هذه البيانات خاصة بك وأن لك الحق في تقديمها.</p>
+      <p data-en style="display:none">When you upload an Istimara photo or enter your vehicle data, you grant us a limited, temporary licence to process that data solely to provide the service. You warrant that this data belongs to you and that you have the right to submit it.</p>
+    </div>
+
+    <!-- 6. Disclaimer -->
+    <div class="section-card">
+      <h2 data-ar>٦. إخلاء المسؤولية</h2>
+      <h2 data-en style="display:none">6. Disclaimer</h2>
+
+      <h3 data-ar>دقة المعلومات</h3>
+      <h3 data-en style="display:none">Accuracy of Information</h3>
+      <p data-ar>نسعى لتقديم معلومات دقيقة، غير أن قيم الصيانة ومعلومات الضمان وتقديرات قيمة السيارة استرشادية فقط. لا يُغني التطبيق عن استشارة متخصص معتمد.</p>
+      <p data-en style="display:none">We strive to provide accurate information, but maintenance values, warranty information, and car value estimates are for guidance only. The app does not replace consultation with an accredited specialist.</p>
+
+      <h3 data-ar>قراءة الاستمارة بالذكاء الاصطناعي</h3>
+      <h3 data-en style="display:none">AI Istimara Reading</h3>
+      <p data-ar>قد لا تكون عملية استخراج بيانات الاستمارة دقيقة ١٠٠٪ في جميع الحالات. يُرجى التحقق دائماً من البيانات المستخرجة قبل الاعتماد عليها.</p>
+      <p data-en style="display:none">The Istimara data extraction process may not be 100% accurate in all cases. Always verify the extracted data before relying on it.</p>
+
+      <h3 data-ar>توافر الخدمة</h3>
+      <h3 data-en style="display:none">Service Availability</h3>
+      <p data-ar>لا نضمن توافر التطبيق بلا انقطاع. قد تُوقف الخدمة مؤقتاً للصيانة أو الترقيات، وسنسعى لإبلاغك مسبقاً.</p>
+      <p data-en style="display:none">We do not guarantee uninterrupted availability of the app. The service may be temporarily suspended for maintenance or upgrades, and we will endeavour to notify you in advance.</p>
+    </div>
+
+    <!-- 7. Intellectual Property -->
+    <div class="section-card">
+      <h2 data-ar>٧. الملكية الفكرية</h2>
+      <h2 data-en style="display:none">7. Intellectual Property</h2>
+      <p data-ar>التطبيق وجميع محتوياته — بما فيها التصميم والشعار وخوارزميات الذكاء الاصطناعي ومحتوى Car Value Score وخارطة الصيانة — ملك حصري لشركة قدرها ومحمية بموجب قوانين الملكية الفكرية السارية في المملكة العربية السعودية. لا يجوز نسخها أو إعادة توزيعها دون إذن كتابي مسبق.</p>
+      <p data-en style="display:none">The app and all its content — including design, logo, AI algorithms, Car Value Score content, and Maintenance Roadmap — are the exclusive property of Qadrha and are protected by applicable intellectual property laws in the Kingdom of Saudi Arabia. They may not be copied or redistributed without prior written permission.</p>
+    </div>
+
+    <!-- 8. Limitation of Liability -->
+    <div class="section-card">
+      <h2 data-ar>٨. تحديد المسؤولية</h2>
+      <h2 data-en style="display:none">8. Limitation of Liability</h2>
+      <p data-ar>في أقصى حد تسمح به الأنظمة المعمول بها، لن تكون قدرها مسؤولة عن:</p>
+      <p data-en style="display:none">To the maximum extent permitted by applicable law, Qadrha will not be liable for:</p>
+      <ul data-ar>
+        <li>أي خسائر مالية ناتجة عن الاعتماد على تقييمات التطبيق</li>
+        <li>أي ضرر ينتج عن أعطال تقنية أو انقطاع الخدمة</li>
+        <li>قرارات الصيانة أو الإصلاح المبنية على توصيات التطبيق</li>
+        <li>أي محتوى طرف ثالث مرتبط بالتطبيق أو موقعنا الإلكتروني</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Any financial losses arising from reliance on app assessments</li>
+        <li>Any damage resulting from technical failures or service interruptions</li>
+        <li>Maintenance or repair decisions based on app recommendations</li>
+        <li>Any third-party content linked from the app or our website</li>
+      </ul>
+    </div>
+
+    <!-- 9. Governing Law -->
+    <div class="section-card">
+      <h2 data-ar>٩. القانون الحاكم وتسوية النزاعات</h2>
+      <h2 data-en style="display:none">9. Governing Law &amp; Dispute Resolution</h2>
+      <p data-ar>تخضع هذه الشروط وتُفسَّر وفقاً لأنظمة المملكة العربية السعودية. في حال نشوء أي نزاع، يُسعى أولاً إلى تسويته ودياً. في حال تعذّر ذلك، تختص المحاكم المختصة في المملكة العربية السعودية بالفصل فيه.</p>
+      <p data-en style="display:none">These terms are governed by and construed in accordance with the laws of the Kingdom of Saudi Arabia. In the event of any dispute, an amicable resolution will first be sought. If not possible, the competent courts of the Kingdom of Saudi Arabia shall have jurisdiction.</p>
+    </div>
+
+    <!-- 10. Modifications -->
+    <div class="section-card">
+      <h2 data-ar>١٠. التعديلات على الشروط</h2>
+      <h2 data-en style="display:none">10. Modifications to Terms</h2>
+      <p data-ar>نحتفظ بحق تعديل هذه الشروط في أي وقت. سيُبلَّغ المستخدمون بأي تغييرات جوهرية عبر إشعار داخل التطبيق. استمرارك في استخدام التطبيق بعد سريان التغييرات يُعدّ موافقةً عليها.</p>
+      <p data-en style="display:none">We reserve the right to modify these terms at any time. Users will be notified of material changes via an in-app notification. Continued use of the app after changes take effect constitutes acceptance of the updated terms.</p>
+    </div>
+
+    <!-- 11. Contact -->
+    <div class="section-card">
+      <h2 data-ar>١١. التواصل معنا</h2>
+      <h2 data-en style="display:none">11. Contact Us</h2>
+      <p data-ar>لأي استفسار بشأن هذه الشروط:</p>
+      <p data-en style="display:none">For any inquiries about these terms:</p>
+      <ul data-ar>
+        <li>البريد الإلكتروني: <a href="mailto:support@qadrha.com">support@qadrha.com</a></li>
+        <li>المملكة العربية السعودية</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Email: <a href="mailto:support@qadrha.com">support@qadrha.com</a></li>
+        <li>Kingdom of Saudi Arabia</li>
+      </ul>
+    </div>
+
+    <!-- Back link -->
+    <div class="text-center mt-10">
+      <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-[#00c4ff] transition" data-ar>← العودة إلى الرئيسية</a>
+      <a href="index.html" class="text-sm font-bold text-gray-400 hover:text-white transition" data-en style="display:none">← Back to Home</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#1a2b45] bg-[#0a0f1e] py-8 px-6 mt-10 text-center">
+    <p class="text-xs text-gray-600" data-ar>© ٢٠٢٦ قدرها. جميع الحقوق محفوظة. · بيانات سيارتك تبقى في السعودية · متوافق مع نظام PDPL</p>
+    <p class="text-xs text-gray-600" data-en style="display:none">© 2026 Qadrha. All rights reserved. · Your car data stays in Saudi Arabia · PDPL Compliant</p>
+    <div class="flex justify-center gap-6 mt-4 text-xs text-gray-600">
+      <a href="privacy.html" class="hover:text-[#00c4ff] transition" data-ar>سياسة الخصوصية</a>
+      <a href="privacy.html" class="hover:text-[#00c4ff] transition" data-en style="display:none">Privacy Policy</a>
+      <a href="terms.html" class="hover:text-[#00c4ff] transition" data-ar>الشروط والأحكام</a>
+      <a href="terms.html" class="hover:text-[#00c4ff] transition" data-en style="display:none">Terms &amp; Conditions</a>
+    </div>
+  </footer>
+
+  <script>
+    let lang = 'ar';
+
+    function toggleLang() {
+      lang = lang === 'ar' ? 'en' : 'ar';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('lang-btn').textContent = lang === 'ar' ? 'EN' : 'ع';
+
+      document.querySelectorAll('[data-ar]').forEach(el => {
+        el.style.display = lang === 'ar' ? '' : 'none';
+      });
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.style.display = lang === 'en' ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

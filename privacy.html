@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سياسة الخصوصية | Qadrha Privacy Policy</title>
+  <meta name="description" content="سياسة خصوصية قدرها — كيف نجمع بياناتك ونستخدمها ونحميها. Qadrha Privacy Policy." />
+  <link rel="icon" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --cyan: #00c4ff; --cyan2: #0090cc; --navy: #0a0f1e; --card: #0e1829; --border: #1a2b45; }
+    body { background: var(--navy); color: #d1d5db; font-family: 'Tajawal', 'Inter', sans-serif; }
+    .q-mark { background: linear-gradient(135deg, var(--cyan), var(--cyan2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-bottom: 1.5rem; }
+    h2 { color: #f1f5f9; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.75rem; }
+    h3 { color: #94a3b8; font-size: 0.95rem; font-weight: 700; margin: 1rem 0 0.4rem; }
+    p, li { font-size: 0.95rem; line-height: 1.9; color: #9ca3af; }
+    ul { list-style: none; padding: 0; }
+    ul li::before { content: "· "; color: var(--cyan); font-weight: 700; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .lang-toggle { cursor: pointer; background: var(--border); border: none; color: #94a3b8; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; transition: background 0.2s; }
+    .lang-toggle:hover { background: #243552; color: #e2e8f0; }
+    .highlight { color: var(--cyan); font-weight: 700; }
+    .badge { display: inline-block; background: rgba(0,196,255,0.12); border: 1px solid rgba(0,196,255,0.3); color: var(--cyan); font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.5rem; }
+    [data-en] { display: none; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 border-b border-[#1a2b45] bg-[#0a0f1e]/95 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 no-underline">
+      <!-- Q mark SVG -->
+      <svg width="28" height="28" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="qg-nav" x1="0.1" y1="0.1" x2="0.9" y2="0.9">
+            <stop offset="0%"   stop-color="#00c4ff" />
+            <stop offset="100%" stop-color="#0090cc" />
+          </linearGradient>
+        </defs>
+        <path d="M 68.9 51.3 A 22 22 0 1 0 58.6 60.3 Q 68 72 80 76"
+              stroke="url(#qg-nav)" stroke-width="9.5" stroke-linecap="round" fill="none"/>
+        <circle cx="80" cy="76" r="4.8" fill="url(#qg-nav)"/>
+      </svg>
+      <span class="font-black text-white text-lg" data-ar>قدرها</span>
+      <span class="font-black text-white text-lg" data-en style="display:none">Qadrha</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <button class="lang-toggle" onclick="toggleLang()" id="lang-btn">EN</button>
+      <a href="index.html" class="text-sm font-bold text-gray-400 hover:text-white transition" data-ar>الرئيسية</a>
+      <a href="index.html" class="text-sm font-bold text-gray-400 hover:text-white transition" data-en style="display:none">Home</a>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto px-6 py-14">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="badge" data-ar>نظام PDPL · حماية البيانات الشخصية</div>
+      <div class="badge" data-en style="display:none">PDPL Compliant · Personal Data Protection</div>
+      <h1 class="text-3xl font-black text-white mt-4 mb-3" data-ar>سياسة الخصوصية</h1>
+      <h1 class="text-3xl font-black text-white mt-4 mb-3" data-en style="display:none">Privacy Policy</h1>
+      <p class="text-gray-500 text-sm" data-ar>آخر تحديث: مايو ٢٠٢٦</p>
+      <p class="text-gray-500 text-sm" data-en style="display:none">Last updated: May 2026</p>
+    </div>
+
+    <!-- Intro -->
+    <div class="section-card">
+      <p data-ar>تصف هذه السياسة كيفية جمع شركة <span class="highlight">قدرها</span> للبيانات الشخصية واستخدامها وحمايتها عند استخدامك تطبيق قدرها. نلتزم بأحكام <span class="highlight">نظام حماية البيانات الشخصية (PDPL)</span> الصادر في المملكة العربية السعودية، ونضمن أن تبقى بيانات سيارتك وبياناتك الشخصية داخل حدود المملكة.</p>
+      <p data-en style="display:none">This policy describes how <span class="highlight">Qadrha</span> collects, uses, and protects your personal data when you use the Qadrha app. We comply with the Saudi <span class="highlight">Personal Data Protection Law (PDPL)</span> and ensure your car and personal data stays within the Kingdom of Saudi Arabia.</p>
+    </div>
+
+    <!-- 1. Data We Collect -->
+    <div class="section-card">
+      <h2 data-ar>١. البيانات التي نجمعها</h2>
+      <h2 data-en style="display:none">1. Data We Collect</h2>
+
+      <h3 data-ar>بيانات الحساب</h3>
+      <h3 data-en style="display:none">Account Data</h3>
+      <ul data-ar>
+        <li>رقم الجوال (لإنشاء الحساب والتحقق عبر OTP)</li>
+        <li>الاسم (اختياري، عند إدخاله في الملف الشخصي)</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Mobile number (for account creation and OTP verification)</li>
+        <li>Name (optional, if entered in profile)</li>
+      </ul>
+
+      <h3 data-ar>بيانات السيارة</h3>
+      <h3 data-en style="display:none">Vehicle Data</h3>
+      <ul data-ar>
+        <li>المصنّع، الطراز، الموديل، سنة الصنع</li>
+        <li>رقم الهيكل (VIN) — إن أُدخل</li>
+        <li>صورة الاستمارة (لاستخراج بيانات السيارة تلقائياً)</li>
+        <li>سجل الصيانة ومواعيدها المُدخَلة من المستخدم</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Make, model, trim, year</li>
+        <li>VIN (Vehicle Identification Number) — if provided</li>
+        <li>Istimara (registration) photo — for automatic data extraction</li>
+        <li>Maintenance records and schedules entered by the user</li>
+      </ul>
+
+      <h3 data-ar>بيانات الاستخدام</h3>
+      <h3 data-en style="display:none">Usage Data</h3>
+      <ul data-ar>
+        <li>الشاشات التي تزورها داخل التطبيق (للتحسين التقني فقط)</li>
+        <li>سجلات الأخطاء التقنية (دون ربطها بهويتك)</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Screens visited within the app (for technical improvement only)</li>
+        <li>Technical error logs (not linked to your identity)</li>
+      </ul>
+
+      <h3 data-ar>ما لا نجمعه</h3>
+      <h3 data-en style="display:none">What We Do Not Collect</h3>
+      <ul data-ar>
+        <li>بيانات الموقع الجغرافي (GPS)</li>
+        <li>جهات الاتصال أو بيانات التقويم</li>
+        <li>بيانات مالية أو بنكية</li>
+        <li>بيانات التصفح خارج التطبيق</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Location / GPS data</li>
+        <li>Contacts or calendar data</li>
+        <li>Financial or banking data</li>
+        <li>Browsing data outside the app</li>
+      </ul>
+    </div>
+
+    <!-- 2. How We Use Your Data -->
+    <div class="section-card">
+      <h2 data-ar>٢. كيف نستخدم بياناتك</h2>
+      <h2 data-en style="display:none">2. How We Use Your Data</h2>
+      <ul data-ar>
+        <li>التحقق من هويتك عند تسجيل الدخول عبر OTP (رمز التحقق)</li>
+        <li>عرض خارطة الصيانة وتنبيهاتها لسيارتك</li>
+        <li>تقييم الضمان وحالة السيارة بناءً على بيانات السيارة</li>
+        <li>احتساب قيمة سيارتك (Car Value Score)</li>
+        <li>تقديم توصيات المساعد الذكي بشأن سيارتك</li>
+        <li>تحسين دقة التطبيق وأداء الخدمة</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Verify your identity at login via OTP</li>
+        <li>Display your car's maintenance roadmap and reminders</li>
+        <li>Assess warranty status and vehicle condition using your vehicle data</li>
+        <li>Calculate your Car Value Score</li>
+        <li>Provide AI Advisor recommendations about your car</li>
+        <li>Improve app accuracy and service performance</li>
+      </ul>
+    </div>
+
+    <!-- 3. Data Storage & Residency -->
+    <div class="section-card">
+      <h2 data-ar>٣. تخزين البيانات وإقامتها</h2>
+      <h2 data-en style="display:none">3. Data Storage & Residency</h2>
+      <p data-ar>جميع بياناتك — بما فيها صور الاستمارة ومعلومات السيارة — <span class="highlight">تُخزَّن حصراً داخل المملكة العربية السعودية</span> على خوادم Google Cloud Platform في منطقة <span class="highlight">me-west1 (الدمام)</span>. لا تُنقل أي بيانات شخصية خارج المملكة.</p>
+      <p data-en style="display:none">All your data — including Istimara photos and vehicle information — is <span class="highlight">stored exclusively within the Kingdom of Saudi Arabia</span> on Google Cloud Platform servers in the <span class="highlight">me-west1 (Dammam)</span> region. No personal data is transferred outside the Kingdom.</p>
+
+      <h3 data-ar>معالجة الصور بالذكاء الاصطناعي</h3>
+      <h3 data-en style="display:none">AI Image Processing</h3>
+      <p data-ar>تُعالَج صور الاستمارة عبر نموذج Vertex AI (Gemini) على بنية Google Cloud في الدمام — لا تغادر الصور المملكة في أي مرحلة.</p>
+      <p data-en style="display:none">Istimara photos are processed via the Vertex AI (Gemini) model on Google Cloud infrastructure in Dammam — images never leave the Kingdom at any stage.</p>
+    </div>
+
+    <!-- 4. Third-Party Services -->
+    <div class="section-card">
+      <h2 data-ar>٤. مزودو الخدمات الخارجيون</h2>
+      <h2 data-en style="display:none">4. Third-Party Service Providers</h2>
+      <p data-ar>نتعاون مع مزودي الخدمات الآتيين لتشغيل التطبيق:</p>
+      <p data-en style="display:none">We work with the following service providers to operate the app:</p>
+
+      <div style="overflow-x:auto; margin-top:1rem;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border); color:#64748b;">
+              <th style="text-align:right; padding:0.5rem 0.75rem;" data-ar>المزود</th>
+              <th style="text-align:right; padding:0.5rem 0.75rem;" data-en class="hidden">Provider</th>
+              <th style="text-align:right; padding:0.5rem 0.75rem;" data-ar>الغرض</th>
+              <th style="text-align:right; padding:0.5rem 0.75rem;" data-en class="hidden">Purpose</th>
+              <th style="text-align:right; padding:0.5rem 0.75rem;" data-ar>البيانات المشاركة</th>
+              <th style="text-align:right; padding:0.5rem 0.75rem;" data-en class="hidden">Data Shared</th>
+            </tr>
+          </thead>
+          <tbody style="color:#9ca3af;">
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.6rem 0.75rem; color:#e2e8f0; font-weight:700;">Twilio Verify</td>
+              <td style="padding:0.6rem 0.75rem;" data-ar>إرسال رمز OTP</td>
+              <td style="padding:0.6rem 0.75rem;" data-en class="hidden">Send OTP code</td>
+              <td style="padding:0.6rem 0.75rem;" data-ar>رقم الجوال فقط</td>
+              <td style="padding:0.6rem 0.75rem;" data-en class="hidden">Mobile number only</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.6rem 0.75rem; color:#e2e8f0; font-weight:700;">Google Cloud (Vertex AI)</td>
+              <td style="padding:0.6rem 0.75rem;" data-ar>معالجة صور الاستمارة بالذكاء الاصطناعي</td>
+              <td style="padding:0.6rem 0.75rem;" data-en class="hidden">AI Istimara image processing</td>
+              <td style="padding:0.6rem 0.75rem;" data-ar>صورة الاستمارة (داخل KSA)</td>
+              <td style="padding:0.6rem 0.75rem;" data-en class="hidden">Istimara photo (within KSA)</td>
+            </tr>
+            <tr>
+              <td style="padding:0.6rem 0.75rem; color:#e2e8f0; font-weight:700;">Expo (EAS)</td>
+              <td style="padding:0.6rem 0.75rem;" data-ar>توصيل تحديثات التطبيق</td>
+              <td style="padding:0.6rem 0.75rem;" data-en class="hidden">App update delivery</td>
+              <td style="padding:0.6rem 0.75rem;" data-ar>لا بيانات شخصية</td>
+              <td style="padding:0.6rem 0.75rem;" data-en class="hidden">No personal data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:1rem;" data-ar>لا نبيع بياناتك ولا نشاركها مع أي جهة تسويقية أو إعلانية.</p>
+      <p style="margin-top:1rem;" data-en style="display:none">We do not sell your data or share it with any marketing or advertising entity.</p>
+    </div>
+
+    <!-- 5. Your Rights -->
+    <div class="section-card">
+      <h2 data-ar>٥. حقوقك بموجب نظام PDPL</h2>
+      <h2 data-en style="display:none">5. Your Rights Under PDPL</h2>
+      <p data-ar>يكفل لك نظام حماية البيانات الشخصية الحقوق الآتية:</p>
+      <p data-en style="display:none">The Personal Data Protection Law grants you the following rights:</p>
+      <ul data-ar>
+        <li><span class="highlight">الاطلاع</span> — طلب نسخة من بياناتك الشخصية المُخزَّنة لدينا</li>
+        <li><span class="highlight">التصحيح</span> — تصحيح أي بيانات غير دقيقة</li>
+        <li><span class="highlight">الحذف</span> — طلب حذف حسابك وجميع بياناتك</li>
+        <li><span class="highlight">إيقاف المعالجة</span> — الاعتراض على معالجة بياناتك في حالات معينة</li>
+        <li><span class="highlight">سحب الموافقة</span> — إلغاء موافقتك في أي وقت دون أثر رجعي</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li><span class="highlight">Access</span> — Request a copy of your personal data held by us</li>
+        <li><span class="highlight">Correction</span> — Correct any inaccurate data</li>
+        <li><span class="highlight">Deletion</span> — Request deletion of your account and all associated data</li>
+        <li><span class="highlight">Objection</span> — Object to processing in certain circumstances</li>
+        <li><span class="highlight">Withdraw Consent</span> — Withdraw your consent at any time without retroactive effect</li>
+      </ul>
+      <p style="margin-top:1rem;" data-ar>لممارسة أي من هذه الحقوق، تواصل معنا على: <a href="mailto:privacy@qadrha.com">privacy@qadrha.com</a></p>
+      <p style="margin-top:1rem;" data-en style="display:none">To exercise any of these rights, contact us at: <a href="mailto:privacy@qadrha.com">privacy@qadrha.com</a></p>
+    </div>
+
+    <!-- 6. Data Retention -->
+    <div class="section-card">
+      <h2 data-ar>٦. مدة الاحتفاظ بالبيانات</h2>
+      <h2 data-en style="display:none">6. Data Retention</h2>
+      <ul data-ar>
+        <li>بيانات الحساب: محتفظ بها طوال مدة نشاط الحساب</li>
+        <li>صور الاستمارة: تُحذف فور استخراج البيانات منها (لا تُحفظ الصورة الأصلية)</li>
+        <li>بيانات السيارة والصيانة: محتفظ بها حتى يطلب المستخدم الحذف</li>
+        <li>سجلات الأخطاء: تُحذف تلقائياً بعد ٩٠ يوماً</li>
+        <li>عند حذف الحساب: تُمحى جميع البيانات خلال ٣٠ يوماً</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Account data: retained for the duration of active account</li>
+        <li>Istimara photos: deleted immediately after data extraction (the original photo is not stored)</li>
+        <li>Vehicle and maintenance data: retained until the user requests deletion</li>
+        <li>Error logs: automatically deleted after 90 days</li>
+        <li>Upon account deletion: all data is erased within 30 days</li>
+      </ul>
+    </div>
+
+    <!-- 7. Cookies & Tracking -->
+    <div class="section-card">
+      <h2 data-ar>٧. ملفات تعريف الارتباط والتتبع</h2>
+      <h2 data-en style="display:none">7. Cookies & Tracking</h2>
+      <p data-ar>لا يستخدم تطبيق قدرها ملفات تعريف الارتباط (Cookies) أو أدوات التتبع الإعلاني. يستخدم الموقع الإلكتروني (<span class="highlight">qadrha.com</span>) ملفات تعريف ارتباط تقنية بحتة لتشغيل الموقع فقط، دون جمع بيانات تتبع.</p>
+      <p data-en style="display:none">The Qadrha app does not use cookies or advertising trackers. The website (<span class="highlight">qadrha.com</span>) uses purely technical cookies for site operation only, without collecting any tracking data.</p>
+    </div>
+
+    <!-- 8. Children -->
+    <div class="section-card">
+      <h2 data-ar>٨. الأطفال</h2>
+      <h2 data-en style="display:none">8. Children</h2>
+      <p data-ar>التطبيق مخصص للمستخدمين الذين تجاوزوا سن الثامنة عشرة (١٨). لا نجمع بيانات الأطفال عن قصد. إذا علمنا بوجود بيانات لقاصر، نحذفها فوراً.</p>
+      <p data-en style="display:none">The app is intended for users aged 18 and above. We do not knowingly collect data from minors. If we become aware that data from a minor has been collected, we will delete it immediately.</p>
+    </div>
+
+    <!-- 9. Changes -->
+    <div class="section-card">
+      <h2 data-ar>٩. تغييرات على هذه السياسة</h2>
+      <h2 data-en style="display:none">9. Changes to This Policy</h2>
+      <p data-ar>قد نحدّث هذه السياسة من وقت لآخر. سيُبلَّغ المستخدمون بأي تغييرات جوهرية عبر إشعار داخل التطبيق قبل سريانها بـ ١٤ يوماً على الأقل.</p>
+      <p data-en style="display:none">We may update this policy from time to time. Users will be notified of any material changes via an in-app notification at least 14 days before they take effect.</p>
+    </div>
+
+    <!-- 10. Contact -->
+    <div class="section-card">
+      <h2 data-ar>١٠. التواصل معنا</h2>
+      <h2 data-en style="display:none">10. Contact Us</h2>
+      <p data-ar>لأي استفسار بشأن خصوصيتك أو لممارسة حقوقك:</p>
+      <p data-en style="display:none">For any privacy inquiries or to exercise your rights:</p>
+      <ul data-ar>
+        <li>البريد الإلكتروني: <a href="mailto:privacy@qadrha.com">privacy@qadrha.com</a></li>
+        <li>المملكة العربية السعودية</li>
+      </ul>
+      <ul data-en style="display:none">
+        <li>Email: <a href="mailto:privacy@qadrha.com">privacy@qadrha.com</a></li>
+        <li>Kingdom of Saudi Arabia</li>
+      </ul>
+    </div>
+
+    <!-- Back link -->
+    <div class="text-center mt-10">
+      <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-[#00c4ff] transition" data-ar>← العودة إلى الرئيسية</a>
+      <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-[#00c4ff] transition" data-en style="display:none">← Back to Home</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#1a2b45] bg-[#0a0f1e] py-8 px-6 mt-10 text-center">
+    <p class="text-xs text-gray-600" data-ar>© ٢٠٢٦ قدرها. جميع الحقوق محفوظة. · بيانات سيارتك تبقى في السعودية · متوافق مع نظام PDPL</p>
+    <p class="text-xs text-gray-600" data-en style="display:none">© 2026 Qadrha. All rights reserved. · Your car data stays in Saudi Arabia · PDPL Compliant</p>
+    <div class="flex justify-center gap-6 mt-4 text-xs text-gray-600">
+      <a href="privacy.html" class="hover:text-[#00c4ff] transition" data-ar>سياسة الخصوصية</a>
+      <a href="privacy.html" class="hover:text-[#00c4ff] transition" data-en style="display:none">Privacy Policy</a>
+      <a href="terms.html" class="hover:text-[#00c4ff] transition" data-ar>الشروط والأحكام</a>
+      <a href="terms.html" class="hover:text-[#00c4ff] transition" data-en style="display:none">Terms &amp; Conditions</a>
+    </div>
+  </footer>
+
+  <script>
+    let lang = 'ar';
+
+    function toggleLang() {
+      lang = lang === 'ar' ? 'en' : 'ar';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('lang-btn').textContent = lang === 'ar' ? 'EN' : 'ع';
+
+      // Show/hide elements by attribute
+      document.querySelectorAll('[data-ar]').forEach(el => {
+        el.style.display = lang === 'ar' ? '' : 'none';
+      });
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.style.display = lang === 'en' ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
