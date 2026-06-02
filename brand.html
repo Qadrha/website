@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qadrha Brand Identity</title>
+  <link rel="icon" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:      #0a0f1e;
+      --navy2:     #0e1829;
+      --border:    #1a2b45;
+      --deep:      #004d8a;
+      --mid-dark:  #006db5;
+      --brand:     #0090cc;
+      --highlight: #00c4ff;
+      --light-cyan:#b3ecff;
+      --red:       #FF4564;
+      --white:     #ffffff;
+      --gray:      #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ── */
+    .page { max-width: 1080px; margin: 0 auto; padding: 60px 32px 100px; }
+    .section { margin-bottom: 72px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .card-dark {
+      background: #060b14;
+      border: 1px solid #111c2e;
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .card-light {
+      background: #f0f8ff;
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    /* ── Typography ── */
+    .brand-heading {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+    h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; }
+    h3 { font-size: 1.1rem; font-weight: 700; color: #e2e8f0; margin-bottom: 6px; }
+    p  { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+    /* ── Logo mark SVG helpers ── */
+    .logo-center { display:flex; align-items:center; justify-content:center; }
+    .logo-wordmark { display:flex; align-items:center; gap:14px; }
+    .wordmark-text { font-size: 1.8rem; font-weight: 900; letter-spacing: -0.02em; }
+    .wordmark-ar { font-family:'Tajawal',sans-serif; font-size:1.7rem; font-weight:900; }
+    .wordmark-sub {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-top: 2px;
+    }
+
+    /* ── Color swatches ── */
+    .swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .swatch-color { height: 80px; }
+    .swatch-info { padding: 10px 12px; background: var(--navy2); }
+    .swatch-hex { font-size: 0.8rem; font-weight: 700; font-family: monospace; color: #e2e8f0; }
+    .swatch-name { font-size: 0.7rem; color: var(--gray); margin-top: 2px; }
+
+    /* ── Typography specimen ── */
+    .type-specimen { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 20px; }
+    .type-ar { font-family:'Tajawal',sans-serif; font-size: 2.2rem; font-weight:900; line-height:1.2; }
+    .type-en { font-size: 2.2rem; font-weight:900; line-height:1.2; }
+    .type-body-ar { font-family:'Tajawal',sans-serif; font-size:1rem; line-height:1.8; color:var(--gray); }
+    .type-body-en { font-size:0.95rem; line-height:1.75; color:var(--gray); }
+
+    /* ── Segment diagram labels ── */
+    .diagram-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .diagram-label span { color: var(--white); font-size: 0.8rem; }
+
+    /* ── Usage / Don't ── */
+    .usage-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .usage-do { border: 1.5px solid rgba(0,196,255,0.35); border-radius:16px; padding:24px; }
+    .usage-dont { border: 1.5px solid rgba(255,69,100,0.35); border-radius:16px; padding:24px; }
+    .usage-label-do  { font-size:0.7rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--highlight); margin-bottom:14px; }
+    .usage-label-dont{ font-size:0.7rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--red); margin-bottom:14px; }
+    ul.rules { list-style:none; padding:0; }
+    ul.rules li { font-size:0.85rem; color:var(--gray); line-height:1.7; padding-right:0; }
+    ul.rules li::before { content: "· "; color:var(--brand); font-weight:700; }
+
+    /* ── Brand badge ── */
+    .badge {
+      display:inline-block;
+      background:rgba(0,196,255,0.12);
+      border:1px solid rgba(0,196,255,0.3);
+      color:var(--highlight);
+      font-size:0.7rem;
+      font-weight:700;
+      padding:0.2rem 0.75rem;
+      border-radius:20px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      margin-bottom:20px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 32px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    nav a { color: var(--gray); font-size:0.85rem; font-weight:600; text-decoration:none; }
+    nav a:hover { color:var(--white); }
+
+    /* ── App icon mockup ── */
+    .icon-wrap {
+      width:80px; height:80px;
+      border-radius:18px;
+      background:#060b14;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--border);
+    }
+    .icon-wrap.small { width:56px; height:56px; border-radius:13px; }
+    .icon-wrap.xs { width:40px; height:40px; border-radius:9px; }
+
+    /* ── Gradient text ── */
+    .grad { background: linear-gradient(135deg, #00c4ff, #0090cc); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    @media (max-width:700px) {
+      .grid-2, .grid-3, .grid-6, .usage-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo-wordmark" style="text-decoration:none;">
+    <!-- Q mark inline SVG -->
+    <svg width="28" height="28" viewBox="0 0 100 100">
+      <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+      <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+      <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+      <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+      <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+    </svg>
+    <span style="font-weight:900;font-size:1rem;color:white;">Qadrha Brand</span>
+  </a>
+  <div style="display:flex;gap:24px;">
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ── Header ── -->
+  <div class="section" style="text-align:center; padding-top:20px;">
+    <div class="badge">Brand Identity System · 2026</div>
+    <h1 style="font-size:3rem;font-weight:900;line-height:1.1;margin-bottom:16px;">
+      <span class="grad">Qadrha</span> Brand Identity
+    </h1>
+    <p style="max-width:500px;margin:0 auto;font-size:1rem;color:var(--gray);">
+      Segmented Q mark · Cyan spectrum · Red action point · Dark navy field
+    </p>
+  </div>
+
+  <!-- ── 1. Primary Logo Mark ── -->
+  <div class="section">
+    <div class="brand-heading">01 — Logo Mark</div>
+    <div class="grid-2" style="gap:20px;">
+
+      <!-- Dark background (primary) -->
+      <div class="card" style="min-height:260px;">
+        <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:32px;">PRIMARY — DARK FIELD</p>
+        <div class="logo-center" style="flex-direction:column;gap:28px;">
+          <!-- Large Q mark -->
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+          </svg>
+          <!-- Wordmark -->
+          <div class="logo-wordmark">
+            <svg width="44" height="44" viewBox="0 0 100 100">
+              <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+            </svg>
+            <div>
+              <div class="wordmark-ar" style="color:white;">قدرها</div>
+              <div style="font-size:1.1rem;font-weight:700;letter-spacing:0.08em;color:var(--brand);margin-top:-4px;">QADRHA</div>
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center;font-size:0.7rem;color:var(--gray);margin-top:24px;">Mark only · Mark + Arabic · Mark + Bilingual</p>
+      </div>
+
+      <!-- Light background (reversed) -->
+      <div class="card-light" style="min-height:260px;">
+        <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#64748b;margin-bottom:32px;">REVERSED — LIGHT FIELD</p>
+        <div class="logo-center" style="flex-direction:column;gap:28px;">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 54 59.32 L 74 73" stroke="#0055a0" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+          </svg>
+          <div class="logo-wordmark">
+            <svg width="44" height="44" viewBox="0 0 100 100">
+              <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 54 59.32 L 74 73" stroke="#0055a0" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+            </svg>
+            <div>
+              <div class="wordmark-ar" style="color:#0a0f1e;">قدرها</div>
+              <div style="font-size:1.1rem;font-weight:700;letter-spacing:0.08em;color:#0090cc;margin-top:-4px;">QADRHA</div>
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center;font-size:0.7rem;color:#64748b;margin-top:24px;">Use on white or very light backgrounds only</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Logo Anatomy ── -->
+  <div class="section">
+    <div class="brand-heading">02 — Logo Anatomy</div>
+    <div class="card" style="padding:48px;">
+      <div class="logo-center" style="position:relative; height:340px;">
+        <!-- Large annotated Q mark -->
+        <svg width="200" height="200" viewBox="0 0 100 100" style="position:absolute;">
+          <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+          <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+          <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+          <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+          <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+        </svg>
+        <!-- Annotation callouts -->
+        <div style="position:absolute;top:10px;right:60px;text-align:right;" class="diagram-label">
+          <div style="color:var(--highlight);">▶ HIGHLIGHT SEGMENT</div>
+          <div>#00c4ff · Upper-right arc</div>
+        </div>
+        <div style="position:absolute;top:100px;left:30px;text-align:left;" class="diagram-label">
+          <div style="color:var(--mid-dark);">◀ MID-DARK SEGMENT</div>
+          <div>#006db5 · Left arc</div>
+        </div>
+        <div style="position:absolute;bottom:100px;left:30px;text-align:left;" class="diagram-label">
+          <div style="color:var(--deep);">◀ DEEP SEGMENT</div>
+          <div>#004d8a · Lower arc</div>
+        </div>
+        <div style="position:absolute;bottom:20px;right:40px;text-align:right;" class="diagram-label">
+          <div style="color:var(--red);">▶ RED ACTION POINT</div>
+          <div>#FF4564 · Always red</div>
+        </div>
+        <div style="position:absolute;top:50%;right:24px;transform:translateY(30px);text-align:right;" class="diagram-label">
+          <div style="color:var(--brand);">◀ DIAGONAL STROKE CUT</div>
+          <div>Lower-right, ~40° angle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Colour System ── -->
+  <div class="section">
+    <div class="brand-heading">03 — Colour System</div>
+    <div class="grid-6" style="margin-bottom:20px;">
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#00c4ff;"></div>
+        <div class="swatch-info">
+          <div class="swatch-hex">#00C4FF</div>
+          <div class="swatch-name">Brand Highlight</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0090cc;"></div>
+        <div class="swatch-info">
+          <div class="swatch-hex">#0090CC</div>
+          <div class="swatch-name">Brand Cyan</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#006db5;"></div>
+        <div class="swatch-info">
+          <div class="swatch-hex">#006DB5</div>
+          <div class="swatch-name">Mid-Dark</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#004d8a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-hex">#004D8A</div>
+          <div class="swatch-name">Deep Cyan</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FF4564;"></div>
+        <div class="swatch-info">
+          <div class="swatch-hex">#FF4564</div>
+          <div class="swatch-name">Action Red</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0a0f1e; border:1px solid #1a2b45;"></div>
+        <div class="swatch-info">
+          <div class="swatch-hex">#0A0F1E</div>
+          <div class="swatch-name">Background</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="card" style="padding:20px 24px;">
+      <p style="font-size:0.85rem;color:var(--gray);">
+        <strong style="color:var(--white);">Colour discipline:</strong>
+        The four-tone cyan spectrum (#00c4ff → #0090cc → #006db5 → #004d8a) forms the segmented Q ring and should only be used in this rotational order.
+        The <strong style="color:var(--red);">Action Red (#FF4564)</strong> is reserved exclusively for the end dot, error states, and critical alerts — never use it decoratively.
+        The background field (#0a0f1e) must always be dark navy; never place the logo on black (#000000) or coloured backgrounds.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── 4. Typography ── -->
+  <div class="section">
+    <div class="brand-heading">04 — Typography</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:4px;">IBM Plex Sans Arabic</h3>
+        <p style="font-size:0.75rem;color:var(--brand);margin-bottom:20px;">PRIMARY — ARABIC UI & HEADINGS</p>
+        <div class="type-specimen">
+          <div class="type-ar" style="color:white;">اعرف سيارتك</div>
+        </div>
+        <div class="type-specimen">
+          <div class="type-ar" style="font-size:1.4rem;font-weight:700;color:var(--gray);">صيانة · ضمان · قيمة</div>
+        </div>
+        <div style="padding-top:8px;">
+          <div class="type-body-ar">حافظ على قيمة سيارتك مع قدرها — الرفيق الذكي لكل سائق في المملكة.</div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+          <span style="font-size:0.7rem;background:rgba(0,196,255,0.12);border:1px solid rgba(0,196,255,0.3);color:var(--highlight);padding:3px 10px;border-radius:20px;">900 Black</span>
+          <span style="font-size:0.7rem;background:rgba(0,196,255,0.12);border:1px solid rgba(0,196,255,0.3);color:var(--highlight);padding:3px 10px;border-radius:20px;">700 Bold</span>
+          <span style="font-size:0.7rem;background:rgba(0,196,255,0.12);border:1px solid rgba(0,196,255,0.3);color:var(--highlight);padding:3px 10px;border-radius:20px;">400 Regular</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:4px;">Inter</h3>
+        <p style="font-size:0.75rem;color:var(--brand);margin-bottom:20px;">SECONDARY — LATIN UI, DATA & LABELS</p>
+        <div class="type-specimen">
+          <div class="type-en" style="color:white;">Know Your Car</div>
+        </div>
+        <div class="type-specimen">
+          <div class="type-en" style="font-size:1.4rem;font-weight:700;color:var(--gray);">Maintenance · Warranty · Value</div>
+        </div>
+        <div style="padding-top:8px;">
+          <div class="type-body-en">Protect your car's value with Qadrha — the intelligent companion for every driver in the Kingdom.</div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+          <span style="font-size:0.7rem;background:rgba(0,196,255,0.12);border:1px solid rgba(0,196,255,0.3);color:var(--highlight);padding:3px 10px;border-radius:20px;">900 Black</span>
+          <span style="font-size:0.7rem;background:rgba(0,196,255,0.12);border:1px solid rgba(0,196,255,0.3);color:var(--highlight);padding:3px 10px;border-radius:20px;">700 Bold</span>
+          <span style="font-size:0.7rem;background:rgba(0,196,255,0.12);border:1px solid rgba(0,196,255,0.3);color:var(--highlight);padding:3px 10px;border-radius:20px;">400 Regular</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. App Icon Sizes ── -->
+  <div class="section">
+    <div class="brand-heading">05 — App Icon System</div>
+    <div class="card">
+      <div style="display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;">
+        <!-- 1024 -->
+        <div style="text-align:center;">
+          <div class="icon-wrap" style="width:96px;height:96px;border-radius:22px;">
+            <svg width="72" height="72" viewBox="0 0 100 100">
+              <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+            </svg>
+          </div>
+          <div class="diagram-label" style="margin-top:8px;">1024 × 1024<br>App Store</div>
+        </div>
+        <!-- 180 -->
+        <div style="text-align:center;">
+          <div class="icon-wrap" style="width:72px;height:72px;border-radius:16px;">
+            <svg width="54" height="54" viewBox="0 0 100 100">
+              <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+            </svg>
+          </div>
+          <div class="diagram-label" style="margin-top:8px;">180 × 180<br>iPhone @3x</div>
+        </div>
+        <!-- 60 -->
+        <div style="text-align:center;">
+          <div class="icon-wrap small">
+            <svg width="42" height="42" viewBox="0 0 100 100">
+              <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+            </svg>
+          </div>
+          <div class="diagram-label" style="margin-top:8px;">60 × 60<br>Notification</div>
+        </div>
+        <!-- 40 -->
+        <div style="text-align:center;">
+          <div class="icon-wrap xs">
+            <svg width="28" height="28" viewBox="0 0 100 100">
+              <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+            </svg>
+          </div>
+          <div class="diagram-label" style="margin-top:8px;">40 × 40<br>Tab bar</div>
+        </div>
+
+        <!-- Spacer -->
+        <div style="flex:1; min-width:60px;"></div>
+
+        <!-- Adaptive (Android) -->
+        <div style="text-align:center;">
+          <div style="width:96px;height:96px;border-radius:50%;background:#060b14;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+            <svg width="72" height="72" viewBox="0 0 100 100">
+              <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+              <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+            </svg>
+          </div>
+          <div class="diagram-label" style="margin-top:8px;">Android<br>Adaptive (circle)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. Clear Space & Usage ── -->
+  <div class="section">
+    <div class="brand-heading">06 — Usage Rules</div>
+    <div class="usage-grid">
+      <div class="usage-do">
+        <div class="usage-label-do">✓ Do</div>
+        <ul class="rules">
+          <li>Always use on #0a0f1e dark navy or very light (#f0f8ff+) backgrounds</li>
+          <li>Maintain clear space of at least 1× the mark width on all sides</li>
+          <li>Use the mark at minimum 24dp / 24px (legibility floor)</li>
+          <li>Keep the red dot always at #FF4564 — it is a brand constant</li>
+          <li>Use the Arabic wordmark (قدرها) as the primary wordmark in all KSA contexts</li>
+          <li>Use the four-segment sequence A→B→C→D (deep→highlight, clockwise)</li>
+        </ul>
+      </div>
+      <div class="usage-dont">
+        <div class="usage-label-dont">✗ Don't</div>
+        <ul class="rules">
+          <li>Don't recolour the red dot — no cyan, gold, or white dot variants</li>
+          <li>Don't rotate the mark — the diagonal cut must always run lower-right</li>
+          <li>Don't use on coloured backgrounds (green, orange, etc.)</li>
+          <li>Don't remove the diagonal stroke cut or the end dot</li>
+          <li>Don't scale below 20dp — segments become indistinguishable</li>
+          <li>Don't add drop shadows, gradients, or glows to the mark itself</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. In-App Usage ── -->
+  <div class="section">
+    <div class="brand-heading">07 — In-App Context</div>
+    <div class="grid-3">
+      <!-- Header bar -->
+      <div class="card" style="padding:20px;">
+        <p class="diagram-label" style="margin-bottom:12px;">APP HEADER BAR</p>
+        <div style="background:#0e1829;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;border:1px solid #1a2b45;">
+          <svg width="28" height="28" viewBox="0 0 100 100">
+            <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+          </svg>
+          <span style="font-family:'Tajawal',sans-serif;font-weight:800;font-size:1rem;color:white;">قدرها</span>
+        </div>
+        <p style="margin-top:10px;">32dp mark · Arabic wordmark only</p>
+      </div>
+      <!-- Loading splash -->
+      <div class="card" style="padding:20px;">
+        <p class="diagram-label" style="margin-bottom:12px;">SPLASH SCREEN</p>
+        <div style="background:#0a0f1e;border-radius:12px;padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;border:1px solid #1a2b45;">
+          <svg width="60" height="60" viewBox="0 0 100 100">
+            <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+          </svg>
+          <span style="font-family:'Tajawal',sans-serif;font-weight:900;font-size:1.3rem;color:white;">قدرها</span>
+        </div>
+        <p style="margin-top:10px;">60dp mark · centered · no subtext</p>
+      </div>
+      <!-- Website nav -->
+      <div class="card" style="padding:20px;">
+        <p class="diagram-label" style="margin-bottom:12px;">WEBSITE NAVBAR</p>
+        <div style="background:#0a0f1e;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;border:1px solid #1a2b45;">
+          <svg width="24" height="24" viewBox="0 0 100 100">
+            <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32" stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 61.32 32 A 20 20 0 0 1 61.32 52" stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
+            <path d="M 54 59.32 L 74 73" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <circle cx="74" cy="73" r="4.8" fill="#FF4564"/>
+          </svg>
+          <div>
+            <div style="font-family:'Tajawal',sans-serif;font-weight:800;font-size:0.85rem;color:white;">قدرها</div>
+            <div style="font-size:0.55rem;font-weight:700;letter-spacing:0.2em;color:#0090cc;">QADRHA</div>
+          </div>
+        </div>
+        <p style="margin-top:10px;">24dp mark · bilingual stacked wordmark</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div style="text-align:center;padding-top:20px;border-top:1px solid var(--border);">
+    <p style="font-size:0.8rem;color:#4b5563;">© 2026 Qadrha · Brand Identity System · Version 2.0 · June 2026</p>
+    <p style="font-size:0.75rem;color:#374151;margin-top:6px;">Confidential — for authorised use only</p>
+  </div>
+
+</div>
+</body>
+</html>
