@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة قدرها — انضم عبر TestFlight</title>
+  <meta name="description" content="انضم إلى قدرها — اعرف قيمة سيارتك، تتبّع صيانتها، واحمِ قيمتها.">
+  <!-- Open Graph: nice preview when the link is shared on WhatsApp/Snap -->
+  <meta property="og:title" content="انضم إلى قدرها 🚗">
+  <meta property="og:description" content="اعرف قيمة سيارتك وتتبّع صيانتها. استخدم رمز الدعوة وابدأ مجاناً.">
+  <meta property="og:image" content="https://qadrha.com/favicon.png">
+  <link rel="icon" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Tajawal', system-ui, sans-serif;
+      background: radial-gradient(120% 80% at 50% 0%, #14253b 0%, #0d1b2e 55%, #0a1422 100%);
+      color: #f4f7fb; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      width: 100%; max-width: 440px; text-align: center;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(0,196,255,0.15);
+      border-radius: 28px; padding: 40px 28px;
+      box-shadow: 0 0 40px rgba(0,196,255,0.08);
+    }
+    .q { width: 56px; height: 56px; margin: 0 auto 20px; border-radius: 16px;
+      background: linear-gradient(135deg,#00c4ff,#0077ff);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 28px; color: #0d1b2e;
+      box-shadow: 0 0 24px rgba(0,196,255,0.4); }
+    h1 { font-size: 28px; font-weight: 900; margin-bottom: 10px; }
+    .sub { color: #9fb3c8; font-size: 16px; line-height: 1.7; margin-bottom: 28px; }
+    .code-wrap { display: none; margin: 0 0 28px; }
+    .code-label { font-size: 13px; color: #6b8299; margin-bottom: 6px; }
+    .code { font-size: 38px; font-weight: 900; letter-spacing: 6px; color: #00c4ff;
+      direction: ltr; }
+    .copy { margin-top: 12px; padding: 9px 22px; border: 1px solid rgba(0,196,255,0.4);
+      background: transparent; color: #00c4ff; border-radius: 24px; font-family: inherit;
+      font-weight: 700; font-size: 14px; cursor: pointer; transition: .2s; }
+    .copy:hover { background: rgba(0,196,255,0.1); }
+    .tf { display: block; margin-top: 8px; padding: 16px;
+      background: #00c4ff; color: #0d1b2e; font-weight: 900; font-size: 17px;
+      border-radius: 30px; text-decoration: none;
+      box-shadow: 0 0 24px rgba(0,196,255,0.35); transition: transform .15s; }
+    .tf:hover { transform: scale(1.03); }
+    .steps { margin-top: 26px; font-size: 13px; color: #6b8299; line-height: 1.9; text-align: right; }
+    .steps b { color: #9fb3c8; }
+    .foot { margin-top: 24px; font-size: 12px; color: #45596e; }
+    .foot a { color: #00c4ff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="q">ق</div>
+    <h1>انضمّ إلى قدرها 🚗</h1>
+    <p class="sub">اعرف قيمة سيارتك الحقيقية، تتبّع صيانتها، واحمِ قيمتها — بالذكاء الاصطناعي، وبياناتك تبقى داخل المملكة.</p>
+
+    <div class="code-wrap" id="codeWrap">
+      <div class="code-label">رمز الدعوة</div>
+      <div class="code" id="code"></div>
+      <button class="copy" id="copy">نسخ الرمز</button>
+    </div>
+
+    <a class="tf" href="https://testflight.apple.com/join/FKnm42f2">انضمّ عبر TestFlight</a>
+
+    <div class="steps">
+      <b>بعد التثبيت:</b><br>
+      ١. افتح تطبيق قدرها وسجّل دخولك.<br>
+      ٢. اذهب إلى «الإحالات».<br>
+      ٣. أدخل رمز الدعوة بالأعلى لتبدأ.
+    </div>
+
+    <p class="foot"><a href="/">qadrha.com</a> · قدرها</p>
+  </div>
+
+  <script>
+    (function () {
+      var ref = new URLSearchParams(location.search).get('ref');
+      if (ref) {
+        ref = ref.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 12);
+        document.getElementById('code').textContent = ref;
+        document.getElementById('codeWrap').style.display = 'block';
+        try { localStorage.setItem('qadrha_ref', ref); } catch (e) {}
+        document.getElementById('copy').addEventListener('click', function () {
+          if (navigator.clipboard) navigator.clipboard.writeText(ref);
+          this.textContent = 'تم النسخ ✓';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

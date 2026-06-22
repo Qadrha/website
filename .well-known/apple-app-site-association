@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "WF339A493T.sa.qadrha.app",
+        "paths": ["/invite", "/invite/*", "/r/*"]
+      }
+    ]
+  }
+}
