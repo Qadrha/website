@@ -6,126 +6,131 @@
 
   <!-- Primary Meta -->
   <title>قدرها | Qadrha — رفيقك الذكي لسيارتك</title>
-  <meta name="description" content="تتبع صيانة سيارتك، تحقق من ضمانها، واعرف قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي. قدرها، مساعدك الذكي لكل ما يخص سيارتك.">
-  <meta name="keywords" content="صيانة سيارة, ضمان سيارة, قيمة سيارة, مستشار ذكي, تشخيص أعطال, إستمارة, car maintenance, car warranty, car value, AI car advisor, fault diagnosis, Saudi Arabia, قدرها, Qadrha">
+  <meta name="description" content="تتبع صيانة سيارتك، تحقق من ضمانها، اعرف قيمتها الحقيقية، وتسوّق قطع الغيار المستعملة — كل ذلك بالذكاء الاصطناعي. قدرها، مساعدك الذكي لكل ما يخص سيارتك.">
+  <meta name="keywords" content="صيانة سيارة, ضمان سيارة, قيمة سيارة, مستشار ذكي, تشخيص أعطال, إستمارة, سوق قطع غيار, استدعاء سيارات, car maintenance, car warranty, car value, AI car advisor, fault diagnosis, used parts marketplace, recall check, Saudi Arabia, قدرها, Qadrha">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://qadrha.com/">
   <meta property="og:title" content="قدرها | Qadrha — رفيقك الذكي لسيارتك">
-  <meta property="og:description" content="AI-powered car companion. Qadrha tracks your maintenance, verifies your warranty, and reveals your car's true value.">
+  <meta property="og:description" content="AI-powered car companion. Qadrha tracks your maintenance, verifies your warranty, reveals your car's true value, and connects you to a trusted parts marketplace.">
   <meta property="og:image" content="https://qadrha.com/og-image.jpg">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://qadrha.com/">
   <meta property="twitter:title" content="قدرها | Qadrha — رفيقك الذكي لسيارتك">
-  <meta property="twitter:description" content="Track maintenance. Verify warranty. Know your car's value. All powered by AI — in Saudi Arabia.">
+  <meta property="twitter:description" content="Track maintenance. Verify warranty. Know your car's value. Shop trusted used parts. All powered by AI — in Saudi Arabia.">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --font-ar: 'Tajawal', sans-serif;
-      --font-en: 'Inter', sans-serif;
+      --font-ar: 'IBM Plex Sans Arabic', sans-serif;
+      --font-en: 'IBM Plex Sans', sans-serif;
+      --cyan: #00B4DC;
+      --cyan-bright: #4FD6F4;
+      --cyan-deep: #008CB0;
+      --ink: #152A3E;
+      --ink-muted: #5E7896;
     }
 
     body {
       font-family: var(--font-ar);
-      background-color: #0d1b2e;
       color: #f4f7fb;
       transition: font-family 0.2s;
+      /* Mercedes showroom gradient — same stops as the app. Height is set in JS
+         to exactly match where #features begins, so the dark→light transition
+         always finishes right as the light-card content starts, regardless of
+         viewport width / mobile stacking (see sizeGradient() below). */
+      background-color: #E8F2FA;
+      background-image: linear-gradient(180deg,
+        #070A16 0%, #0B1730 19%, #16294A 32%, #274568 42%,
+        #46688C 52%, #6E93B2 61%, #9BBDD6 72%, #C6DDEC 83%, #E8F2FA 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 1400px; /* fallback before JS measures; see sizeGradient() */
     }
 
-    html[lang="en"] body {
-      font-family: var(--font-en);
-    }
+    html[lang="en"] body { font-family: var(--font-en); }
 
-    /* Brand accent bar */
     .q-accent {
       width: 40px; height: 5px;
-      background: linear-gradient(90deg, #00c4ff, #0077ff);
+      background: linear-gradient(90deg, var(--cyan), var(--cyan-deep));
       border-radius: 3px;
     }
 
-    /* Milestone track animation */
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50%       { opacity: 0.6; transform: scale(1.3); }
     }
     .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
 
-    /* Score bar fill animation */
     @keyframes fill-bar {
       from { width: 0; }
       to   { width: 87%; }
     }
-    .score-fill {
-      animation: fill-bar 1.4s ease-out 0.4s both;
-    }
+    .score-fill { animation: fill-bar 1.4s ease-out 0.4s both; }
 
-    /* Lang toggle pill */
     .lang-btn {
       display: flex; align-items: center; gap: 6px;
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1.5px solid rgba(255,255,255,0.1);
-      font-size: 13px; font-weight: 700;
+      border: 1.5px solid rgba(255,255,255,0.14);
+      font-size: 13px; font-weight: 600;
       color: #9ca3af;
       cursor: pointer;
       transition: all 0.2s;
       background: transparent;
     }
-    .lang-btn:hover { border-color: #00c4ff; color: #00c4ff; }
+    .lang-btn:hover { border-color: var(--cyan); color: var(--cyan); }
 
-    /* Gradient glow bg */
     .hero-glow {
       position: absolute; inset: 0; z-index: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,196,255,0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,180,220,0.10) 0%, transparent 70%);
       pointer-events: none;
     }
+
+    /* Line icons — thin stroke, rounded caps, matches the app's Icon.tsx language */
+    .qicon { width: 30px; height: 30px; }
   </style>
 </head>
 
-<body class="selection:bg-[#00c4ff] selection:text-[#0d1b2e] pb-20 bg-[#0d1b2e]">
+<body class="selection:bg-[#00B4DC] selection:text-[#070A16] pb-0">
 
   <!-- ── NAV ─────────────────────────────────────────────────────────────── -->
-  <nav class="fixed top-0 w-full z-50 bg-[#0d1b2e]/90 backdrop-blur-xl border-b border-[#1a2b45]">
+  <nav class="fixed top-0 w-full z-50 bg-[#070A16]/85 backdrop-blur-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
 
       <!-- Logo -->
       <div class="flex items-center gap-4 cursor-pointer">
-        <div class="w-12 h-12 bg-[#0a0f1e] border border-[#1a2b45] rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(0,196,255,0.15)] shrink-0 overflow-hidden">
-          <!-- Q mark — segmented 4-colour brand mark -->
-          <svg id="logo-svg" width="28" height="28" viewBox="0 0 100 100" fill="none">
-            <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
-            <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
-            <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32"    stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
-            <path d="M 61.32 32 A 20 20 0 0 1 61.32 52"        stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
-            <path d="M 54 59.32 L 51 50" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
-            <circle cx="51" cy="50" r="4.8" fill="#FF4564"/>
+        <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(0,180,220,0.15)] shrink-0 overflow-hidden">
+          <!-- Q mark — the disciplined gauge-Q (matches QadhraLogo.tsx / SplashScreen exactly) -->
+          <svg id="logo-svg" width="26" height="26" viewBox="0 0 100 100" fill="none">
+            <path d="M84 50 A34 34 0 1 0 67 79" stroke="#C4DCF0" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <path d="M67 79 L79 90" stroke="#00C8F0" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <circle cx="79" cy="90" r="4" fill="#00C8F0"/>
           </svg>
         </div>
         <div class="flex flex-col justify-center" id="logo-text-wrap">
-          <span id="logo-name" class="text-2xl font-black leading-none tracking-tight text-[#f4f7fb]">قدرها</span>
-          <span id="logo-sub" class="text-[10px] font-bold text-[#00c4ff] tracking-[0.2em] uppercase mt-1" style="font-family:'Inter',sans-serif">Qadrha</span>
+          <span id="logo-name" class="text-2xl font-bold leading-none tracking-tight text-[#f4f7fb]">قدرها</span>
+          <span id="logo-sub" class="text-[10px] font-semibold text-[#00B4DC] tracking-[0.2em] uppercase mt-1" style="font-family:'IBM Plex Sans',sans-serif">Qadrha</span>
         </div>
       </div>
 
       <!-- Nav right -->
       <div class="flex items-center gap-4">
-        <a href="#features" id="nav-link" class="hidden md:block text-sm font-bold text-gray-400 hover:text-white transition">المميزات</a>
+        <a href="#features" id="nav-link" class="hidden md:block text-sm font-semibold text-gray-400 hover:text-white transition">المميزات</a>
 
         <!-- Language Toggle -->
         <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
           </svg>
           <span id="lang-toggle-label">EN</span>
         </button>
 
-        <button id="cta-btn" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00c4ff] text-[#0d1b2e] font-bold text-sm px-6 py-2 rounded-full hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,196,255,0.3)]">
+        <button id="cta-btn" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00B4DC] text-[#070A16] font-bold text-sm px-6 py-2 rounded-full hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,180,220,0.3)]">
           حمل التطبيق
         </button>
       </div>
@@ -137,81 +142,81 @@
   <div class="relative overflow-hidden">
     <div class="hero-glow"></div>
     <header class="pt-40 pb-20 px-6 flex flex-col items-center text-center max-w-5xl mx-auto relative z-10">
-      <div class="q-accent mb-8 shadow-[0_0_15px_#00c4ff]"></div>
-      <h1 id="hero-h1" class="text-6xl md:text-[7rem] font-black leading-[1.1] tracking-tight mb-8 text-[#f4f7fb]">
+      <div class="q-accent mb-8 shadow-[0_0_15px_#00B4DC]"></div>
+      <h1 id="hero-h1" class="text-6xl md:text-[7rem] font-bold leading-[1.1] tracking-tight mb-8 text-[#f4f7fb]">
         اعرف سيارتك.<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00c4ff] to-[#0077ff]">احمِ قيمتها.</span>
+        <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00B4DC] to-[#008CB0]">احمِ قيمتها.</span>
       </h1>
       <p id="hero-sub" class="text-xl md:text-2xl text-gray-400 font-medium max-w-2xl mb-12 leading-relaxed">
         قدرها يتتبع صيانة سيارتك، يكشف فجوات الضمان،<br>
         ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 items-center">
-        <button id="hero-cta-primary" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00c4ff] text-[#0d1b2e] font-black text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,196,255,0.35)]">
+        <button id="hero-cta-primary" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00B4DC] text-[#070A16] font-bold text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,180,220,0.35)]">
           حمل التطبيق مجاناً
         </button>
-        <a href="#how-it-works" id="hero-cta-secondary" class="text-sm font-bold text-gray-400 hover:text-white transition flex items-center gap-2">
+        <a href="#how-it-works" id="hero-cta-secondary" class="text-sm font-semibold text-gray-400 hover:text-white transition flex items-center gap-2">
           كيف يعمل؟
-          <svg id="hero-arrow" class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          <svg id="hero-arrow" class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         </a>
       </div>
-      <p class="text-xs text-gray-500 mt-5">🧪 نسخة تجريبية مبكرة عبر TestFlight · Early beta access</p>
+      <p class="text-xs text-gray-500 mt-5">نسخة تجريبية مبكرة عبر TestFlight · Early beta access</p>
     </header>
   </div>
 
-  <!-- ── HOW IT WORKS ───────────────────────────────────────────────────── -->
+  <!-- ── HOW IT WORKS (dark zone) ──────────────────────────────────────── -->
   <section id="how-it-works" class="py-20 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-16">
-      <h2 id="hiw-title" class="text-4xl md:text-5xl font-black mb-4 text-[#f4f7fb]">ابدأ في ثلاث خطوات</h2>
+      <h2 id="hiw-title" class="text-4xl md:text-5xl font-bold mb-4 text-[#f4f7fb]">ابدأ في ثلاث خطوات</h2>
       <p id="hiw-sub" class="text-xl text-gray-400">من رفع الإستمارة إلى معرفة القيمة الحقيقية</p>
     </div>
 
     <div id="steps-row" class="flex flex-col md:flex-row gap-6 justify-center items-stretch w-full">
 
       <!-- Step 1 — Add Car -->
-      <div class="flex-1 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00c4ff]/50 transition-colors group">
-        <div class="w-12 h-12 rounded-full bg-[#0d1b2e] border-2 border-[#00c4ff] text-[#00c4ff] flex items-center justify-center font-black text-xl mb-6 shadow-[0_0_15px_rgba(0,196,255,0.2)]" style="font-family:'Inter',sans-serif">1</div>
-        <h3 id="s1-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">أضف سيارتك</h3>
-        <p id="s1-body" class="text-gray-400 text-sm leading-relaxed mb-10">ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.</p>
+      <div class="flex-1 bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00B4DC]/50 transition-colors group">
+        <div class="w-12 h-12 rounded-full bg-[#00B4DC]/10 border-2 border-[#00B4DC] text-[#00B4DC] flex items-center justify-center font-bold text-xl mb-6" style="font-family:'IBM Plex Sans',sans-serif">1</div>
+        <h3 id="s1-title" class="text-2xl font-bold mb-3 text-[#152A3E]">أضف سيارتك</h3>
+        <p id="s1-body" class="text-[#5E7896] text-sm leading-relaxed mb-10">ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.</p>
         <!-- Vehicle card mockup -->
-        <div class="bg-[#111623] rounded-3xl p-5 border border-gray-700 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300 text-right">
+        <div class="bg-[#0D1219] rounded-3xl p-5 border border-white/10 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300 text-right">
           <div class="flex items-center justify-between mb-3">
-            <span class="text-xs text-[#00c4ff] font-bold bg-[#00c4ff]/10 px-2 py-1 rounded-lg" style="font-family:'Inter',sans-serif">2022</span>
-            <span class="text-gray-500 text-xs">🚗</span>
+            <span class="text-xs text-[#00B4DC] font-semibold bg-[#00B4DC]/10 px-2 py-1 rounded-lg" style="font-family:'IBM Plex Sans',sans-serif">2022</span>
+            <svg class="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><path d="M5 17a2 2 0 0 0 4 0M15 17a2 2 0 0 0 4 0"/></svg>
           </div>
-          <p id="s1-car-name" class="text-white font-black text-lg leading-tight mb-1">هافال دارجو</p>
-          <p class="text-[#00c4ff] font-bold text-xs tracking-wider" style="font-family:'Inter',sans-serif">ABC-1234 ← ن م م</p>
+          <p id="s1-car-name" class="text-white font-bold text-lg leading-tight mb-1">تويوتا كامري</p>
+          <p class="text-[#00B4DC] font-semibold text-xs tracking-wider" style="font-family:'IBM Plex Sans',sans-serif">ABC-1234 ← ن م م</p>
         </div>
       </div>
 
       <!-- Step 2 — Maintenance -->
-      <div class="flex-1 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00c4ff]/50 transition-colors group">
-        <div class="w-12 h-12 rounded-full bg-[#0d1b2e] border-2 border-gray-700 text-gray-400 flex items-center justify-center font-black text-xl mb-6 group-hover:border-[#00c4ff] group-hover:text-[#00c4ff] transition-colors" style="font-family:'Inter',sans-serif">2</div>
-        <h3 id="s2-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">تتبع الصيانة والضمان</h3>
-        <p id="s2-body" class="text-gray-400 text-sm leading-relaxed mb-10">سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.</p>
+      <div class="flex-1 bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00B4DC]/50 transition-colors group">
+        <div class="w-12 h-12 rounded-full bg-[#152A3E]/5 border-2 border-[#152A3E]/15 text-[#5E7896] flex items-center justify-center font-bold text-xl mb-6 group-hover:border-[#00B4DC] group-hover:text-[#00B4DC] transition-colors" style="font-family:'IBM Plex Sans',sans-serif">2</div>
+        <h3 id="s2-title" class="text-2xl font-bold mb-3 text-[#152A3E]">تتبع الصيانة والضمان</h3>
+        <p id="s2-body" class="text-[#5E7896] text-sm leading-relaxed mb-10">سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.</p>
         <!-- Maintenance timeline mockup -->
-        <div class="bg-[#050a14] rounded-3xl p-5 border border-gray-700 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300 text-right">
+        <div class="bg-[#070A16] rounded-3xl p-5 border border-white/10 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300 text-right">
           <div class="flex flex-col gap-3">
             <div class="flex items-center gap-3 flex-row-reverse">
-              <div class="w-6 h-6 rounded-full bg-[#1a7a4a] flex items-center justify-center text-xs text-white font-bold shrink-0">✓</div>
+              <div class="w-6 h-6 rounded-full bg-[#00B4DC] flex items-center justify-center text-xs text-[#070A16] font-bold shrink-0">✓</div>
               <div class="flex-1">
-                <p class="text-white text-xs font-bold" id="s2-m1">40,000 كم — موثّق</p>
+                <p class="text-white text-xs font-semibold" id="s2-m1">40,000 كم — موثّق</p>
                 <p class="text-gray-500 text-[10px]">تغيير زيت + فلتر هواء</p>
               </div>
             </div>
             <div class="flex items-center gap-3 flex-row-reverse">
-              <div class="w-6 h-6 rounded-full bg-[#00c4ff] flex items-center justify-center pulse-dot shrink-0">
-                <span class="text-[#0d1b2e] text-xs font-black">🚗</span>
+              <div class="w-6 h-6 rounded-full bg-[#00B4DC] flex items-center justify-center pulse-dot shrink-0">
+                <svg class="w-3 h-3 text-[#070A16]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><path d="M5 17a2 2 0 0 0 4 0M15 17a2 2 0 0 0 4 0"/></svg>
               </div>
               <div class="flex-1">
-                <p class="text-[#00c4ff] text-xs font-bold" id="s2-m2">50,000 كم — أنت هنا</p>
+                <p class="text-[#00B4DC] text-xs font-semibold" id="s2-m2">50,000 كم — أنت هنا</p>
                 <p class="text-gray-500 text-[10px]">فحص الفرامل + تبديل الإطارات</p>
               </div>
             </div>
             <div class="flex items-center gap-3 flex-row-reverse opacity-40">
               <div class="w-6 h-6 rounded-full border border-gray-600 flex items-center justify-center text-xs text-gray-500 shrink-0">◎</div>
               <div class="flex-1">
-                <p class="text-gray-400 text-xs font-bold" id="s2-m3">60,000 كم — قادم</p>
+                <p class="text-gray-400 text-xs font-semibold" id="s2-m3">60,000 كم — قادم</p>
                 <p class="text-gray-600 text-[10px]">تبديل شمعات + فحص شامل</p>
               </div>
             </div>
@@ -219,27 +224,27 @@
         </div>
       </div>
 
-      <!-- Step 3 — Car Value Score -->
-      <div class="flex-1 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00c4ff]/50 transition-colors group">
-        <div class="w-12 h-12 rounded-full bg-[#0d1b2e] border-2 border-gray-700 text-gray-400 flex items-center justify-center font-black text-xl mb-6 group-hover:border-[#00c4ff] group-hover:text-[#00c4ff] transition-colors" style="font-family:'Inter',sans-serif">3</div>
-        <h3 id="s3-title" class="text-2xl font-black mb-3 text-[#f4f7fb]">اعرف قيمة سيارتك</h3>
-        <p id="s3-body" class="text-gray-400 text-sm leading-relaxed mb-10">الذكاء الاصطناعي يحسب نقاط جواز سيارتك بناءً على سجل الصيانة ويكشف قيمتها السوقية.</p>
-        <!-- Car passport score mockup -->
-        <div class="bg-[#0d1b2e] rounded-3xl p-5 border border-[#00c4ff]/40 w-full mt-auto shadow-[0_0_20px_rgba(0,196,255,0.1)] group-hover:-translate-y-2 transition-transform duration-300">
+      <!-- Step 3 — Qadrha Score (real live feature — Car Passport itself is still coming soon) -->
+      <div class="flex-1 bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00B4DC]/50 transition-colors group">
+        <div class="w-12 h-12 rounded-full bg-[#152A3E]/5 border-2 border-[#152A3E]/15 text-[#5E7896] flex items-center justify-center font-bold text-xl mb-6 group-hover:border-[#00B4DC] group-hover:text-[#00B4DC] transition-colors" style="font-family:'IBM Plex Sans',sans-serif">3</div>
+        <h3 id="s3-title" class="text-2xl font-bold mb-3 text-[#152A3E]">اعرف قيمة سيارتك الحقيقية</h3>
+        <p id="s3-body" class="text-[#5E7896] text-sm leading-relaxed mb-10">الذكاء الاصطناعي يحسب قدرها سكور بناءً على سجل الصيانة ويكشف قيمتها السوقية الحقيقية.</p>
+        <!-- Qadrha Score mockup -->
+        <div class="bg-[#0D1219] rounded-3xl p-5 border border-[#00B4DC]/40 w-full mt-auto shadow-[0_0_20px_rgba(0,180,220,0.1)] group-hover:-translate-y-2 transition-transform duration-300">
           <div class="flex items-center justify-between mb-3">
-            <span id="s3-score-label" class="text-gray-400 text-xs font-bold">نقاط جواز السيارة</span>
-            <span class="text-[#00c4ff] font-black text-2xl" style="font-family:'Inter',sans-serif">87<span class="text-sm text-gray-500 font-normal">/100</span></span>
+            <span id="s3-score-label" class="text-gray-400 text-xs font-semibold">قدرها سكور</span>
+            <span class="text-[#00B4DC] font-bold text-2xl" style="font-family:'IBM Plex Sans',sans-serif">87<span class="text-sm text-gray-500 font-normal">/100</span></span>
           </div>
-          <div class="h-2 bg-[#1a2b45] rounded-full overflow-hidden mb-3">
-            <div class="score-fill h-full bg-gradient-to-l from-[#00c4ff] to-[#0077ff] rounded-full"></div>
+          <div class="h-2 bg-white/10 rounded-full overflow-hidden mb-3">
+            <div class="score-fill h-full bg-gradient-to-l from-[#00B4DC] to-[#008CB0] rounded-full"></div>
           </div>
           <div class="flex gap-2 flex-row-reverse">
             <div class="flex items-center gap-1">
-              <div class="w-2 h-2 rounded-full bg-[#1a7a4a]"></div>
+              <div class="w-2 h-2 rounded-full bg-[#00B4DC]"></div>
               <span id="s3-verified" class="text-gray-400 text-[10px]">4 موثّق</span>
             </div>
             <div class="flex items-center gap-1">
-              <div class="w-2 h-2 rounded-full bg-[#c06020]"></div>
+              <div class="w-2 h-2 rounded-full bg-[#008CB0]"></div>
               <span id="s3-partial" class="text-gray-400 text-[10px]">1 جزئي</span>
             </div>
           </div>
@@ -249,83 +254,104 @@
     </div>
   </section>
 
-  <!-- ── FEATURES ───────────────────────────────────────────────────────── -->
-  <section id="features" class="py-20 px-6 max-w-7xl mx-auto border-t border-[#1a2b45] mt-10">
+  <!-- ── FEATURES (light zone — matches the app's "content lives in the light lower zone") ── -->
+  <section id="features" class="py-20 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-16">
-      <h2 id="feat-title" class="text-4xl md:text-5xl font-black mb-4 text-[#f4f7fb]">كل ما تحتاجه لسيارتك</h2>
-      <p id="feat-sub" class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">مجموعة متكاملة من الأدوات الذكية — مبنية للسوق السعودي.</p>
+      <h2 id="feat-title" class="text-4xl md:text-5xl font-bold mb-4 text-[#152A3E]">كل ما تحتاجه لسيارتك</h2>
+      <p id="feat-sub" class="text-[#5E7896] text-lg max-w-2xl mx-auto leading-relaxed">مجموعة متكاملة من الأدوات الذكية — مبنية للسوق السعودي.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
       <!-- Feature 1: Maintenance Roadmap -->
-      <div id="feat1" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
-        <div class="text-4xl mb-4">🔧</div>
-        <h3 id="feat1-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">مسار الصيانة.</h3>
-        <p id="feat1-body" class="text-base text-gray-400 leading-relaxed">جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة — كلما رفعت أكثر، ارتفعت نقاطك.</p>
+      <div id="feat1" class="bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00B4DC]/50 transition-colors text-right md:h-[280px]">
+        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#2C4E70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15.6 11l-2-2 2.1-2.1-.2-.2z"/><path d="M14.7 6.3l3-3"/></svg>
+        <h3 id="feat1-title" class="text-2xl font-bold mb-3 text-[#152A3E]">مسار الصيانة.</h3>
+        <p id="feat1-body" class="text-sm text-[#5E7896] leading-relaxed">جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة — كلما رفعت أكثر، ارتفعت نقاطك.</p>
       </div>
 
       <!-- Feature 2: Warranty Check -->
-      <div id="feat2" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
-        <div class="text-4xl mb-4">🛡</div>
-        <h3 id="feat2-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">فحص الضمان.</h3>
-        <p id="feat2-body" class="text-base text-gray-400 leading-relaxed">كشف فجوات الصيانة التي قد تبطل ضمان سيارتك مع توصيات استباقية لحمايته قبل فوات الأوان.</p>
+      <div id="feat2" class="bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00B4DC]/50 transition-colors text-right md:h-[280px]">
+        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#2C4E70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3z"/></svg>
+        <h3 id="feat2-title" class="text-2xl font-bold mb-3 text-[#152A3E]">فحص الضمان.</h3>
+        <p id="feat2-body" class="text-sm text-[#5E7896] leading-relaxed">كشف فجوات الصيانة التي قد تبطل ضمان سيارتك مع توصيات استباقية لحمايته قبل فوات الأوان.</p>
       </div>
 
-      <!-- Feature 3: AI Advisor -->
-      <div id="feat3" class="bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00c4ff]/50 transition-colors text-right md:h-[300px]">
-        <div class="text-4xl mb-4">✨</div>
-        <h3 id="feat3-title" class="text-3xl font-black mb-4 text-[#f4f7fb]">مستشار ذكي.</h3>
-        <p id="feat3-body" class="text-base text-gray-400 leading-relaxed">اسأل عن أي عطل، صوّر ضوء التحذير، أو استفسر عن الصيانة — ردود فورية بالذكاء الاصطناعي، وبياناتك تبقى داخل المملكة.</p>
+      <!-- Feature 3: Car Value / Qadrha Score -->
+      <div id="feat3" class="bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00B4DC]/50 transition-colors text-right md:h-[280px]">
+        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#2C4E70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg>
+        <h3 id="feat3-title" class="text-2xl font-bold mb-3 text-[#152A3E]">قيمة سيارتك.</h3>
+        <p id="feat3-body" class="text-sm text-[#5E7896] leading-relaxed">قدرها سكور يحلل سجل صيانتك ويكشف القيمة السوقية الحقيقية لسيارتك في السوق السعودي المستعمل.</p>
       </div>
 
-      <!-- Feature 4 — Car Passport (full width) -->
-      <div class="md:col-span-3 bg-[#0a0f1e] border border-[#1a2b45] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between relative overflow-hidden gap-8 group mt-2">
-        <div id="passport-stripe" class="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-[#00c4ff] to-[#0077ff]"></div>
+      <!-- Feature 4: Recall Check -->
+      <div id="feat4" class="bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00B4DC]/50 transition-colors text-right md:h-[280px]">
+        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#2C4E70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <h3 id="feat4-title" class="text-2xl font-bold mb-3 text-[#152A3E]">فحص الاستدعاءات.</h3>
+        <p id="feat4-body" class="text-sm text-[#5E7896] leading-relaxed">فحص رسمي مباشر مع سجل وزارة التجارة (recalls.sa) — نخبرك فوراً إن كانت سيارتك مشمولة بأي حملة استدعاء.</p>
+      </div>
+
+      <!-- Feature 5: Marketplace -->
+      <div id="feat5" class="bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00B4DC]/50 transition-colors text-right md:h-[280px]">
+        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#2C4E70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 3a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2z"/><path d="M4 8l1.2-3.2A2 2 0 0 1 7 3.5h10a2 2 0 0 1 1.8 1.3L20 8"/><path d="M6 13v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-6"/></svg>
+        <h3 id="feat5-title" class="text-2xl font-bold mb-3 text-[#152A3E]">سوق قطع الغيار.</h3>
+        <p id="feat5-body" class="text-sm text-[#5E7896] leading-relaxed">بيع وشراء قطع الغيار والإكسسوارات المستعملة مباشرة من مالكين موثّقين — مع تفاوض داخل التطبيق وحماية لمعلومات التواصل.</p>
+      </div>
+
+      <!-- Feature 6: AI Advisor -->
+      <div id="feat6" class="bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-10 flex flex-col justify-end hover:border-[#00B4DC]/50 transition-colors text-right md:h-[280px]">
+        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#2C4E70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.2 3.3L16.5 7.5l-3.3 1.2L12 12l-1.2-3.3L7.5 7.5l3.3-1.2z"/><path d="M19 13l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/></svg>
+        <h3 id="feat6-title" class="text-2xl font-bold mb-3 text-[#152A3E]">مستشار ذكي.</h3>
+        <p id="feat6-body" class="text-sm text-[#5E7896] leading-relaxed">اسأل عن أي عطل، صوّر ضوء التحذير، أو استفسر عن الصيانة — ردود فورية بالذكاء الاصطناعي، وبياناتك تبقى داخل المملكة.</p>
+      </div>
+
+      <!-- Car Passport — coming soon (full width) -->
+      <div class="md:col-span-3 bg-white/70 border border-[#152A3E]/10 rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between relative overflow-hidden gap-8 group mt-2">
+        <div id="passport-stripe" class="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-[#00B4DC] to-[#008CB0]"></div>
 
         <div id="passport-text" class="w-full md:w-1/2 flex flex-col justify-center">
-          <span class="inline-block self-start text-xs font-bold text-[#00c4ff] bg-[#00c4ff]/10 border border-[#00c4ff]/30 px-3 py-1 rounded-full mb-3">قريباً · Coming soon</span>
-          <h3 id="passport-title" class="text-3xl md:text-4xl font-black mb-4 text-[#f4f7fb]">جواز سيارتك الرقمي.</h3>
-          <p id="passport-body" class="text-base md:text-lg text-gray-400 mb-6 leading-relaxed">
-            قدرها يبني سجلاً رقمياً موثقاً لسيارتك. كلما زادت الفواتير المرفوعة، ارتفعت نقاط الجواز —
-            <span class="text-[#00c4ff] font-bold" id="passport-highlight">مما يرفع قيمتها عند البيع ويمنحك ميزة تفاوضية حقيقية.</span>
+          <span class="inline-block self-start text-xs font-semibold text-[#008CB0] bg-[#00B4DC]/10 border border-[#00B4DC]/30 px-3 py-1 rounded-full mb-3">قريباً · Coming soon</span>
+          <h3 id="passport-title" class="text-3xl md:text-4xl font-bold mb-4 text-[#152A3E]">جواز سيارتك الرقمي.</h3>
+          <p id="passport-body" class="text-base md:text-lg text-[#5E7896] mb-6 leading-relaxed">
+            قدرها يبني سجلاً رقمياً موثقاً لسيارتك من صيانتها وقيمتها وحالة ضمانها. كلما زادت الفواتير المرفوعة، ارتفع قدرها سكور —
+            <span class="text-[#008CB0] font-semibold" id="passport-highlight">مما يرفع قيمتها عند البيع ويمنحك ميزة تفاوضية حقيقية.</span>
           </p>
         </div>
 
         <!-- Score card mockup -->
-        <div class="w-full md:w-1/2 bg-[#111623] border border-gray-700 shadow-2xl p-5 md:p-6 rounded-3xl flex flex-col group-hover:-translate-y-2 transition-transform duration-500 max-w-lg" id="passport-card">
-          <div class="flex items-center justify-between mb-4 border-b border-gray-800 pb-4">
-            <div class="flex items-center gap-2 text-[#00c4ff] font-bold text-sm">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#00c4ff] animate-pulse"></span>
-              <span id="passport-badge">جواز السيارة · نشط</span>
+        <div class="w-full md:w-1/2 bg-white border border-[#152A3E]/10 shadow-xl p-5 md:p-6 rounded-3xl flex flex-col group-hover:-translate-y-2 transition-transform duration-500 max-w-lg" id="passport-card">
+          <div class="flex items-center justify-between mb-4 border-b border-[#152A3E]/10 pb-4">
+            <div class="flex items-center gap-2 text-[#008CB0] font-semibold text-sm">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#00B4DC] animate-pulse"></span>
+              <span id="passport-badge">جواز السيارة · قريباً</span>
             </div>
-            <span class="text-gray-500 text-xs" style="font-family:'Inter',sans-serif">هافال دارجو 2022</span>
+            <span class="text-[#5E7896] text-xs" style="font-family:'IBM Plex Sans',sans-serif">تويوتا كامري 2022</span>
           </div>
           <div class="flex items-end justify-between mb-3">
             <div>
-              <p id="passport-card-label" class="text-gray-400 text-xs font-bold mb-1">نقاط الجواز</p>
-              <p class="text-white font-black text-4xl" style="font-family:'Inter',sans-serif">87<span class="text-base text-gray-500 font-normal">/100</span></p>
+              <p id="passport-card-label" class="text-[#5E7896] text-xs font-semibold mb-1">قدرها سكور</p>
+              <p class="text-[#152A3E] font-bold text-4xl" style="font-family:'IBM Plex Sans',sans-serif">87<span class="text-base text-[#5E7896] font-normal">/100</span></p>
             </div>
             <div class="text-right">
-              <p id="passport-trend-label" class="text-gray-500 text-xs mb-1">التغيير</p>
-              <p class="text-[#00c4ff] font-bold text-sm">↑ +12 <span class="text-gray-500">نقطة</span></p>
+              <p id="passport-trend-label" class="text-[#5E7896] text-xs mb-1">التغيير</p>
+              <p class="text-[#008CB0] font-semibold text-sm">↑ +12 <span class="text-[#5E7896]">نقطة</span></p>
             </div>
           </div>
-          <div class="h-2 bg-[#1a2b45] rounded-full overflow-hidden mb-4">
-            <div class="h-full w-[87%] bg-gradient-to-l from-[#00c4ff] to-[#0077ff] rounded-full"></div>
+          <div class="h-2 bg-[#152A3E]/10 rounded-full overflow-hidden mb-4">
+            <div class="h-full w-[87%] bg-gradient-to-l from-[#00B4DC] to-[#008CB0] rounded-full"></div>
           </div>
           <div class="flex gap-3 flex-row-reverse text-xs">
             <div class="flex items-center gap-1.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-[#1a7a4a]"></div>
-              <span id="passport-verified" class="text-gray-400">4 موثّق</span>
+              <div class="w-2.5 h-2.5 rounded-full bg-[#00B4DC]"></div>
+              <span id="passport-verified" class="text-[#5E7896]">4 موثّق</span>
             </div>
             <div class="flex items-center gap-1.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-[#c06020]"></div>
-              <span id="passport-partial" class="text-gray-400">1 جزئي</span>
+              <div class="w-2.5 h-2.5 rounded-full bg-[#008CB0]"></div>
+              <span id="passport-partial" class="text-[#5E7896]">1 جزئي</span>
             </div>
             <div class="flex items-center gap-1.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-[#4a6a9a]"></div>
-              <span id="passport-claimed" class="text-gray-400">0 مُعلن</span>
+              <div class="w-2.5 h-2.5 rounded-full bg-[#5E7896]"></div>
+              <span id="passport-claimed" class="text-[#5E7896]">0 مُعلن</span>
             </div>
           </div>
         </div>
@@ -334,27 +360,23 @@
     </div>
   </section>
 
-  <!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
-  <footer class="border-t border-[#1a2b45] bg-[#0a0f1e] pt-12 pb-8 px-6 mt-10">
+  <!-- ── FOOTER (light zone) ───────────────────────────────────────────── -->
+  <footer class="border-t border-[#152A3E]/10 pt-12 pb-8 px-6 mt-10">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
 
       <div class="flex items-center gap-3">
-        <!-- Q mark — footer (small, muted) -->
-        <svg width="18" height="18" viewBox="0 0 100 100" fill="none" class="opacity-40">
-          <path d="M 54 59.32 A 20 20 0 0 1 25.21 48.84" stroke="#004d8a" stroke-width="10" stroke-linecap="butt" fill="none"/>
-          <path d="M 25.21 48.84 A 20 20 0 0 1 37.16 23.21" stroke="#006db5" stroke-width="10" stroke-linecap="butt" fill="none"/>
-          <path d="M 37.16 23.21 A 20 20 0 0 1 61.32 32"    stroke="#0090cc" stroke-width="10" stroke-linecap="butt" fill="none"/>
-          <path d="M 61.32 32 A 20 20 0 0 1 61.32 52"        stroke="#00c4ff" stroke-width="10" stroke-linecap="butt" fill="none"/>
-          <path d="M 54 59.32 L 51 50" stroke="#0060aa" stroke-width="10" stroke-linecap="round" fill="none"/>
-          <circle cx="51" cy="50" r="4.8" fill="#FF4564"/>
+        <svg width="18" height="18" viewBox="0 0 100 100" fill="none" class="opacity-50">
+          <path d="M84 50 A34 34 0 1 0 67 79" stroke="#1A2840" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M67 79 L79 90" stroke="#00C8F0" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <circle cx="79" cy="90" r="4" fill="#00C8F0"/>
         </svg>
-        <span id="footer-copy" class="text-sm font-bold text-gray-500">© 2026 قدرها. جميع الحقوق محفوظة.</span>
+        <span id="footer-copy" class="text-sm font-semibold text-[#5E7896]">© 2026 قدرها. جميع الحقوق محفوظة.</span>
       </div>
 
-      <div class="flex items-center gap-6 text-sm text-gray-500 font-medium">
-        <p id="footer-disclaimer" class="hidden md:block border-gray-700 italic text-xs" style="border-inline-end-width:1px; padding-inline-end:1.5rem; margin-inline-end:0.5rem">بيانات سيارتك تبقى في السعودية · متوافق مع نظام PDPL</p>
-        <a href="terms.html" id="footer-terms" class="hover:text-[#00c4ff] transition-colors">الشروط والأحكام</a>
-        <a href="privacy.html" id="footer-privacy" class="hover:text-[#00c4ff] transition-colors">سياسة الخصوصية</a>
+      <div class="flex items-center gap-6 text-sm text-[#5E7896] font-medium">
+        <p id="footer-disclaimer" class="hidden md:block border-[#152A3E]/15 italic text-xs" style="border-inline-end-width:1px; padding-inline-end:1.5rem; margin-inline-end:0.5rem">بيانات سيارتك تبقى في السعودية · متوافق مع نظام PDPL</p>
+        <a href="terms.html" id="footer-terms" class="hover:text-[#008CB0] transition-colors">الشروط والأحكام</a>
+        <a href="privacy.html" id="footer-privacy" class="hover:text-[#008CB0] transition-colors">سياسة الخصوصية</a>
       </div>
 
     </div>
@@ -370,7 +392,7 @@
         langLabel: 'EN',
         ctaBtn: 'حمل التطبيق',
 
-        heroH1: 'اعرف سيارتك.<br><span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00c4ff] to-[#0077ff]">احمِ قيمتها.</span>',
+        heroH1: 'اعرف سيارتك.<br><span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00B4DC] to-[#008CB0]">احمِ قيمتها.</span>',
         heroSub: 'قدرها يتتبع صيانة سيارتك، يكشف فجوات الضمان،<br>ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.',
         heroCTAPrimary: 'حمل التطبيق مجاناً',
         heroCTASecondary: 'كيف يعمل؟',
@@ -381,7 +403,7 @@
 
         s1Title: 'أضف سيارتك',
         s1Body: 'ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.',
-        s1CarName: 'هافال دارجو',
+        s1CarName: 'تويوتا كامري',
 
         s2Title: 'تتبع الصيانة والضمان',
         s2Body: 'سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.',
@@ -389,9 +411,9 @@
         s2M2: '50,000 كم — أنت هنا',
         s2M3: '60,000 كم — قادم',
 
-        s3Title: 'اعرف قيمة سيارتك',
-        s3Body: 'الذكاء الاصطناعي يحسب نقاط جواز سيارتك بناءً على سجل الصيانة ويكشف قيمتها السوقية.',
-        s3ScoreLabel: 'نقاط جواز السيارة',
+        s3Title: 'اعرف قيمة سيارتك الحقيقية',
+        s3Body: 'الذكاء الاصطناعي يحسب قدرها سكور بناءً على سجل الصيانة ويكشف قيمتها السوقية الحقيقية.',
+        s3ScoreLabel: 'قدرها سكور',
         s3Verified: '4 موثّق',
         s3Partial: '1 جزئي',
 
@@ -401,16 +423,22 @@
         feat1Body: 'جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة — كلما رفعت أكثر، ارتفعت نقاطك.',
         feat2Title: 'فحص الضمان.',
         feat2Body: 'كشف فجوات الصيانة التي قد تبطل ضمان سيارتك مع توصيات استباقية لحمايته قبل فوات الأوان.',
-        feat3Title: 'مستشار ذكي.',
-        feat3Body: 'اسأل عن أي عطل، صوّر ضوء التحذير، أو استفسر عن الصيانة — ردود فورية بالذكاء الاصطناعي، وبياناتك تبقى داخل المملكة.',
+        feat3Title: 'قيمة سيارتك.',
+        feat3Body: 'قدرها سكور يحلل سجل صيانتك ويكشف القيمة السوقية الحقيقية لسيارتك في السوق السعودي المستعمل.',
+        feat4Title: 'فحص الاستدعاءات.',
+        feat4Body: 'فحص رسمي مباشر مع سجل وزارة التجارة (recalls.sa) — نخبرك فوراً إن كانت سيارتك مشمولة بأي حملة استدعاء.',
+        feat5Title: 'سوق قطع الغيار.',
+        feat5Body: 'بيع وشراء قطع الغيار والإكسسوارات المستعملة مباشرة من مالكين موثّقين — مع تفاوض داخل التطبيق وحماية لمعلومات التواصل.',
+        feat6Title: 'مستشار ذكي.',
+        feat6Body: 'اسأل عن أي عطل، صوّر ضوء التحذير، أو استفسر عن الصيانة — ردود فورية بالذكاء الاصطناعي، وبياناتك تبقى داخل المملكة.',
         featAlign: 'text-right',
 
         passportStripePos: 'right-0',
+        passportBadge: 'جواز السيارة · قريباً',
         passportTitle: 'جواز سيارتك الرقمي.',
-        passportBody: 'قدرها يبني سجلاً رقمياً موثقاً لسيارتك. كلما زادت الفواتير المرفوعة، ارتفعت نقاط الجواز —',
+        passportBody: 'قدرها يبني سجلاً رقمياً موثقاً لسيارتك من صيانتها وقيمتها وحالة ضمانها. كلما زادت الفواتير المرفوعة، ارتفع قدرها سكور —',
         passportHighlight: 'مما يرفع قيمتها عند البيع ويمنحك ميزة تفاوضية حقيقية.',
-        passportBadge: 'جواز السيارة · نشط',
-        passportCardLabel: 'نقاط الجواز',
+        passportCardLabel: 'قدرها سكور',
         passportTrendLabel: 'التغيير',
         passportVerified: '4 موثّق',
         passportPartial: '1 جزئي',
@@ -428,7 +456,7 @@
         langLabel: 'عربي',
         ctaBtn: 'Download App',
 
-        heroH1: 'Know Your Car.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00c4ff] to-[#0077ff]">Protect Its Value.</span>',
+        heroH1: 'Know Your Car.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4DC] to-[#008CB0]">Protect Its Value.</span>',
         heroSub: 'Qadrha tracks your maintenance, detects warranty gaps,<br>and reveals your car\'s true value — all powered by AI.',
         heroCTAPrimary: 'Download Free',
         heroCTASecondary: 'How it works',
@@ -439,7 +467,7 @@
 
         s1Title: 'Add Your Car',
         s1Body: 'Upload your Istimara photo and our AI extracts your car\'s data automatically.',
-        s1CarName: 'Haval Dargo',
+        s1CarName: 'Toyota Camry',
 
         s2Title: 'Track Maintenance & Warranty',
         s2Body: 'Log service history, upload receipts, and check your warranty status — all in one place.',
@@ -447,9 +475,9 @@
         s2M2: '50,000 km — You are here',
         s2M3: '60,000 km — Upcoming',
 
-        s3Title: 'Know Your Car\'s Value',
-        s3Body: 'AI calculates your Car Passport Score from service history and reveals its true market value.',
-        s3ScoreLabel: 'Car Passport Score',
+        s3Title: 'Know Your Car\'s Real Value',
+        s3Body: 'AI calculates your Qadrha Score from service history and reveals its true market value.',
+        s3ScoreLabel: 'Qadrha Score',
         s3Verified: '4 Verified',
         s3Partial: '1 Partial',
 
@@ -459,16 +487,22 @@
         feat1Body: 'A personalized maintenance schedule with smart reminders and verified receipt tracking — the more you upload, the higher your score.',
         feat2Title: 'Warranty Check.',
         feat2Body: 'Detects maintenance gaps that may void your car\'s warranty, with proactive recommendations to protect it before it\'s too late.',
-        feat3Title: 'AI Advisor.',
-        feat3Body: 'Ask about any fault, photo a warning light, or query maintenance — instant AI answers, with your data kept inside the Kingdom.',
+        feat3Title: 'Car Value.',
+        feat3Body: 'Your Qadrha Score analyzes your service history and reveals your car\'s true market value in the Saudi used-car market.',
+        feat4Title: 'Recall Check.',
+        feat4Body: 'A direct official check against the Ministry of Commerce registry (recalls.sa) — we tell you immediately if your car is under any recall campaign.',
+        feat5Title: 'Parts Marketplace.',
+        feat5Body: 'Buy and sell used parts and accessories directly from verified owners — in-app negotiation and protected contact info.',
+        feat6Title: 'AI Advisor.',
+        feat6Body: 'Ask about any fault, photo a warning light, or query maintenance — instant AI answers, with your data kept inside the Kingdom.',
         featAlign: 'text-left',
 
         passportStripePos: 'left-0',
+        passportBadge: 'Car Passport · Coming soon',
         passportTitle: 'Your Car\'s Digital Passport.',
-        passportBody: 'Qadrha builds a verified digital record for your car. More uploaded receipts = higher Passport Score =',
+        passportBody: 'Qadrha builds a verified digital record from your car\'s maintenance, value, and warranty status. More uploaded receipts = higher Qadrha Score =',
         passportHighlight: 'higher resale value and real negotiating power when you sell.',
-        passportBadge: 'Car Passport · Active',
-        passportCardLabel: 'Passport Score',
+        passportCardLabel: 'Qadrha Score',
         passportTrendLabel: 'Change',
         passportVerified: '4 Verified',
         passportPartial: '1 Partial',
@@ -490,27 +524,22 @@
       html.lang = s.htmlLang;
       html.dir  = s.htmlDir;
 
-      // Font
-      document.body.style.fontFamily = lang === 'ar' ? "'Tajawal', sans-serif" : "'Inter', sans-serif";
+      document.body.style.fontFamily = lang === 'ar' ? "'IBM Plex Sans Arabic', sans-serif" : "'IBM Plex Sans', sans-serif";
 
-      // Logo
       document.getElementById('logo-name').textContent = s.logoName;
       document.getElementById('logo-sub').textContent  = s.logoSub;
       document.getElementById('logo-text-wrap').style.textAlign = lang === 'ar' ? 'right' : 'left';
 
-      // Nav
       document.getElementById('nav-link').textContent          = s.navLink;
       document.getElementById('lang-toggle-label').textContent = s.langLabel;
       document.getElementById('cta-btn').textContent           = s.ctaBtn;
 
-      // Hero
       document.getElementById('hero-h1').innerHTML             = s.heroH1;
       document.getElementById('hero-sub').innerHTML            = s.heroSub;
       document.getElementById('hero-cta-primary').textContent  = s.heroCTAPrimary;
       document.getElementById('hero-cta-secondary').childNodes[0].textContent = s.heroCTASecondary + ' ';
       document.getElementById('hero-arrow').className          = s.heroArrowClass;
 
-      // How it works
       document.getElementById('hiw-title').textContent = s.hiwTitle;
       document.getElementById('hiw-sub').textContent   = s.hiwSub;
       document.getElementById('steps-row').style.direction = lang === 'ar' ? 'rtl' : 'ltr';
@@ -531,31 +560,28 @@
       document.getElementById('s3-verified').textContent    = s.s3Verified;
       document.getElementById('s3-partial').textContent     = s.s3Partial;
 
-      // Features
       document.getElementById('feat-title').textContent = s.featTitle;
       document.getElementById('feat-sub').textContent   = s.featSub;
-      ['feat1','feat2','feat3'].forEach(id => {
+      ['feat1','feat2','feat3','feat4','feat5','feat6'].forEach(id => {
         const el = document.getElementById(id);
         el.className = el.className.replace(/text-(right|left)/, s.featAlign);
         document.getElementById(id+'-title').textContent = s[id+'Title'];
         document.getElementById(id+'-body').textContent  = s[id+'Body'];
       });
 
-      // Passport stripe (RTL: right / LTR: left)
       document.getElementById('passport-stripe').className =
-        `absolute top-0 ${s.passportStripePos} w-2 h-full bg-gradient-to-b from-[#00c4ff] to-[#0077ff]`;
+        `absolute top-0 ${s.passportStripePos} w-2 h-full bg-gradient-to-b from-[#00B4DC] to-[#008CB0]`;
 
+      document.getElementById('passport-badge').textContent     = s.passportBadge;
       document.getElementById('passport-title').textContent     = s.passportTitle;
       document.getElementById('passport-body').childNodes[0].textContent = s.passportBody + ' ';
       document.getElementById('passport-highlight').textContent = s.passportHighlight;
-      document.getElementById('passport-badge').textContent     = s.passportBadge;
       document.getElementById('passport-card-label').textContent = s.passportCardLabel;
       document.getElementById('passport-trend-label').textContent = s.passportTrendLabel;
       document.getElementById('passport-verified').textContent  = s.passportVerified;
       document.getElementById('passport-partial').textContent   = s.passportPartial;
       document.getElementById('passport-claimed').textContent   = s.passportClaimed;
 
-      // Footer
       document.getElementById('footer-copy').textContent       = s.footerCopy;
       document.getElementById('footer-disclaimer').textContent = s.footerDisclaimer;
       document.getElementById('footer-terms').textContent      = s.footerTerms;
@@ -567,8 +593,21 @@
       applyLang(currentLang);
     }
 
-    // Init
     applyLang('ar');
+
+    // Size the dark→light gradient to end exactly where #features begins, so
+    // "how it works" (light text) always stays on the dark zone and the
+    // Features section (dark text) always starts on the light zone.
+    function sizeGradient() {
+      const features = document.getElementById('features');
+      if (!features) return;
+      const top = features.getBoundingClientRect().top + window.scrollY;
+      document.body.style.backgroundSize = `100% ${Math.round(top)}px`;
+    }
+    window.addEventListener('load', sizeGradient);
+    window.addEventListener('resize', sizeGradient);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeGradient);
+    sizeGradient();
   </script>
 
 </body>
