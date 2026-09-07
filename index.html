@@ -237,12 +237,26 @@
        rather than just read a caption next to a static picture. Tokens match
        the app's actual NightGlass/cyan system, not generic Tailwind grays. */
 
-    /* Add-car mockup: tap flips it to a "verified" state. */
-    .vcard { cursor: pointer; -webkit-tap-highlight-color: transparent; }
-    .vcard-icon-done { display: none; }
-    .vcard.is-flipped .vcard-icon-idle { display: none; }
-    .vcard.is-flipped .vcard-icon-done { display: block; }
-    .vcard.is-flipped { border-color: rgba(79,214,244,0.4) !important; }
+    /* Add-car scan demo — a real recreation of the app's own onboarding
+       scan-and-reveal moment, not a generic "tap to verify" mockup. Three
+       phases, one visible at a time via the [data-phase] attribute; the
+       idle button is the default (never hidden pending JS). */
+    .vscan-btn, .vscan-replay { all: unset; box-sizing: border-box; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+    .vscan-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 1.1rem; border: 1.5px dashed rgba(0,180,220,0.35); border-radius: 1.5rem; color: #4FD6F4; font-size: 13px; font-weight: 600; transition: border-color 0.2s, background-color 0.2s; }
+    .vscan-btn:hover, .vscan-btn:focus-visible { border-color: rgba(0,180,220,0.6); background: rgba(0,180,220,0.06); }
+    .vscan-btn-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .vscan-captions { display: none; flex-direction: column; gap: 0.75rem; padding: 2rem 0.5rem; background: #0D1219; border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; }
+    .vscan-caption { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; font-size: 13px; font-weight: 500; color: rgba(210,228,242,0.75); text-align: center; margin: 0; }
+    .vscan-caption.is-visible { opacity: 1; transform: translateY(0); }
+    .vscan-result { display: none; background: #0D1219; border-radius: 1.5rem; padding: 1.25rem; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    .vscan-replay { display: block; width: 100%; text-align: center; font-size: 10.5px; color: rgba(210,228,242,0.45); margin-top: 0.6rem; }
+    .vscan[data-phase="scanning"] .vscan-btn { display: none; }
+    .vscan[data-phase="scanning"] .vscan-captions { display: flex; }
+    .vscan[data-phase="revealed"] .vscan-btn, .vscan[data-phase="revealed"] .vscan-captions { display: none; }
+    .vscan[data-phase="revealed"] .vscan-result { display: block; animation: pop-in 0.5s ease; }
+    @media (prefers-reduced-motion: reduce) {
+      .vscan-caption { transition: none; }
+    }
 
     /* Maintenance checklist */
     .maint-card { background: #0D1219; border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; padding: 1.25rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
@@ -479,18 +493,30 @@
           <div class="w-12 h-12 rounded-full bg-[#00B4DC]/10 border-2 border-[#00B4DC] text-[#00B4DC] flex items-center justify-center font-bold text-xl mb-6" style="font-family:'IBM Plex Sans',sans-serif">1</div>
           <h3 id="s1-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">أضف سيارتك</h3>
           <p id="s1-body" class="text-[rgba(210,228,242,0.65)] text-sm leading-relaxed mb-10">ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.</p>
-          <!-- Vehicle card mockup, mobile copy — click flips it to a "verified"
-               state, same tap interaction as the desktop stage copy below. -->
-          <button type="button" class="vcard step-visual-inline bg-[#0D1219] rounded-3xl p-5 border border-white/10 w-full mt-auto shadow-lg group-hover:-translate-y-2 transition-transform duration-300 text-right" aria-label="Toggle verified state">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs text-[#00B4DC] font-semibold bg-[#00B4DC]/10 px-2 py-1 rounded-lg" style="font-family:'IBM Plex Sans',sans-serif">2025</span>
-              <svg class="w-4 h-4 text-gray-500 vcard-icon-idle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><path d="M5 17a2 2 0 0 0 4 0M15 17a2 2 0 0 0 4 0"/></svg>
-              <svg class="w-4 h-4 text-[#4FD6F4] vcard-icon-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <!-- Scan demo, mobile copy — a real recreation of the app's own
+               onboarding: tap to scan, watch the OCR captions reveal one at
+               a time (matches IstimaraUploadScreen's actual scanning
+               copy/timing), then the extracted vehicle card appears. -->
+          <div class="vscan step-visual-inline" data-phase="idle">
+            <button type="button" class="vscan-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="vscan-btn-icon"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+              <span id="s1-scan-btn">امسح الاستمارة</span>
+            </button>
+            <div class="vscan-captions">
+              <p class="vscan-caption" id="s1-caption-1">قراءة الوثيقة…</p>
+              <p class="vscan-caption" id="s1-caption-2">التعرف على السيارة…</p>
+              <p class="vscan-caption" id="s1-caption-3">استخراج البيانات…</p>
             </div>
-            <p id="s1-car-name" class="text-white font-bold text-lg leading-tight mb-1">تويوتا كامري</p>
-            <p class="text-[#00B4DC] font-semibold text-xs tracking-wider" style="font-family:'IBM Plex Sans',sans-serif">ABC-1234 ← ن م م</p>
-            <p class="vcard-tap-hint text-[rgba(210,228,242,0.45)] text-[11px] mt-2" data-idle-text="اضغط للتحقق" data-done-text="تم التحقق من البيانات ✓">اضغط للتحقق</p>
-          </button>
+            <div class="vscan-result">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-[#00B4DC] font-semibold bg-[#00B4DC]/10 px-2 py-1 rounded-lg" style="font-family:'IBM Plex Sans',sans-serif">2025</span>
+                <svg class="w-4 h-4 text-[#4FD6F4]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <p id="s1-car-name" class="text-white font-bold text-lg leading-tight mb-1">تويوتا كامري</p>
+              <p class="text-[#00B4DC] font-semibold text-xs tracking-wider" style="font-family:'IBM Plex Sans',sans-serif">ABC-1234 ← ن م م</p>
+              <button type="button" class="vscan-replay" id="s1-replay-btn"><span id="s1-replay">امسح مرة أخرى</span></button>
+            </div>
+          </div>
         </div>
 
         <!-- Step 2 — Maintenance: interactive checklist, mobile copy. Tap a
@@ -565,16 +591,26 @@
            .is-active as each step-card scrolls through the viewport centre. -->
       <div id="hiw-stage" class="hiw-stage">
         <div class="stage-item is-active" data-step="0">
-          <button type="button" class="vcard bg-[#0D1219] rounded-3xl p-6 border border-white/10 shadow-lg text-right" aria-label="Toggle verified state">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs text-[#00B4DC] font-semibold bg-[#00B4DC]/10 px-2 py-1 rounded-lg" style="font-family:'IBM Plex Sans',sans-serif">2025</span>
-              <svg class="w-4 h-4 text-gray-500 vcard-icon-idle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><path d="M5 17a2 2 0 0 0 4 0M15 17a2 2 0 0 0 4 0"/></svg>
-              <svg class="w-4 h-4 text-[#4FD6F4] vcard-icon-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <div class="vscan" data-phase="idle">
+            <button type="button" class="vscan-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="vscan-btn-icon"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+              <span id="s1-scan-btn-stage">امسح الاستمارة</span>
+            </button>
+            <div class="vscan-captions">
+              <p class="vscan-caption" id="s1-caption-1-stage">قراءة الوثيقة…</p>
+              <p class="vscan-caption" id="s1-caption-2-stage">التعرف على السيارة…</p>
+              <p class="vscan-caption" id="s1-caption-3-stage">استخراج البيانات…</p>
             </div>
-            <p id="s1-car-name-stage" class="text-white font-bold text-lg leading-tight mb-1">تويوتا كامري</p>
-            <p class="text-[#00B4DC] font-semibold text-xs tracking-wider" style="font-family:'IBM Plex Sans',sans-serif">ABC-1234 ← ن م م</p>
-            <p class="vcard-tap-hint text-[rgba(210,228,242,0.45)] text-[11px] mt-2" data-idle-text="اضغط للتحقق" data-done-text="تم التحقق من البيانات ✓">اضغط للتحقق</p>
-          </button>
+            <div class="vscan-result">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-[#00B4DC] font-semibold bg-[#00B4DC]/10 px-2 py-1 rounded-lg" style="font-family:'IBM Plex Sans',sans-serif">2025</span>
+                <svg class="w-4 h-4 text-[#4FD6F4]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <p id="s1-car-name-stage" class="text-white font-bold text-lg leading-tight mb-1">تويوتا كامري</p>
+              <p class="text-[#00B4DC] font-semibold text-xs tracking-wider" style="font-family:'IBM Plex Sans',sans-serif">ABC-1234 ← ن م م</p>
+              <button type="button" class="vscan-replay" id="s1-replay-btn-stage"><span id="s1-replay-stage">امسح مرة أخرى</span></button>
+            </div>
+          </div>
         </div>
         <div class="stage-item" data-step="1">
           <div class="maint-card">
@@ -920,8 +956,11 @@
         s1Title: 'أضف سيارتك',
         s1Body: 'ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.',
         s1CarName: 'تويوتا كامري',
-        s1TapIdle: 'اضغط للتحقق',
-        s1TapDone: 'تم التحقق من البيانات ✓',
+        s1ScanBtn: 'امسح الاستمارة',
+        s1Caption1: 'قراءة الوثيقة…',
+        s1Caption2: 'التعرف على السيارة…',
+        s1Caption3: 'استخراج البيانات…',
+        s1Replay: 'امسح مرة أخرى',
 
         s2Title: 'تتبع الصيانة والضمان',
         s2Body: 'سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.',
@@ -1061,8 +1100,11 @@
         s1Title: 'Add Your Car',
         s1Body: 'Upload your Istimara photo and our AI extracts your car\'s data automatically.',
         s1CarName: 'Toyota Camry',
-        s1TapIdle: 'Tap to verify',
-        s1TapDone: 'Data verified ✓',
+        s1ScanBtn: 'Scan the Istimara',
+        s1Caption1: 'Reading the document…',
+        s1Caption2: 'Identifying the vehicle…',
+        s1Caption3: 'Extracting the details…',
+        s1Replay: 'Scan again',
 
         s2Title: 'Track Maintenance & Warranty',
         s2Body: 'Log service history, upload receipts, and check your warranty status — all in one place.',
@@ -1306,11 +1348,12 @@
       document.getElementById('ai-chip-3').textContent = s.aiChip3;
       document.getElementById('ai-input-ph').textContent = s.aiInputPh;
 
-      document.querySelectorAll('.vcard-tap-hint').forEach(el => {
-        el.dataset.idleText = s.s1TapIdle;
-        el.dataset.doneText = s.s1TapDone;
-        const flipped = el.closest('.vcard').classList.contains('is-flipped');
-        el.textContent = flipped ? s.s1TapDone : s.s1TapIdle;
+      ['', '-stage'].forEach(suffix => {
+        document.getElementById('s1-scan-btn' + suffix).textContent = s.s1ScanBtn;
+        document.getElementById('s1-caption-1' + suffix).textContent = s.s1Caption1;
+        document.getElementById('s1-caption-2' + suffix).textContent = s.s1Caption2;
+        document.getElementById('s1-caption-3' + suffix).textContent = s.s1Caption3;
+        document.getElementById('s1-replay' + suffix).textContent = s.s1Replay;
       });
 
       document.getElementById('biz-badge').textContent = s.bizBadge;
@@ -1455,14 +1498,31 @@
       });
     }
 
-    // Add-car mockup — tap flips it to a "verified" state (event delegation
-    // so the same handler covers both the mobile and desktop copies).
+    // Add-car scan demo — tap to scan, watch the captions reveal one at a
+    // time (same stagger the real app's scanning screen uses: each caption
+    // fades+slides in complete, 750ms apart, never typed letter-by-letter),
+    // then the extracted vehicle card appears. Event delegation covers both
+    // the mobile and desktop copies with one handler each.
     document.addEventListener('click', (e) => {
-      const vcard = e.target.closest('.vcard');
-      if (!vcard) return;
-      const flipped = vcard.classList.toggle('is-flipped');
-      const hint = vcard.querySelector('.vcard-tap-hint');
-      if (hint) hint.textContent = flipped ? hint.dataset.doneText : hint.dataset.idleText;
+      const btn = e.target.closest('.vscan-btn');
+      if (!btn) return;
+      const vscan = btn.closest('.vscan');
+      if (vscan.dataset.phase !== 'idle') return;
+      vscan.dataset.phase = 'scanning';
+      const captions = Array.from(vscan.querySelectorAll('.vscan-caption'));
+      captions.forEach(c => c.classList.remove('is-visible'));
+      if (reduceMotion) {
+        vscan.dataset.phase = 'revealed';
+        return;
+      }
+      captions.forEach((c, i) => setTimeout(() => c.classList.add('is-visible'), i * 750));
+      setTimeout(() => { vscan.dataset.phase = 'revealed'; }, captions.length * 750 + 900);
+    });
+
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.vscan-replay');
+      if (!btn) return;
+      btn.closest('.vscan').dataset.phase = 'idle';
     });
 
     // Maintenance checklist — tap a row to expand its detail.
