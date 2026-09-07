@@ -190,6 +190,12 @@
         transition: opacity 0.5s ease, transform 0.5s ease;
         display: flex; align-items: center; justify-content: center;
       }
+      /* The mobile copies of these widgets get Tailwind's w-full; the stage
+         copies never did, so they shrank to their own content width and sat
+         centered in the middle of the (much wider) sticky box — looking
+         small and stranded with a huge gap to the steps beside it. Force
+         every stage widget to fill the box instead. */
+      .hiw-stage .stage-item > * { width: 100%; }
       .hiw-stage .stage-item img { max-height: 420px; width: auto; max-width: 100%; object-fit: contain; }
       .hiw-stage .stage-item.is-active { opacity: 1; transform: translateY(0) scale(1); }
       .step-card { transition: border-color 0.35s, background-color 0.35s, opacity 0.35s; opacity: 0.55; }
