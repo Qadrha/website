@@ -143,9 +143,15 @@
     .hero-3d-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
     .hero-3d-score { font-size: 2.75rem; font-weight: 800; color: #EDF4FA; font-family: 'IBM Plex Sans', sans-serif; text-shadow: 0 0 30px rgba(79,214,244,0.5); line-height: 1; }
     .hero-3d-label { font-size: 0.75rem; color: rgba(210,228,242,0.6); margin-top: 0.35rem; letter-spacing: 0.05em; }
+    /* The caption only makes sense once the ring above it is actually
+       showing — a sentence explaining "the ring above" with no ring above
+       it (WebGL unavailable, CDN failed) would be its own orphaned bug. */
+    .hero-3d-caption { display: none; font-size: 0.95rem; color: rgba(210,228,242,0.65); margin: 1rem 0 2.5rem; max-width: 26rem; }
+    .hero-3d-wrap.is-ready + .hero-3d-caption { display: block; }
     @media (min-width: 768px) {
       .hero-3d-wrap { max-width: 460px; height: 380px; }
       .hero-3d-score { font-size: 3.5rem; }
+      .hero-3d-caption { font-size: 1.05rem; }
     }
 
     /* Line icons — thin stroke, rounded caps, matches the app's Icon.tsx language */
@@ -469,6 +475,25 @@
         قدرها يتتبع صيانة سيارتك، يكشف فجوات الضمان،<br>
         ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.
       </p>
+
+      <!-- Real, on-brand 3D hero — the Qadrha Score ring itself, rendered in
+           WebGL with cinematic rim lighting, instead of a generic floating
+           shape. Positioned right after the promise (headline+subtitle) as
+           its visual payoff, with an explicit caption — a ring showing "87"
+           means nothing on its own. Pure enhancement: stays display:none
+           (see .hero-3d-wrap) until JS confirms WebGL works and the scene
+           is actually ready, so a slow/failed CDN load just means the page
+           looks exactly like it did before this existed — never a broken
+           or half-built hero. -->
+      <div id="hero-3d-wrap" class="hero-anim hero-3d-wrap">
+        <canvas id="hero-3d-canvas" aria-hidden="true"></canvas>
+        <div class="hero-3d-overlay">
+          <span class="hero-3d-score" id="hero-3d-score">87</span>
+          <span class="hero-3d-label" id="hero-3d-label">قدرها سكور</span>
+        </div>
+      </div>
+      <p id="hero-3d-caption" class="hero-anim hero-3d-caption">صحة سيارتك وقيمتها الحقيقية، في رقم واحد.</p>
+
       <div class="hero-anim flex flex-col sm:flex-row gap-4 items-center">
         <button id="hero-cta-primary" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00B4DC] text-[#070A16] font-bold text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,180,220,0.35)]">
           حمل التطبيق مجاناً
@@ -479,20 +504,6 @@
         </a>
       </div>
       <p class="hero-anim text-xs text-gray-500 mt-5">نسخة تجريبية مبكرة عبر TestFlight · Early beta access</p>
-
-      <!-- Real, on-brand 3D hero — the Qadrha Score ring itself, rendered in
-           WebGL with cinematic rim lighting, instead of a generic floating
-           shape. Pure enhancement: stays display:none (see .hero-3d-wrap)
-           until JS confirms WebGL works and the scene is actually ready, so
-           a slow/failed CDN load just means the page looks exactly like it
-           did before this existed — never a broken or half-built hero. -->
-      <div id="hero-3d-wrap" class="hero-anim hero-3d-wrap" aria-hidden="true">
-        <canvas id="hero-3d-canvas"></canvas>
-        <div class="hero-3d-overlay">
-          <span class="hero-3d-score" id="hero-3d-score">87</span>
-          <span class="hero-3d-label" id="hero-3d-label">قدرها سكور</span>
-        </div>
-      </div>
     </header>
   </div>
 
@@ -975,6 +986,7 @@
         heroH1: 'اعرف سيارتك.<br><span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00B4DC] to-[#008CB0]">احمِ قيمتها.</span>',
         heroSub: 'قدرها يتتبع صيانة سيارتك، يكشف فجوات الضمان،<br>ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.',
         heroCTAPrimary: 'حمل التطبيق مجاناً',
+        hero3dCaption: 'صحة سيارتك وقيمتها الحقيقية، في رقم واحد.',
         heroCTASecondary: 'كيف يعمل؟',
         heroArrowClass: 'w-4 h-4 rotate-180',
 
@@ -1119,6 +1131,7 @@
         heroH1: 'Know Your Car.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4DC] to-[#008CB0]">Protect Its Value.</span>',
         heroSub: 'Qadrha tracks your maintenance, detects warranty gaps,<br>and reveals your car\'s true value — all powered by AI.',
         heroCTAPrimary: 'Download Free',
+        hero3dCaption: "Your car's health and true value, in one number.",
         heroCTASecondary: 'How it works',
         heroArrowClass: 'w-4 h-4',
 
@@ -1281,6 +1294,7 @@
       document.getElementById('hero-cta-secondary').childNodes[0].textContent = s.heroCTASecondary + ' ';
       document.getElementById('hero-arrow').className          = s.heroArrowClass;
       document.getElementById('hero-3d-label').textContent      = s.s3ScoreLabel;
+      document.getElementById('hero-3d-caption').textContent    = s.hero3dCaption;
 
       document.getElementById('hiw-title').textContent = s.hiwTitle;
       document.getElementById('hiw-sub').textContent   = s.hiwSub;
