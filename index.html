@@ -278,24 +278,16 @@
     .maint-item-detail p { font-size: 11.5px; color: rgba(210,228,242,0.6); line-height: 1.5; margin: 0; padding-bottom: 0.6rem; }
     .maint-item-detail.is-open { max-height: 80px; opacity: 1; }
 
-    /* Score / value gauge */
-    .score-card { background: #0D1219; border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-    .score-gauge { position: relative; width: 120px; height: 120px; }
-    .score-gauge-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-    .score-gauge-track, .score-gauge-fill { fill: none; stroke-width: 9; }
-    .score-gauge-track { stroke: rgba(255,255,255,0.08); }
-    .score-gauge-fill { stroke: #00B4DC; stroke-linecap: round; stroke-dasharray: 326.7; stroke-dashoffset: 326.7; transition: stroke-dashoffset 1.4s cubic-bezier(.16,.84,.44,1); }
-    .score-gauge.is-animated .score-gauge-fill { stroke-dashoffset: var(--score-offset, 42.5); }
-    .score-gauge-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .score-gauge-num { font-size: 2rem; font-weight: 700; color: #EDF4FA; font-family: 'IBM Plex Sans', sans-serif; }
-    .score-gauge-label { font-size: 10.5px; color: rgba(210,228,242,0.55); font-weight: 600; }
-    .score-breakdown { display: flex; gap: 0.5rem; }
-    .score-chip { font-size: 10.5px; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 999px; }
-    .score-chip.verified { color: #4FD6F4; background: rgba(0,180,220,0.1); }
-    .score-chip.partial { color: rgba(210,228,242,0.6); background: rgba(255,255,255,0.06); }
-    .score-value-row { width: 100%; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.9rem; }
-    .score-value-label { font-size: 11px; color: rgba(210,228,242,0.55); margin: 0 0 2px; }
-    .score-value-amount { font-size: 1.05rem; font-weight: 700; color: #EDF4FA; margin: 0; font-family: 'IBM Plex Sans', sans-serif; }
+    /* Step 3 visual — no stats here anymore (the score/value/warranty
+       numbers now live once, in the finale, instead of being repeated at
+       every stage of the story). Just an icon and a short line naming
+       what feeds the score. */
+    .s3-visual { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem; padding: 2.5rem 1rem; }
+    .s3-visual-icon { width: 56px; height: 56px; color: var(--cyan-bright); opacity: 0.9; }
+    .s3-visual-caption { font-size: 0.85rem; color: rgba(210,228,242,0.55); text-align: center; max-width: 18rem; line-height: 1.6; margin: 0; }
+
+    /* Warranty tooltip (feat2) — the info-button/tooltip pattern used on
+       the warranty feature card. */
     .score-info-btn { all: unset; box-sizing: border-box; width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(210,228,242,0.3); color: rgba(210,228,242,0.6); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
     .score-tooltip { font-size: 11px; color: rgba(210,228,242,0.55); line-height: 1.5; text-align: center; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease; margin: 0; }
     .score-tooltip.is-open { max-height: 100px; opacity: 1; margin-top: -0.3rem; }
@@ -321,7 +313,6 @@
     .ai-input-send { width: 26px; height: 26px; border-radius: 50%; background: rgba(0,180,220,0.15); color: #4FD6F4; display: flex; align-items: center; justify-content: center; font-size: 13px; }
 
     @media (prefers-reduced-motion: reduce) {
-      .score-gauge-fill { transition: none; }
       .maint-item-detail, .score-tooltip { transition: none; }
       .ai-typing-dots span { animation: none; opacity: 0.7; }
     }
@@ -638,37 +629,16 @@
           </div>
         </div>
 
-        <!-- Step 3 — Qadrha Score: animated gauge, mobile copy. Score
-             animates in once this card enters view; tap the "؟" for the
-             calculation tooltip — same .score-gauge class the desktop
-             stage copy uses. -->
+        <!-- Step 3 — mobile copy. No score/value stats here on purpose:
+             the actual numbers only appear once, in the finale, instead
+             of being repeated at every step of the story. -->
         <div class="step-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00B4DC]/50 transition-colors group" data-step="2">
           <div class="w-12 h-12 rounded-full bg-white/[0.05] border-2 border-white/[0.15] text-[rgba(210,228,242,0.65)] flex items-center justify-center font-bold text-xl mb-6 group-hover:border-[#00B4DC] group-hover:text-[#00B4DC] transition-colors" style="font-family:'IBM Plex Sans',sans-serif">3</div>
           <h3 id="s3-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">اعرف قيمة سيارتك الحقيقية</h3>
-          <p id="s3-body" class="text-[rgba(210,228,242,0.65)] text-sm leading-relaxed mb-10">هنا يتكوّن قدرها سكور الذي رأيته في الأعلى — يحسبه الذكاء الاصطناعي من سجل صيانتك، ويكشف قيمتها السوقية الحقيقية.</p>
-          <div class="step-visual-inline score-card w-full mt-auto">
-            <div class="score-gauge" data-target="87">
-              <svg viewBox="0 0 120 120" class="score-gauge-svg">
-                <circle cx="60" cy="60" r="52" class="score-gauge-track"/>
-                <circle cx="60" cy="60" r="52" class="score-gauge-fill"/>
-              </svg>
-              <div class="score-gauge-center">
-                <span class="score-gauge-num">0</span>
-                <span class="score-gauge-label" id="s3-score-label-m">قدرها سكور</span>
-              </div>
-            </div>
-            <div class="score-breakdown">
-              <span class="score-chip verified" id="s3-verified-m">4 موثّق</span>
-              <span class="score-chip partial" id="s3-partial-m">1 جزئي</span>
-            </div>
-            <div class="score-value-row">
-              <div>
-                <p class="score-value-label" id="s3-value-label-m">القيمة السوقية</p>
-                <p class="score-value-amount" id="s3-value-amount-m">٩٨,٥٠٠ ر.س</p>
-              </div>
-              <button type="button" class="score-info-btn" aria-label="How it's calculated">؟</button>
-            </div>
-            <p class="score-tooltip" id="s3-tooltip-m">نحسبها من سجل صيانتك الموثق، عمر السيارة، وحالة السوق الحالية.</p>
+          <p id="s3-body" class="text-[rgba(210,228,242,0.65)] text-sm leading-relaxed mb-10">هنا تتكوّن قدرها سكور — من سجل صيانتك الموثّق، لتكشف قيمتها السوقية الحقيقية.</p>
+          <div class="step-visual-inline s3-visual w-full mt-auto">
+            <svg class="s3-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg>
+            <p class="s3-visual-caption" id="s3-caption-m">من صيانتك الموثّقة وضمانك وتاريخها الكامل</p>
           </div>
         </div>
       </div>
@@ -725,29 +695,9 @@
           </div>
         </div>
         <div class="stage-item" data-step="2">
-          <div class="score-card">
-            <div class="score-gauge" data-target="87">
-              <svg viewBox="0 0 120 120" class="score-gauge-svg">
-                <circle cx="60" cy="60" r="52" class="score-gauge-track"/>
-                <circle cx="60" cy="60" r="52" class="score-gauge-fill"/>
-              </svg>
-              <div class="score-gauge-center">
-                <span class="score-gauge-num">0</span>
-                <span class="score-gauge-label" id="s3-score-label-stage">قدرها سكور</span>
-              </div>
-            </div>
-            <div class="score-breakdown">
-              <span class="score-chip verified" id="s3-verified-stage">4 موثّق</span>
-              <span class="score-chip partial" id="s3-partial-stage">1 جزئي</span>
-            </div>
-            <div class="score-value-row">
-              <div>
-                <p class="score-value-label" id="s3-value-label-stage">القيمة السوقية</p>
-                <p class="score-value-amount" id="s3-value-amount-stage">٩٨,٥٠٠ ر.س</p>
-              </div>
-              <button type="button" class="score-info-btn" aria-label="How it's calculated">؟</button>
-            </div>
-            <p class="score-tooltip" id="s3-tooltip-stage">نحسبها من سجل صيانتك الموثق، عمر السيارة، وحالة السوق الحالية.</p>
+          <div class="s3-visual">
+            <svg class="s3-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg>
+            <p class="s3-visual-caption" id="s3-caption-stage">من صيانتك الموثّقة وضمانك وتاريخها الكامل</p>
           </div>
         </div>
       </div>
@@ -1113,10 +1063,8 @@
         s2M3: '60,000 كم — قادم',
 
         s3Title: 'اعرف قيمة سيارتك الحقيقية',
-        s3Body: 'هنا يتكوّن قدرها سكور الذي رأيته في الأعلى — يحسبه الذكاء الاصطناعي من سجل صيانتك، ويكشف قيمتها السوقية الحقيقية.',
-        s3ScoreLabel: 'قدرها سكور',
-        s3Verified: '4 موثّق',
-        s3Partial: '1 جزئي',
+        s3Body: 'هنا تتكوّن قدرها سكور — من سجل صيانتك الموثّق، لتكشف قيمتها السوقية الحقيقية.',
+        s3Caption: 'من صيانتك الموثّقة وضمانك وتاريخها الكامل',
 
         hiw2WarrantyChip: 'الضمان: ساري ✓',
         hiw2Item1Title: 'تغيير الزيت والفلتر',
@@ -1129,10 +1077,6 @@
         hiw2Item3Meta: '60,000 كم · قادم',
         hiw2Item3Detail: 'متبقٍ تقريباً 10,000 كم',
 
-        hiw3ValueLabel: 'القيمة السوقية',
-        hiw3ValueAmount: '٩٨,٥٠٠ ر.س',
-        hiw3ValueTrend: '↑ 6% عن سيارات مشابهة بدون سجل موثق',
-        hiw3InfoTooltip: 'نحسبها من سجل صيانتك الموثق، عمر السيارة، وحالة السوق الحالية.',
 
         aiChip1: 'ليه ضوء المحرك مضوي؟',
         aiChip2: 'هل صيانتي المتأخرة تؤثر على ضماني؟',
@@ -1265,10 +1209,8 @@
         s2M3: '60,000 km — Upcoming',
 
         s3Title: 'Know Your Car\'s Real Value',
-        s3Body: 'This is where the Qadrha Score you saw up top comes together — AI calculates it from your service history and reveals your car\'s true market value.',
-        s3ScoreLabel: 'Qadrha Score',
-        s3Verified: '4 Verified',
-        s3Partial: '1 Partial',
+        s3Body: 'This is where the Qadrha Score comes together — built from your documented service history, revealing your car\'s true market value.',
+        s3Caption: 'From your documented maintenance, warranty, and full history',
 
         hiw2WarrantyChip: 'Warranty: Active ✓',
         hiw2Item1Title: 'Oil & Filter Change',
@@ -1281,10 +1223,6 @@
         hiw2Item3Meta: '60,000 km · Upcoming',
         hiw2Item3Detail: 'About 10,000 km remaining',
 
-        hiw3ValueLabel: 'Market Value',
-        hiw3ValueAmount: 'SAR 98,500',
-        hiw3ValueTrend: '↑ 6% vs. similar cars with no verified record',
-        hiw3InfoTooltip: 'Calculated from your verified service history, vehicle age, and current market conditions.',
 
         aiChip1: 'Why is my check-engine light on?',
         aiChip2: 'Does my overdue maintenance affect my warranty?',
@@ -1436,12 +1374,7 @@
       document.getElementById('s3-title').textContent       = s.s3Title;
       document.getElementById('s3-body').textContent        = s.s3Body;
       ['m','stage'].forEach(v => {
-        document.getElementById(`s3-score-label-${v}`).textContent = s.s3ScoreLabel;
-        document.getElementById(`s3-verified-${v}`).textContent    = s.s3Verified;
-        document.getElementById(`s3-partial-${v}`).textContent     = s.s3Partial;
-        document.getElementById(`s3-value-label-${v}`).textContent = s.hiw3ValueLabel;
-        document.getElementById(`s3-value-amount-${v}`).textContent = s.hiw3ValueAmount;
-        document.getElementById(`s3-tooltip-${v}`).textContent     = s.hiw3InfoTooltip;
+        document.getElementById(`s3-caption-${v}`).textContent = s.s3Caption;
       });
 
       document.getElementById('feat-title').textContent = s.featTitle;
@@ -1770,7 +1703,6 @@
         const setCurrent = (step) => {
           stepCards.forEach(c => c.classList.toggle('is-current', c.dataset.step === step));
           stageItems.forEach(s => s.classList.toggle('is-active', s.dataset.step === step));
-          if (step === '2') animateScoreGauges();
         };
         const hiwIo = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
@@ -1781,29 +1713,6 @@
       }
     } catch (e) {
       // Leave step 1's default current/active state as-is.
-    }
-
-    // Score gauge animation — runs once per gauge (guarded by .is-animated)
-    // the first time its step becomes current, whether that's the mobile
-    // inline copy or the desktop stage copy; both call this the same way.
-    function animateScoreGauges() {
-      document.querySelectorAll('.score-gauge:not(.is-animated)').forEach(gauge => {
-        const target = parseInt(gauge.dataset.target, 10) || 0;
-        const circumference = 2 * Math.PI * 52;
-        const offset = circumference * (1 - Math.min(target, 100) / 100);
-        gauge.style.setProperty('--score-offset', offset.toFixed(2));
-        gauge.classList.add('is-animated');
-        const numEl = gauge.querySelector('.score-gauge-num');
-        if (!numEl || reduceMotion) { if (numEl) numEl.textContent = target; return; }
-        const start = performance.now();
-        const duration = 1200;
-        const tick = (now) => {
-          const p = Math.min(1, (now - start) / duration);
-          numEl.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      });
     }
 
     // Add-car scan demo — tap to scan, watch the captions reveal one at a
