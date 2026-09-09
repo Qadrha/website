@@ -134,25 +134,6 @@
       pointer-events: none;
     }
 
-    /* 3D hero — hidden until JS confirms the WebGL scene actually built
-       (see .is-ready below); no reserved height while hidden, so this can
-       never leave a gap if it fails to load. */
-    .hero-3d-wrap { display: none; position: relative; width: 100%; max-width: 380px; height: 300px; margin: 2.5rem auto 0; }
-    .hero-3d-wrap.is-ready { display: block; }
-    .hero-3d-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-    .hero-3d-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
-    .hero-3d-score { font-size: 2.75rem; font-weight: 800; color: #EDF4FA; font-family: 'IBM Plex Sans', sans-serif; text-shadow: 0 0 30px rgba(79,214,244,0.5); line-height: 1; }
-    .hero-3d-label { font-size: 0.75rem; color: rgba(210,228,242,0.6); margin-top: 0.35rem; letter-spacing: 0.05em; }
-    /* The caption only makes sense once the ring above it is actually
-       showing — a sentence explaining "the ring above" with no ring above
-       it (WebGL unavailable, CDN failed) would be its own orphaned bug. */
-    .hero-3d-caption { display: none; font-size: 0.95rem; color: rgba(210,228,242,0.65); margin: 1rem 0 2.5rem; max-width: 26rem; }
-    .hero-3d-wrap.is-ready + .hero-3d-caption { display: block; }
-    @media (min-width: 768px) {
-      .hero-3d-wrap { max-width: 460px; height: 380px; }
-      .hero-3d-score { font-size: 3.5rem; }
-      .hero-3d-caption { font-size: 1.05rem; }
-    }
 
     /* Line icons — thin stroke, rounded caps, matches the app's Icon.tsx language */
     .qicon { width: 30px; height: 30px; }
@@ -467,7 +448,7 @@
     .fin-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; color: var(--cyan-bright); font-family: 'IBM Plex Sans', sans-serif; margin-bottom: 1rem; display: block; }
     .fin-title { font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 800; margin: 0 0 2.5rem; text-wrap: balance; color: #EDF4FA; }
     .finale .passport {
-      display: inline-flex; align-items: center; gap: 2.5rem; border-radius: 2.25rem; text-align: start; padding: 2.5rem 3rem;
+      display: inline-flex; flex-direction: column; align-items: center; border-radius: 2.25rem; text-align: center; padding: 3rem 3.5rem;
       background: linear-gradient(165deg, rgba(13,18,25,0.97), rgba(10,21,36,0.97));
       border: 1px solid rgba(0,180,220,0.4);
       box-shadow: 0 0 0 1px rgba(0,180,220,0.1), 0 40px 90px rgba(0,0,0,0.55), 0 0 100px rgba(0,180,220,0.18);
@@ -475,21 +456,11 @@
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
     .finale .passport.on { opacity: 1; transform: scale(1) translateY(0); }
-    .p-ring-big { width: 160px; height: 160px; position: relative; flex-shrink: 0; }
+    .p-ring-big { width: 180px; height: 180px; position: relative; flex-shrink: 0; margin-bottom: 1.75rem; }
     .p-ring-big svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-    .num-big { position: absolute; inset: 0; top: -6px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; color: #EDF4FA; font-family: 'IBM Plex Sans', sans-serif; }
-    .num-label { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-size: 0.72rem; color: rgba(210,228,242,0.4); letter-spacing: 0.06em; }
-    .p-rows-big { display: flex; flex-direction: column; gap: 0.7rem; }
-    .p-row-big {
-      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
-      font-size: 0.88rem; padding-bottom: 0.65rem; border-bottom: 1px solid rgba(255,255,255,0.08);
-      opacity: 0; transform: translateX(12px); transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .p-row-big:last-child { border-bottom: none; padding-bottom: 0; }
-    .p-row-big.on { opacity: 1; transform: translateX(0); }
-    .p-row-big .pk { display: flex; align-items: center; gap: 0.55rem; color: rgba(210,228,242,0.4); font-weight: 500; }
-    .p-row-big .pk svg { width: 16px; height: 16px; color: var(--cyan-bright); flex-shrink: 0; }
-    .p-row-big .pv { color: #EDF4FA; font-weight: 700; white-space: nowrap; font-family: 'IBM Plex Sans', sans-serif; }
+    .num-big { position: absolute; inset: 0; top: -6px; display: flex; align-items: center; justify-content: center; font-size: 3.4rem; font-weight: 800; color: #EDF4FA; font-family: 'IBM Plex Sans', sans-serif; }
+    .num-label { position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; font-size: 0.75rem; color: rgba(210,228,242,0.4); letter-spacing: 0.06em; }
+    .fin-sub { font-size: 0.95rem; color: rgba(210,228,242,0.65); line-height: 1.75; max-width: 22rem; margin: 0; }
 
     .progress-rail { position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%); width: 220px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.1); overflow: hidden; z-index: 20; }
     .progress-rail .fill2 { height: 100%; background: linear-gradient(90deg, var(--cyan-deep), var(--cyan-bright)); width: 0%; }
@@ -497,8 +468,7 @@
     @media (max-width: 640px), (prefers-reduced-motion: reduce) {
       .finale-pin-wrap { height: auto; }
       .finale-pin-stage { position: relative; height: auto; min-height: auto; padding: 4rem 1rem; }
-      .finale .passport { opacity: 1 !important; transform: none !important; flex-direction: column; text-align: center; padding: 2rem; }
-      .p-row-big { opacity: 1 !important; transform: none !important; }
+      .finale .passport { opacity: 1 !important; transform: none !important; padding: 2rem; }
       .progress-rail { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -572,30 +542,12 @@
         ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.
       </p>
 
-      <!-- Real, on-brand 3D hero — the Qadrha Score ring itself, rendered in
-           WebGL with cinematic rim lighting, instead of a generic floating
-           shape. Positioned right after the promise (headline+subtitle) as
-           its visual payoff, with an explicit caption — a ring showing "87"
-           means nothing on its own. Pure enhancement: stays display:none
-           (see .hero-3d-wrap) until JS confirms WebGL works and the scene
-           is actually ready, so a slow/failed CDN load just means the page
-           looks exactly like it did before this existed — never a broken
-           or half-built hero. -->
-      <div id="hero-3d-wrap" class="hero-anim hero-3d-wrap">
-        <canvas id="hero-3d-canvas" aria-hidden="true"></canvas>
-        <div class="hero-3d-overlay">
-          <span class="hero-3d-score" id="hero-3d-score">87</span>
-          <span class="hero-3d-label" id="hero-3d-label">قدرها سكور</span>
-        </div>
-      </div>
-      <p id="hero-3d-caption" class="hero-anim hero-3d-caption">هذا هو قدرها سكور. إليك كيف نصل إليه.</p>
-
       <div class="hero-anim flex flex-col sm:flex-row gap-4 items-center">
         <button id="hero-cta-primary" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00B4DC] text-[#070A16] font-bold text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,180,220,0.35)]">
           حمل التطبيق مجاناً
         </button>
         <a href="#how-it-works" id="hero-cta-secondary" class="text-sm font-semibold text-gray-400 hover:text-white transition flex items-center gap-2">
-          شاهد كيف نحسبها
+          كيف يعمل؟
           <svg id="hero-arrow" class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         </a>
       </div>
@@ -1060,32 +1012,7 @@
               <div class="num-big" id="finale-num">0</div>
               <div class="num-label" id="finale-score-label">قدرها سكور</div>
             </div>
-            <div class="p-rows-big">
-              <div class="p-row-big" data-row="0">
-                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15.6 11l-2-2 2.1-2.1-.2-.2z"/></svg><span id="finale-row-maint">الصيانة</span></span>
-                <span class="pv" id="finale-row-maint-val">4 موثّق</span>
-              </div>
-              <div class="p-row-big" data-row="1">
-                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3z"/></svg><span id="finale-row-warranty">الضمان</span></span>
-                <span class="pv" id="finale-row-warranty-val">ساري ✓</span>
-              </div>
-              <div class="p-row-big" data-row="2">
-                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg><span id="finale-row-value">القيمة</span></span>
-                <span class="pv" id="finale-row-value-val">٩٨,٥٠٠ ر.س</span>
-              </div>
-              <div class="p-row-big" data-row="3">
-                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.3 18a2 2 0 0 0 1.7 3h16a2 2 0 0 0 1.7-3l-8-14.1a2 2 0 0 0-3.4 0Z"/></svg><span id="finale-row-recall">الاستدعاء</span></span>
-                <span class="pv" id="finale-row-recall-val">لا يوجد ✓</span>
-              </div>
-              <div class="p-row-big" data-row="4">
-                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span id="finale-row-market">سوق القطع</span></span>
-                <span class="pv" id="finale-row-market-val">حساب موثّق</span>
-              </div>
-              <div class="p-row-big" data-row="5">
-                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v10l6 3"/></svg><span id="finale-row-advisor">المستشار</span></span>
-                <span class="pv" id="finale-row-advisor-val">متاح الآن</span>
-              </div>
-            </div>
+            <p class="fin-sub" id="finale-sub">من صيانتك وضمانك وقيمتها الحقيقية — كل ما رأيته للتو، في رقم واحد تثق به.</p>
           </div>
         </div>
         <div class="progress-rail"><div class="fill2" id="finale-progress"></div></div>
@@ -1164,8 +1091,7 @@
         heroH1: 'اعرف سيارتك.<br><span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00B4DC] to-[#008CB0]">احمِ قيمتها.</span>',
         heroSub: 'قدرها يتتبع صيانة سيارتك، يكشف فجوات الضمان،<br>ويقيّم قيمتها الحقيقية — كل ذلك بالذكاء الاصطناعي.',
         heroCTAPrimary: 'حمل التطبيق مجاناً',
-        hero3dCaption: 'هذا هو قدرها سكور. إليك كيف نصل إليه.',
-        heroCTASecondary: 'شاهد كيف نحسبها',
+        heroCTASecondary: 'كيف يعمل؟',
         heroArrowClass: 'w-4 h-4 rotate-180',
 
         hiwTitle: 'ابدأ في ثلاث خطوات',
@@ -1226,18 +1152,7 @@
         finaleLabel: 'النتيجة',
         finaleTitle: 'كل هذا يتجمع في <span class="em">قدرها سكور.</span>',
         finaleScoreLabel: 'قدرها سكور',
-        finaleRowMaint: 'الصيانة',
-        finaleRowMaintVal: '4 موثّق',
-        finaleRowWarranty: 'الضمان',
-        finaleRowWarrantyVal: 'ساري ✓',
-        finaleRowValue: 'القيمة',
-        finaleRowValueVal: '٩٨,٥٠٠ ر.س',
-        finaleRowRecall: 'الاستدعاء',
-        finaleRowRecallVal: 'لا يوجد ✓',
-        finaleRowMarket: 'سوق القطع',
-        finaleRowMarketVal: 'حساب موثّق',
-        finaleRowAdvisor: 'المستشار',
-        finaleRowAdvisorVal: 'متاح الآن',
+        finaleSub: 'من صيانتك وضمانك وقيمتها الحقيقية — كل ما رأيته للتو، في رقم واحد تثق به.',
         feat1Title: 'مسار الصيانة.',
         feat1Body: 'لا تعرف متى صيانتك القادمة أو أي قطعة تحتاج تغيير؟ قدرها يبني جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة.',
         feat2Title: 'فحص الضمان.',
@@ -1328,8 +1243,7 @@
         heroH1: 'Know Your Car.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4DC] to-[#008CB0]">Protect Its Value.</span>',
         heroSub: 'Qadrha tracks your maintenance, detects warranty gaps,<br>and reveals your car\'s true value — all powered by AI.',
         heroCTAPrimary: 'Download Free',
-        hero3dCaption: "This is your Qadrha Score. Here's how you get there.",
-        heroCTASecondary: 'See how we calculate it',
+        heroCTASecondary: 'How it works',
         heroArrowClass: 'w-4 h-4',
 
         hiwTitle: 'Get Started in Three Steps',
@@ -1390,18 +1304,7 @@
         finaleLabel: 'The Result',
         finaleTitle: 'It all comes together in your <span class="em">Qadrha Score.</span>',
         finaleScoreLabel: 'Qadrha Score',
-        finaleRowMaint: 'Maintenance',
-        finaleRowMaintVal: '4 Verified',
-        finaleRowWarranty: 'Warranty',
-        finaleRowWarrantyVal: 'Active ✓',
-        finaleRowValue: 'Value',
-        finaleRowValueVal: 'SAR 98,500',
-        finaleRowRecall: 'Recall',
-        finaleRowRecallVal: 'None ✓',
-        finaleRowMarket: 'Parts Market',
-        finaleRowMarketVal: 'Verified account',
-        finaleRowAdvisor: 'Advisor',
-        finaleRowAdvisorVal: 'Available now',
+        finaleSub: 'Your maintenance, your warranty, your real value — everything you just saw, in one number you can trust.',
         feat1Title: 'Maintenance Roadmap.',
         feat1Body: 'Don\'t know when your next service is due or which part needs replacing? Qadrha builds a schedule tailored to your car, with smart reminders and verified receipt tracking.',
         feat2Title: 'Warranty Check.',
@@ -1509,8 +1412,6 @@
       document.getElementById('hero-cta-primary').textContent  = s.heroCTAPrimary;
       document.getElementById('hero-cta-secondary').childNodes[0].textContent = s.heroCTASecondary + ' ';
       document.getElementById('hero-arrow').className          = s.heroArrowClass;
-      document.getElementById('hero-3d-label').textContent      = s.s3ScoreLabel;
-      document.getElementById('hero-3d-caption').textContent    = s.hero3dCaption;
 
       document.getElementById('hiw-title').textContent = s.hiwTitle;
       document.getElementById('hiw-sub').textContent   = s.hiwSub;
@@ -1590,18 +1491,7 @@
       document.getElementById('finale-label').textContent = s.finaleLabel;
       document.getElementById('finale-title').innerHTML   = s.finaleTitle;
       document.getElementById('finale-score-label').textContent = s.finaleScoreLabel;
-      document.getElementById('finale-row-maint').textContent      = s.finaleRowMaint;
-      document.getElementById('finale-row-maint-val').textContent  = s.finaleRowMaintVal;
-      document.getElementById('finale-row-warranty').textContent     = s.finaleRowWarranty;
-      document.getElementById('finale-row-warranty-val').textContent = s.finaleRowWarrantyVal;
-      document.getElementById('finale-row-value').textContent      = s.finaleRowValue;
-      document.getElementById('finale-row-value-val').textContent  = s.finaleRowValueVal;
-      document.getElementById('finale-row-recall').textContent      = s.finaleRowRecall;
-      document.getElementById('finale-row-recall-val').textContent  = s.finaleRowRecallVal;
-      document.getElementById('finale-row-market').textContent      = s.finaleRowMarket;
-      document.getElementById('finale-row-market-val').textContent  = s.finaleRowMarketVal;
-      document.getElementById('finale-row-advisor').textContent      = s.finaleRowAdvisor;
-      document.getElementById('finale-row-advisor-val').textContent  = s.finaleRowAdvisorVal;
+      document.getElementById('finale-sub').textContent = s.finaleSub;
 
       document.getElementById('passport-stripe').className =
         `absolute top-0 ${s.passportStripePos} w-2 h-full bg-gradient-to-b from-[#00B4DC] to-[#008CB0]`;
@@ -1771,7 +1661,6 @@
       const finaleRing = document.getElementById('finale-ring');
       const finaleNum = document.getElementById('finale-num');
       const finaleProgressEl = document.getElementById('finale-progress');
-      const finaleRows = finalePassport ? Array.from(finalePassport.querySelectorAll('.p-row-big')) : [];
       const FINALE_CIRC = 2 * Math.PI * 70;
       if (finaleRing) finaleRing.style.strokeDasharray = FINALE_CIRC;
 
@@ -1800,14 +1689,10 @@
 
         finalePassport.classList.toggle('on', progress > 0.05);
 
-        const scoreT = clamp01((progress - 0.15) / 0.55);
+        const scoreT = clamp01((progress - 0.15) / 0.6);
         const eased = easeOutCubic(scoreT);
         if (finaleNum) finaleNum.textContent = Math.round(87 * eased);
         if (finaleRing) finaleRing.style.strokeDashoffset = FINALE_CIRC * (1 - 0.87 * eased);
-
-        finaleRows.forEach((row, i) => {
-          row.classList.toggle('on', progress > 0.3 + i * 0.09);
-        });
       }
 
       function setFinaleRestState() {
@@ -1815,7 +1700,6 @@
         finalePassport.classList.add('on');
         if (finaleNum) finaleNum.textContent = '87';
         if (finaleRing) finaleRing.style.strokeDashoffset = FINALE_CIRC * (1 - 0.87);
-        finaleRows.forEach((row) => row.classList.add('on'));
       }
 
       if (reduceMotion) {
@@ -2218,227 +2102,6 @@
     });
   </script>
 
-  <!-- 3D hero — scattered signal converging into the Qadrha Score. Not a
-       static shape: ~2,000 points start scattered (the maintenance
-       receipts, warranty records, market data Qadrha actually pulls
-       together) and assemble into the score ring once, on load, the same
-       way the app turns a pile of disconnected records into one number.
-       Loaded from a CDN deliberately, unlike GSAP/Tailwind above: this is
-       a pure enhancement (the wrap stays display:none — see CSS — until
-       the scene is confirmed built), so a slow or failed CDN load just
-       means the hero looks exactly as it did before this existed, never a
-       broken or half-built page. Skipped entirely when the browser has no
-       WebGL or prefers reduced motion. -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js" defer></script>
-  <script defer>
-    (function () {
-      var PARTICLE_COUNT = 2000;
-      var ANIM_DURATION = 2600;
-
-      function supportsWebGL() {
-        try {
-          var c = document.createElement('canvas');
-          return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl')));
-        } catch (e) { return false; }
-      }
-
-      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-
-      // One target point somewhere on the score ring's torus surface — 87%
-      // of points land in the "lit" arc (matching the real score), the
-      // rest scatter along the remaining dark track, same split the app's
-      // own score-gauge uses everywhere else on the site.
-      function ringTargetPoint() {
-        var progress = 0.87;
-        var withinArc = Math.random() < progress || Math.random() < 0.15;
-        var angle = withinArc
-          ? (Math.random() * progress) * Math.PI * 2 + Math.PI / 2
-          : Math.random() * Math.PI * 2;
-        var R = 2.2, tube = 0.16;
-        var tubeAngle = Math.random() * Math.PI * 2;
-        var tubeR = tube * Math.sqrt(Math.random());
-        return {
-          x: (R + tubeR * Math.cos(tubeAngle)) * Math.cos(angle),
-          y: (R + tubeR * Math.cos(tubeAngle)) * Math.sin(angle),
-          z: tubeR * Math.sin(tubeAngle),
-          lit: withinArc,
-        };
-      }
-
-      function init() {
-        if (typeof THREE === 'undefined' || !supportsWebGL()) return;
-        var reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        var wrap = document.getElementById('hero-3d-wrap');
-        var canvas = document.getElementById('hero-3d-canvas');
-        if (!wrap || !canvas) return;
-        // Reveal the (still-empty) box BEFORE measuring it — clientWidth/
-        // clientHeight are 0 on a display:none element, which would size
-        // the renderer to 0x0 and leave it stuck there permanently even
-        // after the class is added later. The canvas itself stays visually
-        // blank/transparent until the first render() call fills it, so
-        // this doesn't show anything half-built — just an empty box for a
-        // few ms while the scene builds, same as any image's load flash.
-        wrap.classList.add('is-ready');
-
-        var scene, camera, renderer, points, geometry, startPositions, targetPositions, scatterDownPositions;
-        try {
-          scene = new THREE.Scene();
-          scene.fog = new THREE.FogExp2(0x05080F, 0.035);
-
-          camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
-          camera.position.set(0, 0, 9);
-
-          renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-          renderer.setSize(wrap.clientWidth, wrap.clientHeight);
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-          startPositions       = new Float32Array(PARTICLE_COUNT * 3);
-          targetPositions      = new Float32Array(PARTICLE_COUNT * 3);
-          scatterDownPositions = new Float32Array(PARTICLE_COUNT * 3);
-          var currentPositions = new Float32Array(PARTICLE_COUNT * 3);
-          var colors = new Float32Array(PARTICLE_COUNT * 3);
-          var litColor = new THREE.Color(0x4FD6F4);
-          var dimColor = new THREE.Color(0x3d5670);
-
-          for (var i = 0; i < PARTICLE_COUNT; i++) {
-            // Scattered start — a wide diffuse cloud standing in for the
-            // disconnected records (receipts, warranty docs, market data).
-            var r = 6 + Math.random() * 5;
-            var theta = Math.random() * Math.PI * 2;
-            var phi = Math.acos(2 * Math.random() - 1);
-            startPositions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
-            startPositions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
-            startPositions[i*3+2] = r * Math.cos(phi) * 0.5;
-
-            var t = ringTargetPoint();
-            targetPositions[i*3]   = t.x;
-            targetPositions[i*3+1] = t.y;
-            targetPositions[i*3+2] = t.z;
-
-            // Scroll-away target: once the ring has formed, scrolling the
-            // hero out of view pours the same particles downward — toward
-            // "how it works" — instead of the ring just sitting there inert
-            // the moment the load-in animation finishes.
-            var downTheta = Math.random() * Math.PI * 2;
-            var downR = (2.6 + Math.random() * 4) * (0.6 + Math.random() * 0.6);
-            scatterDownPositions[i*3]   = Math.cos(downTheta) * downR;
-            scatterDownPositions[i*3+1] = t.y - 4 - Math.random() * 7;
-            scatterDownPositions[i*3+2] = Math.sin(downTheta) * downR * 0.4 - 1.5;
-
-            var c = t.lit ? litColor : dimColor;
-            colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
-            currentPositions[i*3]   = reduceMotionQuery.matches ? targetPositions[i*3]   : startPositions[i*3];
-            currentPositions[i*3+1] = reduceMotionQuery.matches ? targetPositions[i*3+1] : startPositions[i*3+1];
-            currentPositions[i*3+2] = reduceMotionQuery.matches ? targetPositions[i*3+2] : startPositions[i*3+2];
-          }
-
-          geometry = new THREE.BufferGeometry();
-          geometry.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
-          geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-          var material = new THREE.PointsMaterial({ size: 0.045, vertexColors: true, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false });
-          points = new THREE.Points(geometry, material);
-          points.rotation.x = 0.9;
-          points.rotation.z = -0.15;
-          scene.add(points);
-
-          renderer.render(scene, camera);
-        } catch (e) {
-          wrap.classList.remove('is-ready');
-          return;
-        }
-
-        var mouseX = 0, mouseY = 0, curRotY = 0, curRotX = 0, running = true;
-        var animStart = performance.now();
-        window.addEventListener('mousemove', function (e) {
-          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        }, { passive: true });
-        window.addEventListener('resize', function () {
-          camera.aspect = wrap.clientWidth / wrap.clientHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(wrap.clientWidth, wrap.clientHeight);
-        });
-
-        // Scroll-away dispersal: once the ring has assembled, scrolling the
-        // hero out of the top of the viewport continues to move the same
-        // object instead of leaving it inert — the ring pours its particles
-        // downward as it goes, into the story the rest of the page tells.
-        // Driven by the wrap's own position (no pin, no extra scroll height
-        // added to the page — same lightweight technique as the existing
-        // .parallax-img scroll listener elsewhere on this page).
-        var scrollDisperse = 0;
-        if (!reduceMotionQuery.matches) {
-          var updateScrollDisperse = function () {
-            var rect = wrap.getBoundingClientRect();
-            // 0 while the wrap sits anywhere at or below the viewport top;
-            // ramps to 1 over the next 1.1x of its own height once it starts
-            // scrolling above the top edge.
-            var raw = -rect.top / (rect.height * 1.1 || 1);
-            scrollDisperse = Math.max(0, Math.min(1, raw));
-          };
-          var scrollTicking = false;
-          window.addEventListener('scroll', function () {
-            if (!scrollTicking) {
-              requestAnimationFrame(function () { updateScrollDisperse(); scrollTicking = false; });
-              scrollTicking = true;
-            }
-          }, { passive: true });
-          updateScrollDisperse();
-        }
-
-        // Pause the render loop entirely when the hero scrolls out of view —
-        // no point spending a frame budget animating something nobody sees.
-        if ('IntersectionObserver' in window) {
-          new IntersectionObserver(function (entries) {
-            running = entries[0].isIntersecting;
-            if (running) animate();
-          }).observe(wrap);
-        }
-
-        function animate() {
-          if (!running) return;
-          requestAnimationFrame(animate);
-
-          if (!reduceMotionQuery.matches) {
-            var elapsed = performance.now() - animStart;
-            var loadEased = easeOutCubic(Math.min(1, elapsed / ANIM_DURATION));
-            var posAttr = geometry.getAttribute('position');
-            for (var i = 0; i < PARTICLE_COUNT; i++) {
-              var ix = i * 3;
-              // First blend start -> ring (the load-in convergence), then —
-              // once that's finished, or concurrently once scrolling starts
-              // — blend ring -> scatter-down. loadEased and scrollDisperse
-              // are independent so a fast scroller doesn't wait for the
-              // intro to finish before the hero starts responding to them.
-              var ringX = startPositions[ix]   + (targetPositions[ix]   - startPositions[ix])   * loadEased;
-              var ringY = startPositions[ix+1] + (targetPositions[ix+1] - startPositions[ix+1]) * loadEased;
-              var ringZ = startPositions[ix+2] + (targetPositions[ix+2] - startPositions[ix+2]) * loadEased;
-              posAttr.array[ix]   = ringX + (scatterDownPositions[ix]   - ringX) * scrollDisperse;
-              posAttr.array[ix+1] = ringY + (scatterDownPositions[ix+1] - ringY) * scrollDisperse;
-              posAttr.array[ix+2] = ringZ + (scatterDownPositions[ix+2] - ringZ) * scrollDisperse;
-            }
-            posAttr.needsUpdate = true;
-          }
-
-          curRotY += (mouseX * 0.3 - curRotY) * 0.03;
-          curRotX += (mouseY * 0.15 - curRotX) * 0.03;
-          points.rotation.y = curRotY + performance.now() * 0.00008 + scrollDisperse * 0.8;
-          points.rotation.x = 0.9 + curRotX;
-          points.material.opacity = 0.9 * (1 - scrollDisperse * 0.75);
-          renderer.render(scene, camera);
-        }
-
-        animate();
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
-    })();
-  </script>
 
 </body>
 </html>
