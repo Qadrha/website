@@ -410,6 +410,101 @@
     @media (prefers-reduced-motion: reduce) {
       .sky-star { animation: none !important; opacity: 0.4; }
     }
+
+    /* ── Ambient glow field — extends the single hero-glow radial into a
+         continuous, gently drifting field that runs the full length of the
+         page (canvas, cheap 2D, no WebGL dependency), so the hero and the
+         features/AI/finale sections below share one atmosphere instead of
+         the hero being the only thing that feels alive. ── */
+    #glow-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    /* ── Features intro pivot ── */
+    .feat-eyebrow {
+      display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--cyan-bright); font-family: 'IBM Plex Sans', sans-serif; margin-bottom: 0.8rem;
+    }
+    .feat-intro-title { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 800; line-height: 1.32; text-wrap: balance; color: #EDF4FA; }
+    .feat-intro-title .em, h2 .em, h3 .em { color: var(--cyan-bright); }
+
+    /* ── Feature spine: alternating pairs connected by a light line that
+         grows and lights each node as it scrolls into view. Each .fpair
+         wraps ONE existing .feat-card unchanged — only outer layout and
+         alignment change, so none of the card's own ids/behavior move. ── */
+    .spine-wrap { position: relative; max-width: 56rem; margin: 0 auto; padding: 0 0.5rem; display: flex; flex-direction: column; gap: 2.5rem; }
+    .spine-line { position: absolute; top: 0; bottom: 0; right: 50%; width: 2px; background: rgba(255,255,255,0.08); }
+    .spine-line .fill { position: absolute; top: 0; right: 0; width: 100%; height: 0%; background: linear-gradient(180deg, var(--cyan-bright), var(--cyan-deep)); box-shadow: 0 0 12px var(--cyan-bright); }
+    .fpair { position: relative; display: flex; opacity: 0.35; filter: saturate(0.55); transition: opacity 0.4s ease, filter 0.4s ease; }
+    .fpair.lit { opacity: 1; filter: saturate(1); }
+    .fpair:nth-child(odd) { justify-content: flex-start; }
+    .fpair:nth-child(even) { justify-content: flex-end; }
+    .fpair .fnode {
+      position: absolute; right: calc(50% - 6px); top: 2.5rem; width: 13px; height: 13px; border-radius: 50%;
+      background: #070A16; border: 2px solid rgba(255,255,255,0.2); z-index: 3;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    }
+    .fpair.lit .fnode { border-color: var(--cyan-bright); background: var(--cyan-bright); box-shadow: 0 0 16px var(--cyan-bright); }
+    .fpair .feat-card { width: 100%; max-width: 24rem; margin: 0; }
+    @media (max-width: 767px) {
+      .spine-line { right: 0; }
+      .fpair .fnode { right: -6px; }
+      .fpair:nth-child(odd), .fpair:nth-child(even) { justify-content: flex-start; padding-inline-start: 1.75rem; }
+      .fpair .feat-card { max-width: 100%; }
+    }
+
+    /* ── AI Advisor spotlight badge — same element, stronger claim now
+         that it's not one card among many but the section right after the
+         full feature story. ── */
+    #ai-advisor .inline-block { font-size: 0.78rem; }
+
+    /* ── Finale: the payoff of the whole scroll — pinned, ring fills and
+         six rows tick in as you scroll through it. Branded around the
+         Qadrha Score (real, live) — deliberately not "Passport" language,
+         since the Car Passport card above is explicitly Coming Soon and
+         this must never read as claiming that feature is live. ── */
+    .finale-pin-wrap { position: relative; height: 220vh; }
+    .finale-pin-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .finale-inner { max-width: 34rem; padding: 0 1.5rem; text-align: center; }
+    .fin-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; color: var(--cyan-bright); font-family: 'IBM Plex Sans', sans-serif; margin-bottom: 1rem; display: block; }
+    .fin-title { font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 800; margin: 0 0 2.5rem; text-wrap: balance; color: #EDF4FA; }
+    .finale .passport {
+      display: inline-flex; align-items: center; gap: 2.5rem; border-radius: 2.25rem; text-align: start; padding: 2.5rem 3rem;
+      background: linear-gradient(165deg, rgba(13,18,25,0.97), rgba(10,21,36,0.97));
+      border: 1px solid rgba(0,180,220,0.4);
+      box-shadow: 0 0 0 1px rgba(0,180,220,0.1), 0 40px 90px rgba(0,0,0,0.55), 0 0 100px rgba(0,180,220,0.18);
+      opacity: 0; transform: scale(0.92) translateY(24px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .finale .passport.on { opacity: 1; transform: scale(1) translateY(0); }
+    .p-ring-big { width: 160px; height: 160px; position: relative; flex-shrink: 0; }
+    .p-ring-big svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .num-big { position: absolute; inset: 0; top: -6px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; color: #EDF4FA; font-family: 'IBM Plex Sans', sans-serif; }
+    .num-label { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-size: 0.72rem; color: rgba(210,228,242,0.4); letter-spacing: 0.06em; }
+    .p-rows-big { display: flex; flex-direction: column; gap: 0.7rem; }
+    .p-row-big {
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+      font-size: 0.88rem; padding-bottom: 0.65rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+      opacity: 0; transform: translateX(12px); transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .p-row-big:last-child { border-bottom: none; padding-bottom: 0; }
+    .p-row-big.on { opacity: 1; transform: translateX(0); }
+    .p-row-big .pk { display: flex; align-items: center; gap: 0.55rem; color: rgba(210,228,242,0.4); font-weight: 500; }
+    .p-row-big .pk svg { width: 16px; height: 16px; color: var(--cyan-bright); flex-shrink: 0; }
+    .p-row-big .pv { color: #EDF4FA; font-weight: 700; white-space: nowrap; font-family: 'IBM Plex Sans', sans-serif; }
+
+    .progress-rail { position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%); width: 220px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.1); overflow: hidden; z-index: 20; }
+    .progress-rail .fill2 { height: 100%; background: linear-gradient(90deg, var(--cyan-deep), var(--cyan-bright)); width: 0%; }
+
+    @media (max-width: 640px), (prefers-reduced-motion: reduce) {
+      .finale-pin-wrap { height: auto; }
+      .finale-pin-stage { position: relative; height: auto; min-height: auto; padding: 4rem 1rem; }
+      .finale .passport { opacity: 1 !important; transform: none !important; flex-direction: column; text-align: center; padding: 2rem; }
+      .p-row-big { opacity: 1 !important; transform: none !important; }
+      .progress-rail { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fpair { opacity: 1 !important; filter: none !important; }
+      .fpair .fnode { border-color: var(--cyan-bright) !important; background: var(--cyan-bright) !important; }
+    }
   </style>
 </head>
 
@@ -421,6 +516,7 @@
        Populated by JS at the bottom of the page (a handful of CSS-animated
        dots — no need for the app's per-star Reanimated machinery here). -->
   <div id="star-field" style="position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;"></div>
+  <canvas id="glow-canvas" aria-hidden="true"></canvas>
 
   <!-- ── NAV ─────────────────────────────────────────────────────────────── -->
   <nav id="main-nav" class="fixed top-0 w-full z-50 bg-[#070A16]/85 backdrop-blur-xl border-b border-white/10">
@@ -706,46 +802,6 @@
     </div>
   </section>
 
-  <!-- ── AI ADVISOR SPOTLIGHT (dark zone — promoted out of the features grid; AI is the headline differentiator, not one card among many) ── -->
-  <section id="ai-advisor" class="reveal py-10 px-6 max-w-7xl mx-auto">
-    <div class="lift-panel bg-[#0D1219] border border-[#00B4DC]/25 rounded-[2.5rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16 relative overflow-hidden shadow-[0_0_60px_rgba(0,180,220,0.08)]">
-      <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#00B4DC]/10 blur-3xl pointer-events-none"></div>
-
-      <div id="ai-text" class="w-full md:w-1/2 flex flex-col relative z-10">
-        <span class="inline-block self-start text-xs font-semibold text-[#4FD6F4] bg-[#00B4DC]/10 border border-[#00B4DC]/30 px-3 py-1 rounded-full mb-4">مدعوم بالذكاء الاصطناعي · AI-Powered</span>
-        <h2 id="ai-title" class="text-3xl md:text-5xl font-bold mb-5 text-[#f4f7fb] leading-tight">مستشارك الذكي، متاح دائماً.</h2>
-        <p id="ai-body" class="text-base md:text-lg text-gray-400 leading-relaxed">
-          اسأل عن أي عطل، صوّر ضوء تحذير على لوحة القيادة، أو استفسر عن موعد صيانتك القادمة —
-          <span id="ai-highlight" class="text-[#4FD6F4] font-semibold">ردود فورية بالذكاء الاصطناعي، وبياناتك لا تغادر المملكة أبداً.</span>
-        </p>
-      </div>
-
-      <!-- Interactive chat demo — tap a real question, watch the advisor
-           reason through it live (typing indicator + typewriter reveal).
-           A static screenshot can only show one canned exchange; this lets
-           a visitor try three different questions themselves, which is a
-           closer match to what actually using the feature feels like. -->
-      <div class="w-full md:w-1/2 relative z-10">
-        <div id="ai-chat-demo" class="ai-chat-demo">
-          <div id="ai-chat-log" class="ai-chat-log">
-            <div class="ai-bubble ai-bubble-bot">
-              <p id="ai-chat-greeting">اسألني أي شي عن سيارتك — جرّب واحد من الأسئلة:</p>
-            </div>
-          </div>
-          <div class="ai-chip-row" id="ai-chip-row">
-            <button type="button" class="ai-chip" data-chip="1"><span id="ai-chip-1">ليه ضوء المحرك مضوي؟</span></button>
-            <button type="button" class="ai-chip" data-chip="2"><span id="ai-chip-2">هل صيانتي المتأخرة تؤثر على ضماني؟</span></button>
-            <button type="button" class="ai-chip" data-chip="3"><span id="ai-chip-3">كم قيمة سيارتي الحين؟</span></button>
-          </div>
-          <div class="ai-input-row">
-            <span id="ai-input-ph" class="ai-input-fake-ph">اسأل عن سيارتك...</span>
-            <span class="ai-input-send">↑</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ── FEATURES (light zone — matches the app's "content lives in the light lower zone") ── -->
   <section id="features" class="py-20 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-16">
@@ -753,115 +809,145 @@
       <p id="feat-sub" class="text-[rgba(210,228,242,0.65)] text-lg max-w-2xl mx-auto leading-relaxed">مجموعة متكاملة من الأدوات الذكية — مبنية للسوق السعودي.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Pivot line: "more than a single number" — sets up the spine below
+         as a deliberate showcase of everything, not just the score. -->
+    <div class="text-center mb-14">
+      <span id="feat-intro-eyebrow" class="feat-eyebrow">أكثر مما تتخيل</span>
+      <h3 id="feat-intro-title" class="feat-intro-title">سيارتك تحتاج أكثر من <span class="em">رقم واحد.</span></h3>
+    </div>
+
+    <!-- Spine: each feature is a full alternating pair (visual one side,
+         explanation the other) connected by a light line that grows and
+         lights each node as it scrolls into view — see #spine-wrap CSS. -->
+    <div class="spine-wrap" id="spine-wrap">
+      <div class="spine-line"><div class="fill" id="spine-fill"></div></div>
 
       <!-- Feature 1: Maintenance Roadmap — mini widget: tap the arrow to
            cycle through the next few upcoming items on the schedule. -->
-      <div id="feat1" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right md:min-h-[220px] shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
-        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15.6 11l-2-2 2.1-2.1-.2-.2z"/><path d="M14.7 6.3l3-3"/></svg>
-        <h3 id="feat1-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">مسار الصيانة.</h3>
-        <p id="feat1-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">لا تعرف متى صيانتك القادمة أو أي قطعة تحتاج تغيير؟ قدرها يبني جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة.</p>
-        <div class="mini-widget mini-roadmap" data-cycle-index="0">
-          <div class="mini-roadmap-bar"><div class="mini-roadmap-bar-fill"></div></div>
-          <div class="mini-roadmap-row">
-            <span class="mini-roadmap-label" id="feat1-next-label">القادم</span>
-            <button type="button" class="mini-cycle-btn" aria-label="Next item">›</button>
+      <div class="fpair" data-idx="0">
+        <div class="fnode"></div>
+        <div id="feat1" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
+          <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15.6 11l-2-2 2.1-2.1-.2-.2z"/><path d="M14.7 6.3l3-3"/></svg>
+          <h3 id="feat1-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">مسار الصيانة.</h3>
+          <p id="feat1-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">لا تعرف متى صيانتك القادمة أو أي قطعة تحتاج تغيير؟ قدرها يبني جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة.</p>
+          <div class="mini-widget mini-roadmap" data-cycle-index="0">
+            <div class="mini-roadmap-bar"><div class="mini-roadmap-bar-fill"></div></div>
+            <div class="mini-roadmap-row">
+              <span class="mini-roadmap-label" id="feat1-next-label">القادم</span>
+              <button type="button" class="mini-cycle-btn" aria-label="Next item">›</button>
+            </div>
+            <p class="mini-roadmap-item" id="feat1-item">فحص الفرامل — خلال 12 يوم</p>
           </div>
-          <p class="mini-roadmap-item" id="feat1-item">فحص الفرامل — خلال 12 يوم</p>
         </div>
       </div>
 
       <!-- Feature 2: Warranty Check — mini widget: status + time-remaining
            bar, tap "؟" for the corrected, accurate explanation. -->
-      <div id="feat2" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right md:min-h-[220px] shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
-        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3z"/></svg>
-        <h3 id="feat2-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">فحص الضمان.</h3>
-        <p id="feat2-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">صيانة متأخرة قد تمنح الوكالة سبباً لرفض مطالبة ضمان محددة مرتبطة بها. قدرها يوثّق سجل صيانتك ليكون دليلك عند أي نزاع.</p>
-        <div class="mini-widget mini-warranty">
-          <div class="mini-warranty-row">
-            <span class="maint-warranty-chip" id="feat2-chip">الضمان: ساري ✓</span>
-            <button type="button" class="score-info-btn" aria-label="More detail">؟</button>
+      <div class="fpair" data-idx="1">
+        <div class="fnode"></div>
+        <div id="feat2" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
+          <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3z"/></svg>
+          <h3 id="feat2-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">فحص الضمان.</h3>
+          <p id="feat2-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">صيانة متأخرة قد تمنح الوكالة سبباً لرفض مطالبة ضمان محددة مرتبطة بها. قدرها يوثّق سجل صيانتك ليكون دليلك عند أي نزاع.</p>
+          <div class="mini-widget mini-warranty">
+            <div class="mini-warranty-row">
+              <span class="maint-warranty-chip" id="feat2-chip">الضمان: ساري ✓</span>
+              <button type="button" class="score-info-btn" aria-label="More detail">؟</button>
+            </div>
+            <div class="mini-roadmap-bar"><div class="mini-roadmap-bar-fill" style="width:78%"></div></div>
+            <p class="mini-roadmap-item" id="feat2-remaining">متبقي 8 أشهر من 36</p>
+            <p class="score-tooltip" id="feat2-tooltip">صيانة متأخرة قد تمنح الوكالة سبباً لرفض مطالبة محددة مرتبطة بها فقط — لا تُسقط الضمان بالكامل.</p>
           </div>
-          <div class="mini-roadmap-bar"><div class="mini-roadmap-bar-fill" style="width:78%"></div></div>
-          <p class="mini-roadmap-item" id="feat2-remaining">متبقي 8 أشهر من 36</p>
-          <p class="score-tooltip" id="feat2-tooltip">صيانة متأخرة قد تمنح الوكالة سبباً لرفض مطالبة محددة مرتبطة بها فقط — لا تُسقط الضمان بالكامل.</p>
         </div>
       </div>
 
       <!-- Feature 3: Car Value / Qadrha Score — mini widget: tap to flip
            between the value without a verified record and the value with
            Qadrha's documented history. -->
-      <div id="feat3" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right md:min-h-[220px] shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
-        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg>
-        <h3 id="feat3-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">قيمة سيارتك.</h3>
-        <p id="feat3-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">لا تعرف كم تساوي سيارتك فعلياً؟ قدرها سكور يحلل سجل صيانتك الموثق ويكشف قيمتها السوقية الحقيقية في السوق السعودي المستعمل.</p>
-        <button type="button" class="mini-widget mini-value" data-flipped="false">
-          <div class="mini-value-row">
-            <span class="mini-value-label" id="feat3-label">بدون سجل موثق</span>
-            <span class="mini-value-amount" id="feat3-amount">٩٢,٠٠٠ ر.س</span>
-          </div>
-          <p class="mini-tap-hint" id="feat3-hint">اضغط للمقارنة</p>
-        </button>
+      <div class="fpair" data-idx="2">
+        <div class="fnode"></div>
+        <div id="feat3" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
+          <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg>
+          <h3 id="feat3-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">قيمة سيارتك.</h3>
+          <p id="feat3-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">لا تعرف كم تساوي سيارتك فعلياً؟ قدرها سكور يحلل سجل صيانتك الموثق ويكشف قيمتها السوقية الحقيقية في السوق السعودي المستعمل.</p>
+          <button type="button" class="mini-widget mini-value" data-flipped="false">
+            <div class="mini-value-row">
+              <span class="mini-value-label" id="feat3-label">بدون سجل موثق</span>
+              <span class="mini-value-amount" id="feat3-amount">٩٢,٠٠٠ ر.س</span>
+            </div>
+            <p class="mini-tap-hint" id="feat3-hint">اضغط للمقارنة</p>
+          </button>
+        </div>
       </div>
 
       <!-- Feature 4: Recall Check — mini widget: tap "Check now" to replay
            a live recalls.sa lookup. -->
-      <div id="feat4" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right md:min-h-[220px] shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
-        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        <h3 id="feat4-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">فحص الاستدعاءات.</h3>
-        <p id="feat4-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">أغلب السائقين لا يعرفون إن كانت سيارتهم مشمولة باستدعاء رسمي. قدرها يفحص سجل وزارة التجارة (recalls.sa) مباشرة ويخبرك فوراً.</p>
-        <div class="mini-widget mini-recall">
-          <div class="mini-recall-result is-visible">
-            <span class="mini-recall-dot"></span>
-            <span id="feat4-result">لا يوجد استدعاء نشط ✓</span>
-          </div>
-          <div class="mini-recall-row">
-            <span class="mini-recall-timestamp" id="feat4-timestamp">آخر فحص: الآن</span>
-            <button type="button" class="mini-recall-btn" id="feat4-check-btn">تحقق الآن</button>
+      <div class="fpair" data-idx="3">
+        <div class="fnode"></div>
+        <div id="feat4" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
+          <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <h3 id="feat4-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">فحص الاستدعاءات.</h3>
+          <p id="feat4-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">أغلب السائقين لا يعرفون إن كانت سيارتهم مشمولة باستدعاء رسمي. قدرها يفحص سجل وزارة التجارة (recalls.sa) مباشرة ويخبرك فوراً.</p>
+          <div class="mini-widget mini-recall">
+            <div class="mini-recall-result is-visible">
+              <span class="mini-recall-dot"></span>
+              <span id="feat4-result">لا يوجد استدعاء نشط ✓</span>
+            </div>
+            <div class="mini-recall-row">
+              <span class="mini-recall-timestamp" id="feat4-timestamp">آخر فحص: الآن</span>
+              <button type="button" class="mini-recall-btn" id="feat4-check-btn">تحقق الآن</button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Feature 5: Marketplace — mini widget: a real listing card, tap to
            reveal the contact action. -->
-      <div id="feat5" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right md:min-h-[220px] shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
-        <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 3a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2z"/><path d="M4 8l1.2-3.2A2 2 0 0 1 7 3.5h10a2 2 0 0 1 1.8 1.3L20 8"/><path d="M6 13v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-6"/></svg>
-        <h3 id="feat5-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">سوق قطع الغيار.</h3>
-        <p id="feat5-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">بيع وشراء قطع الغيار والإكسسوارات المستعملة مباشرة من مالكين موثّقين — مع تفاوض داخل التطبيق وحماية لمعلومات التواصل.</p>
-        <div class="mini-widget mini-listing">
-          <div class="mini-listing-row">
-            <div>
-              <p class="mini-listing-name" id="feat5-name">طقم فرامل أمامي - أصلي</p>
-              <p class="mini-listing-seller" id="feat5-seller">بائع موثّق ✓</p>
+      <div class="fpair" data-idx="4">
+        <div class="fnode"></div>
+        <div id="feat5" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
+          <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 3a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2z"/><path d="M4 8l1.2-3.2A2 2 0 0 1 7 3.5h10a2 2 0 0 1 1.8 1.3L20 8"/><path d="M6 13v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-6"/></svg>
+          <h3 id="feat5-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">سوق قطع الغيار.</h3>
+          <p id="feat5-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">بيع وشراء قطع الغيار والإكسسوارات المستعملة مباشرة من مالكين موثّقين — مع تفاوض داخل التطبيق وحماية لمعلومات التواصل.</p>
+          <div class="mini-widget mini-listing">
+            <div class="mini-listing-row">
+              <div>
+                <p class="mini-listing-name" id="feat5-name">طقم فرامل أمامي - أصلي</p>
+                <p class="mini-listing-seller" id="feat5-seller">بائع موثّق ✓</p>
+              </div>
+              <span class="mini-listing-price" id="feat5-price">٤٥٠ ر.س</span>
             </div>
-            <span class="mini-listing-price" id="feat5-price">٤٥٠ ر.س</span>
+            <button type="button" class="mini-listing-btn" id="feat5-contact-btn">تواصل</button>
+            <p class="mini-tap-hint is-static" id="feat5-note">محادثة آمنة داخل التطبيق</p>
           </div>
-          <button type="button" class="mini-listing-btn" id="feat5-contact-btn">تواصل</button>
-          <p class="mini-tap-hint is-static" id="feat5-note">محادثة آمنة داخل التطبيق</p>
         </div>
       </div>
 
       <!-- Feature 6: Damage Assessment — coming soon, not live yet. Upload
            button instead of a demo scan so this card doesn't imply the
            feature works today. -->
-      <div id="feat6" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right md:min-h-[220px] shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
-        <div class="flex items-center justify-between mb-4">
-          <svg class="qicon" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7z"/><circle cx="12" cy="13" r="3.5"/></svg>
-          <span class="inline-block text-xs font-semibold text-[#008CB0] bg-[#00B4DC]/10 border border-[#00B4DC]/30 px-3 py-1 rounded-full" id="feat6-badge">قريباً · Coming soon</span>
-        </div>
-        <h3 id="feat6-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">تقييم الأضرار.</h3>
-        <p id="feat6-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">صوّر أي ضرر أو خدش وقدرها يقيّم حالته بالذكاء الاصطناعي — اعرف تأثيره على قيمة سيارتك قبل أن تبيع أو تشتري.</p>
-        <div class="mini-widget mini-upload">
-          <button type="button" class="mini-upload-btn" id="feat6-upload-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="mini-upload-icon"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
-            <span id="feat6-upload-label">ارفع صورة الضرر</span>
-          </button>
-          <p class="mini-tap-hint is-static" id="feat6-soon-note">قريباً — نعمل على إطلاقها</p>
+      <div class="fpair" data-idx="5">
+        <div class="fnode"></div>
+        <div id="feat6" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="qicon" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7z"/><circle cx="12" cy="13" r="3.5"/></svg>
+            <span class="inline-block text-xs font-semibold text-[#008CB0] bg-[#00B4DC]/10 border border-[#00B4DC]/30 px-3 py-1 rounded-full" id="feat6-badge">قريباً · Coming soon</span>
+          </div>
+          <h3 id="feat6-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">تقييم الأضرار.</h3>
+          <p id="feat6-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">صوّر أي ضرر أو خدش وقدرها يقيّم حالته بالذكاء الاصطناعي — اعرف تأثيره على قيمة سيارتك قبل أن تبيع أو تشتري.</p>
+          <div class="mini-widget mini-upload">
+            <button type="button" class="mini-upload-btn" id="feat6-upload-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="mini-upload-icon"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+              <span id="feat6-upload-label">ارفع صورة الضرر</span>
+            </button>
+            <p class="mini-tap-hint is-static" id="feat6-soon-note">قريباً — نعمل على إطلاقها</p>
+          </div>
         </div>
       </div>
+    </div>
 
       <!-- Car Passport — coming soon (full width) -->
-      <div class="lift-panel reveal md:col-span-3 bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between relative overflow-hidden gap-8 group mt-2">
+      <div class="lift-panel reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between relative overflow-hidden gap-8 group mt-16 max-w-4xl mx-auto">
         <div id="passport-stripe" class="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-[#00B4DC] to-[#008CB0]"></div>
 
         <div id="passport-text" class="w-full md:w-1/2 flex flex-col justify-center">
@@ -911,7 +997,99 @@
           </div>
         </div>
       </div>
+  </section>
 
+  <!-- ── AI ADVISOR SPOTLIGHT — moved after the features spine (was before
+       it): the advisor is the payoff after seeing everything else, and the
+       headline differentiator right now, not one card among many. Same
+       interactive chat demo as before, just repositioned + a stronger
+       badge reflecting how much it's actually used. ── -->
+  <section id="ai-advisor" class="reveal py-10 px-6 max-w-7xl mx-auto">
+    <div class="lift-panel bg-[#0D1219] border border-[#00B4DC]/25 rounded-[2.5rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-10 md:gap-16 relative overflow-hidden shadow-[0_0_60px_rgba(0,180,220,0.08)]">
+      <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#00B4DC]/10 blur-3xl pointer-events-none"></div>
+
+      <div id="ai-text" class="w-full md:w-1/2 flex flex-col relative z-10">
+        <span class="inline-block self-start text-xs font-semibold text-[#4FD6F4] bg-[#00B4DC]/10 border border-[#00B4DC]/30 px-3 py-1 rounded-full mb-4">مدعوم بالذكاء الاصطناعي · AI-Powered</span>
+        <h2 id="ai-title" class="text-3xl md:text-5xl font-bold mb-5 text-[#f4f7fb] leading-tight">مستشارك الذكي، متاح دائماً.</h2>
+        <p id="ai-body" class="text-base md:text-lg text-gray-400 leading-relaxed">
+          اسأل عن أي عطل، صوّر ضوء تحذير على لوحة القيادة، أو استفسر عن موعد صيانتك القادمة —
+          <span id="ai-highlight" class="text-[#4FD6F4] font-semibold">ردود فورية بالذكاء الاصطناعي، وبياناتك لا تغادر المملكة أبداً.</span>
+        </p>
+      </div>
+
+      <!-- Interactive chat demo — tap a real question, watch the advisor
+           reason through it live (typing indicator + typewriter reveal).
+           A static screenshot can only show one canned exchange; this lets
+           a visitor try three different questions themselves, which is a
+           closer match to what actually using the feature feels like. -->
+      <div class="w-full md:w-1/2 relative z-10">
+        <div id="ai-chat-demo" class="ai-chat-demo">
+          <div id="ai-chat-log" class="ai-chat-log">
+            <div class="ai-bubble ai-bubble-bot">
+              <p id="ai-chat-greeting">اسألني أي شي عن سيارتك — جرّب واحد من الأسئلة:</p>
+            </div>
+          </div>
+          <div class="ai-chip-row" id="ai-chip-row">
+            <button type="button" class="ai-chip" data-chip="1"><span id="ai-chip-1">ليه ضوء المحرك مضوي؟</span></button>
+            <button type="button" class="ai-chip" data-chip="2"><span id="ai-chip-2">هل صيانتي المتأخرة تؤثر على ضماني؟</span></button>
+            <button type="button" class="ai-chip" data-chip="3"><span id="ai-chip-3">كم قيمة سيارتي الحين؟</span></button>
+          </div>
+          <div class="ai-input-row">
+            <span id="ai-input-ph" class="ai-input-fake-ph">اسأل عن سيارتك...</span>
+            <span class="ai-input-send">↑</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINALE — the payoff of the whole scroll: everything above ties
+       into the Qadrha Score. Pinned, big ring, six rows lighting in as it
+       fills. Deliberately branded around the Score (already real and
+       live), not "Passport" — the Car Passport card above is explicitly
+       Coming Soon and this must not read as claiming it's live. ── -->
+  <section id="finale" class="reveal">
+    <div class="finale-pin-wrap" id="finale-pin-wrap">
+      <div class="finale-pin-stage">
+        <div class="finale-inner">
+          <span id="finale-label" class="fin-label">النتيجة</span>
+          <h2 id="finale-title" class="fin-title">كل هذا يتجمع في <span class="em">قدرها سكور.</span></h2>
+          <div class="passport" id="finale-passport">
+            <div class="p-ring-big">
+              <svg viewBox="0 0 160 160"><circle class="track" cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10"/><circle class="fillring finalring" id="finale-ring" cx="80" cy="80" r="70" fill="none" stroke="#4FD6F4" stroke-width="10" stroke-linecap="round" stroke-dasharray="440" stroke-dashoffset="440"/></svg>
+              <div class="num-big" id="finale-num">0</div>
+              <div class="num-label" id="finale-score-label">قدرها سكور</div>
+            </div>
+            <div class="p-rows-big">
+              <div class="p-row-big" data-row="0">
+                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15.6 11l-2-2 2.1-2.1-.2-.2z"/></svg><span id="finale-row-maint">الصيانة</span></span>
+                <span class="pv" id="finale-row-maint-val">4 موثّق</span>
+              </div>
+              <div class="p-row-big" data-row="1">
+                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3z"/></svg><span id="finale-row-warranty">الضمان</span></span>
+                <span class="pv" id="finale-row-warranty-val">ساري ✓</span>
+              </div>
+              <div class="p-row-big" data-row="2">
+                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg><span id="finale-row-value">القيمة</span></span>
+                <span class="pv" id="finale-row-value-val">٩٨,٥٠٠ ر.س</span>
+              </div>
+              <div class="p-row-big" data-row="3">
+                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.3 18a2 2 0 0 0 1.7 3h16a2 2 0 0 0 1.7-3l-8-14.1a2 2 0 0 0-3.4 0Z"/></svg><span id="finale-row-recall">الاستدعاء</span></span>
+                <span class="pv" id="finale-row-recall-val">لا يوجد ✓</span>
+              </div>
+              <div class="p-row-big" data-row="4">
+                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span id="finale-row-market">سوق القطع</span></span>
+                <span class="pv" id="finale-row-market-val">حساب موثّق</span>
+              </div>
+              <div class="p-row-big" data-row="5">
+                <span class="pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v10l6 3"/></svg><span id="finale-row-advisor">المستشار</span></span>
+                <span class="pv" id="finale-row-advisor-val">متاح الآن</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="progress-rail"><div class="fill2" id="finale-progress"></div></div>
+      </div>
     </div>
   </section>
 
@@ -1041,6 +1219,25 @@
 
         featTitle: 'كل ما تحتاجه لسيارتك',
         featSub: 'مجموعة متكاملة من الأدوات الذكية — مبنية للسوق السعودي.',
+        featIntroEyebrow: 'أكثر مما تتخيل',
+        featIntroTitle: 'سيارتك تحتاج أكثر من <span class="em">رقم واحد.</span>',
+
+
+        finaleLabel: 'النتيجة',
+        finaleTitle: 'كل هذا يتجمع في <span class="em">قدرها سكور.</span>',
+        finaleScoreLabel: 'قدرها سكور',
+        finaleRowMaint: 'الصيانة',
+        finaleRowMaintVal: '4 موثّق',
+        finaleRowWarranty: 'الضمان',
+        finaleRowWarrantyVal: 'ساري ✓',
+        finaleRowValue: 'القيمة',
+        finaleRowValueVal: '٩٨,٥٠٠ ر.س',
+        finaleRowRecall: 'الاستدعاء',
+        finaleRowRecallVal: 'لا يوجد ✓',
+        finaleRowMarket: 'سوق القطع',
+        finaleRowMarketVal: 'حساب موثّق',
+        finaleRowAdvisor: 'المستشار',
+        finaleRowAdvisorVal: 'متاح الآن',
         feat1Title: 'مسار الصيانة.',
         feat1Body: 'لا تعرف متى صيانتك القادمة أو أي قطعة تحتاج تغيير؟ قدرها يبني جدول صيانة مخصص لسيارتك مع تذكيرات ذكية وتتبع الفواتير الموثقة.',
         feat2Title: 'فحص الضمان.',
@@ -1089,7 +1286,7 @@
         aiTitle: 'مستشارك الذكي، متاح دائماً.',
         aiBody: 'اسأل عن أي عطل، صوّر ضوء تحذير على لوحة القيادة، أو استفسر عن موعد صيانتك القادمة —',
         aiHighlight: 'ردود فورية بالذكاء الاصطناعي، وبياناتك لا تغادر المملكة أبداً.',
-        aiBadge: 'مدعوم بالذكاء الاصطناعي · AI-Powered',
+        aiBadge: 'الأكثر طلباً في السعودية الآن',
         aiGreeting: 'اسألني أي شي عن سيارتك — جرّب واحد من الأسئلة:',
 
         bizBadge: 'قريباً · Coming soon',
@@ -1186,6 +1383,25 @@
 
         featTitle: 'Everything Your Car Needs',
         featSub: 'A complete suite of intelligent tools — built for the Saudi market.',
+        featIntroEyebrow: "More Than You'd Expect",
+        featIntroTitle: 'Your car needs more than <span class="em">one number.</span>',
+
+
+        finaleLabel: 'The Result',
+        finaleTitle: 'It all comes together in your <span class="em">Qadrha Score.</span>',
+        finaleScoreLabel: 'Qadrha Score',
+        finaleRowMaint: 'Maintenance',
+        finaleRowMaintVal: '4 Verified',
+        finaleRowWarranty: 'Warranty',
+        finaleRowWarrantyVal: 'Active ✓',
+        finaleRowValue: 'Value',
+        finaleRowValueVal: 'SAR 98,500',
+        finaleRowRecall: 'Recall',
+        finaleRowRecallVal: 'None ✓',
+        finaleRowMarket: 'Parts Market',
+        finaleRowMarketVal: 'Verified account',
+        finaleRowAdvisor: 'Advisor',
+        finaleRowAdvisorVal: 'Available now',
         feat1Title: 'Maintenance Roadmap.',
         feat1Body: 'Don\'t know when your next service is due or which part needs replacing? Qadrha builds a schedule tailored to your car, with smart reminders and verified receipt tracking.',
         feat2Title: 'Warranty Check.',
@@ -1234,7 +1450,7 @@
         aiTitle: 'Your AI Advisor, always on.',
         aiBody: 'Ask about any fault, photo a warning light on your dashboard, or check when your next service is due —',
         aiHighlight: 'instant AI answers, and your data never leaves the Kingdom.',
-        aiBadge: 'AI-Powered · مدعوم بالذكاء الاصطناعي',
+        aiBadge: 'Most in-demand in Saudi Arabia right now',
         aiGreeting: 'Ask me anything about your car — try one of these:',
 
         bizBadge: 'Coming soon · قريباً',
@@ -1367,6 +1583,26 @@
       const feat6Label = document.getElementById('feat6-upload-label');
       if (!feat6Label.dataset.toastShowing) feat6Label.textContent = s.feat6UploadLabel;
 
+      document.getElementById('feat-intro-eyebrow').textContent = s.featIntroEyebrow;
+      document.getElementById('feat-intro-title').innerHTML     = s.featIntroTitle;
+
+
+      document.getElementById('finale-label').textContent = s.finaleLabel;
+      document.getElementById('finale-title').innerHTML   = s.finaleTitle;
+      document.getElementById('finale-score-label').textContent = s.finaleScoreLabel;
+      document.getElementById('finale-row-maint').textContent      = s.finaleRowMaint;
+      document.getElementById('finale-row-maint-val').textContent  = s.finaleRowMaintVal;
+      document.getElementById('finale-row-warranty').textContent     = s.finaleRowWarranty;
+      document.getElementById('finale-row-warranty-val').textContent = s.finaleRowWarrantyVal;
+      document.getElementById('finale-row-value').textContent      = s.finaleRowValue;
+      document.getElementById('finale-row-value-val').textContent  = s.finaleRowValueVal;
+      document.getElementById('finale-row-recall').textContent      = s.finaleRowRecall;
+      document.getElementById('finale-row-recall-val').textContent  = s.finaleRowRecallVal;
+      document.getElementById('finale-row-market').textContent      = s.finaleRowMarket;
+      document.getElementById('finale-row-market-val').textContent  = s.finaleRowMarketVal;
+      document.getElementById('finale-row-advisor').textContent      = s.finaleRowAdvisor;
+      document.getElementById('finale-row-advisor-val').textContent  = s.finaleRowAdvisorVal;
+
       document.getElementById('passport-stripe').className =
         `absolute top-0 ${s.passportStripePos} w-2 h-full bg-gradient-to-b from-[#00B4DC] to-[#008CB0]`;
 
@@ -1461,6 +1697,151 @@
     })();
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Ambient glow field — extends the single hero-glow into a
+    // continuous, slowly drifting atmosphere behind the whole page, so the
+    // features spine / AI spotlight / finale below share the hero's
+    // atmosphere instead of it being the only section that feels alive.
+    // Plain 2D canvas, no WebGL dependency, skipped entirely under
+    // prefers-reduced-motion (one static paint instead).
+    (function () {
+      const canvas = document.getElementById('glow-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const blobs = [
+        { xr: 0.5,  yr: 0.03, r: 480, rgb: '0,180,220',  baseA: 0.14 },
+        { xr: 0.12, yr: 0.30, r: 340, rgb: '79,214,244', baseA: 0.07 },
+        { xr: 0.88, yr: 0.48, r: 380, rgb: '0,140,176',  baseA: 0.08 },
+        { xr: 0.20, yr: 0.68, r: 360, rgb: '79,214,244', baseA: 0.08 },
+        { xr: 0.82, yr: 0.85, r: 400, rgb: '0,180,220',  baseA: 0.1 }
+      ];
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = document.documentElement.scrollHeight * dpr;
+        canvas.style.height = document.documentElement.scrollHeight + 'px';
+      }
+
+      function draw(t) {
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        blobs.forEach((b, i) => {
+          const x = b.xr * w + Math.sin(t + i) * 36;
+          const y = b.yr * h + Math.cos(t * 0.8 + i) * 26;
+          const pulse = reduceMotion ? 1 : 0.85 + Math.sin(t * 2 + i * 1.3) * 0.15;
+          const grad = ctx.createRadialGradient(x, y, 0, x, y, b.r);
+          grad.addColorStop(0, `rgba(${b.rgb},${(b.baseA * pulse).toFixed(3)})`);
+          grad.addColorStop(1, `rgba(${b.rgb},0)`);
+          ctx.fillStyle = grad;
+          ctx.fillRect(x - b.r, y - b.r, b.r * 2, b.r * 2);
+        });
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+
+      if (reduceMotion) {
+        draw(0);
+      } else {
+        (function loop() {
+          draw(performance.now() * 0.00012);
+          requestAnimationFrame(loop);
+        })();
+        // Re-measure after full load — fonts/images can still shift the
+        // document height after this script runs.
+        window.addEventListener('load', resize);
+      }
+    })();
+
+    // ── Feature spine — the connecting light line grows with scroll and
+    // each pair lights up (icon + node + card together) as it enters the
+    // reading band, then settles once attention moves to the next one.
+    // ── Finale — pinned; ring fills and all six rows tick in as you
+    // scroll through it, tied to the wrap's own position (no extra
+    // library, same technique already used for the hero's particle ring).
+    (function () {
+      const spineWrap = document.getElementById('spine-wrap');
+      const spineFill = document.getElementById('spine-fill');
+      const pairs = spineWrap ? Array.from(spineWrap.querySelectorAll('.fpair')) : [];
+      const finaleWrap = document.getElementById('finale-pin-wrap');
+      const finalePassport = document.getElementById('finale-passport');
+      const finaleRing = document.getElementById('finale-ring');
+      const finaleNum = document.getElementById('finale-num');
+      const finaleProgressEl = document.getElementById('finale-progress');
+      const finaleRows = finalePassport ? Array.from(finalePassport.querySelectorAll('.p-row-big')) : [];
+      const FINALE_CIRC = 2 * Math.PI * 70;
+      if (finaleRing) finaleRing.style.strokeDasharray = FINALE_CIRC;
+
+      function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function layoutSpine() {
+        if (!spineWrap || !spineFill) return;
+        const rect = spineWrap.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const scrolled = rect.height > 0 ? clamp01((vh * 0.6 - rect.top) / rect.height) : 0;
+        spineFill.style.height = (scrolled * 100) + '%';
+        pairs.forEach((p) => {
+          const pr = p.getBoundingClientRect();
+          const lit = pr.top < vh * 0.65 && pr.bottom > vh * 0.12;
+          p.classList.toggle('lit', lit);
+        });
+      }
+
+      function layoutFinale() {
+        if (!finaleWrap || !finalePassport || window.innerWidth <= 640 || reduceMotion) return;
+        const rect = finaleWrap.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        const progress = total > 0 ? clamp01(-rect.top / total) : 0;
+        if (finaleProgressEl) finaleProgressEl.style.width = (progress * 100) + '%';
+
+        finalePassport.classList.toggle('on', progress > 0.05);
+
+        const scoreT = clamp01((progress - 0.15) / 0.55);
+        const eased = easeOutCubic(scoreT);
+        if (finaleNum) finaleNum.textContent = Math.round(87 * eased);
+        if (finaleRing) finaleRing.style.strokeDashoffset = FINALE_CIRC * (1 - 0.87 * eased);
+
+        finaleRows.forEach((row, i) => {
+          row.classList.toggle('on', progress > 0.3 + i * 0.09);
+        });
+      }
+
+      function setFinaleRestState() {
+        if (!finalePassport) return;
+        finalePassport.classList.add('on');
+        if (finaleNum) finaleNum.textContent = '87';
+        if (finaleRing) finaleRing.style.strokeDashoffset = FINALE_CIRC * (1 - 0.87);
+        finaleRows.forEach((row) => row.classList.add('on'));
+      }
+
+      if (reduceMotion) {
+        pairs.forEach((p) => p.classList.add('lit'));
+        setFinaleRestState();
+        return;
+      }
+      // Finale can't run its pinned-scroll math on the stacked mobile
+      // layout (see CSS), so it needs its filled rest state set directly.
+      if (window.innerWidth <= 640) setFinaleRestState();
+
+      let ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(() => { layoutSpine(); layoutFinale(); ticking = false; });
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth <= 640) setFinaleRestState();
+        onScroll();
+      });
+      layoutSpine();
+      layoutFinale();
+    })();
 
     // Hero: reveal immediately on load (not scroll-gated at all — it's the
     // first thing on the page, there's nothing to "trigger").
