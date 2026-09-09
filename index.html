@@ -1899,7 +1899,7 @@
         // few ms while the scene builds, same as any image's load flash.
         wrap.classList.add('is-ready');
 
-        var scene, camera, renderer, points, geometry, startPositions, targetPositions;
+        var scene, camera, renderer, points, geometry, startPositions, targetPositions, scatterDownPositions;
         try {
           scene = new THREE.Scene();
           scene.fog = new THREE.FogExp2(0x05080F, 0.035);
@@ -1911,8 +1911,9 @@
           renderer.setSize(wrap.clientWidth, wrap.clientHeight);
           renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-          startPositions  = new Float32Array(PARTICLE_COUNT * 3);
-          targetPositions = new Float32Array(PARTICLE_COUNT * 3);
+          startPositions       = new Float32Array(PARTICLE_COUNT * 3);
+          targetPositions      = new Float32Array(PARTICLE_COUNT * 3);
+          scatterDownPositions = new Float32Array(PARTICLE_COUNT * 3);
           var currentPositions = new Float32Array(PARTICLE_COUNT * 3);
           var colors = new Float32Array(PARTICLE_COUNT * 3);
           var litColor = new THREE.Color(0x4FD6F4);
@@ -1932,6 +1933,16 @@
             targetPositions[i*3]   = t.x;
             targetPositions[i*3+1] = t.y;
             targetPositions[i*3+2] = t.z;
+
+            // Scroll-away target: once the ring has formed, scrolling the
+            // hero out of view pours the same particles downward — toward
+            // "how it works" — instead of the ring just sitting there inert
+            // the moment the load-in animation finishes.
+            var downTheta = Math.random() * Math.PI * 2;
+            var downR = (2.6 + Math.random() * 4) * (0.6 + Math.random() * 0.6);
+            scatterDownPositions[i*3]   = Math.cos(downTheta) * downR;
+            scatterDownPositions[i*3+1] = t.y - 4 - Math.random() * 7;
+            scatterDownPositions[i*3+2] = Math.sin(downTheta) * downR * 0.4 - 1.5;
 
             var c = t.lit ? litColor : dimColor;
             colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
@@ -1968,6 +1979,33 @@
           renderer.setSize(wrap.clientWidth, wrap.clientHeight);
         });
 
+        // Scroll-away dispersal: once the ring has assembled, scrolling the
+        // hero out of the top of the viewport continues to move the same
+        // object instead of leaving it inert — the ring pours its particles
+        // downward as it goes, into the story the rest of the page tells.
+        // Driven by the wrap's own position (no pin, no extra scroll height
+        // added to the page — same lightweight technique as the existing
+        // .parallax-img scroll listener elsewhere on this page).
+        var scrollDisperse = 0;
+        if (!reduceMotionQuery.matches) {
+          var updateScrollDisperse = function () {
+            var rect = wrap.getBoundingClientRect();
+            // 0 while the wrap sits anywhere at or below the viewport top;
+            // ramps to 1 over the next 1.1x of its own height once it starts
+            // scrolling above the top edge.
+            var raw = -rect.top / (rect.height * 1.1 || 1);
+            scrollDisperse = Math.max(0, Math.min(1, raw));
+          };
+          var scrollTicking = false;
+          window.addEventListener('scroll', function () {
+            if (!scrollTicking) {
+              requestAnimationFrame(function () { updateScrollDisperse(); scrollTicking = false; });
+              scrollTicking = true;
+            }
+          }, { passive: true });
+          updateScrollDisperse();
+        }
+
         // Pause the render loop entirely when the hero scrolls out of view —
         // no point spending a frame budget animating something nobody sees.
         if ('IntersectionObserver' in window) {
@@ -1983,21 +2021,30 @@
 
           if (!reduceMotionQuery.matches) {
             var elapsed = performance.now() - animStart;
-            var eased = easeOutCubic(Math.min(1, elapsed / ANIM_DURATION));
+            var loadEased = easeOutCubic(Math.min(1, elapsed / ANIM_DURATION));
             var posAttr = geometry.getAttribute('position');
             for (var i = 0; i < PARTICLE_COUNT; i++) {
               var ix = i * 3;
-              posAttr.array[ix]   = startPositions[ix]   + (targetPositions[ix]   - startPositions[ix])   * eased;
-              posAttr.array[ix+1] = startPositions[ix+1] + (targetPositions[ix+1] - startPositions[ix+1]) * eased;
-              posAttr.array[ix+2] = startPositions[ix+2] + (targetPositions[ix+2] - startPositions[ix+2]) * eased;
+              // First blend start -> ring (the load-in convergence), then —
+              // once that's finished, or concurrently once scrolling starts
+              // — blend ring -> scatter-down. loadEased and scrollDisperse
+              // are independent so a fast scroller doesn't wait for the
+              // intro to finish before the hero starts responding to them.
+              var ringX = startPositions[ix]   + (targetPositions[ix]   - startPositions[ix])   * loadEased;
+              var ringY = startPositions[ix+1] + (targetPositions[ix+1] - startPositions[ix+1]) * loadEased;
+              var ringZ = startPositions[ix+2] + (targetPositions[ix+2] - startPositions[ix+2]) * loadEased;
+              posAttr.array[ix]   = ringX + (scatterDownPositions[ix]   - ringX) * scrollDisperse;
+              posAttr.array[ix+1] = ringY + (scatterDownPositions[ix+1] - ringY) * scrollDisperse;
+              posAttr.array[ix+2] = ringZ + (scatterDownPositions[ix+2] - ringZ) * scrollDisperse;
             }
             posAttr.needsUpdate = true;
           }
 
           curRotY += (mouseX * 0.3 - curRotY) * 0.03;
           curRotX += (mouseY * 0.15 - curRotX) * 0.03;
-          points.rotation.y = curRotY + performance.now() * 0.00008;
+          points.rotation.y = curRotY + performance.now() * 0.00008 + scrollDisperse * 0.8;
           points.rotation.x = 0.9 + curRotX;
+          points.material.opacity = 0.9 * (1 - scrollDisperse * 0.75);
           renderer.render(scene, camera);
         }
 
