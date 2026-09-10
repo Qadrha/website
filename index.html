@@ -568,7 +568,10 @@
       <div class="fpair" data-idx="4">
         <div class="fnode"></div>
         <div id="feat5" class="feat-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-10 flex flex-col justify-center hover:border-[#00B4DC]/50 hover:bg-white/[0.09] transition-colors text-right shadow-[0_1px_0_rgba(79,214,244,0.25)_inset]">
-          <svg class="qicon mb-4" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 3a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2z"/><path d="M4 8l1.2-3.2A2 2 0 0 1 7 3.5h10a2 2 0 0 1 1.8 1.3L20 8"/><path d="M6 13v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-6"/></svg>
+          <div class="flex items-center justify-between mb-4">
+            <svg class="qicon" viewBox="0 0 24 24" fill="none" stroke="#C4DCF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 3a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2z"/><path d="M4 8l1.2-3.2A2 2 0 0 1 7 3.5h10a2 2 0 0 1 1.8 1.3L20 8"/><path d="M6 13v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-6"/></svg>
+            <span class="inline-block text-xs font-semibold text-[#008CB0] bg-[#00B4DC]/10 border border-[#00B4DC]/30 px-3 py-1 rounded-full" id="feat5-badge">قريباً · Coming soon</span>
+          </div>
           <h3 id="feat5-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">سوق قطع الغيار.</h3>
           <p id="feat5-body" class="text-sm text-[rgba(210,228,242,0.65)] leading-relaxed mb-5">بيع وشراء قطع الغيار والإكسسوارات المستعملة مباشرة من مالكين موثّقين — مع تفاوض داخل التطبيق وحماية لمعلومات التواصل.</p>
           <div class="mini-widget mini-listing">
@@ -862,7 +865,8 @@
         feat5Price: '٤٥٠ ر.س',
         feat5Seller: 'بائع موثّق ✓',
         feat5ContactBtn: 'تواصل',
-        feat5ContactSent: 'تم الإرسال ✓',
+        feat5Badge: 'قريباً · Coming soon',
+        feat5SoonToast: 'قادمة قريباً 👀',
         feat5ContactNote: 'محادثة آمنة داخل التطبيق',
 
         feat6Badge: 'قريباً · Coming soon',
@@ -912,7 +916,7 @@
         langLabel: 'عربي',
         ctaBtn: 'Download App',
 
-        heroH1: 'An AI agent that knows your car<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4DC] to-[#008CB0]">better than the agency itself.</span>',
+        heroH1: 'AI that knows your car<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4DC] to-[#008CB0]">better than your dealer does.</span>',
         heroSub: 'From warranty gaps to recalls you didn\'t know about —<br>every detail, instant and accurate.',
         heroCTAPrimary: 'Download Free',
         heroCTASecondary: 'How it works',
@@ -975,7 +979,8 @@
         feat5Price: 'SAR 450',
         feat5Seller: 'Verified seller ✓',
         feat5ContactBtn: 'Contact',
-        feat5ContactSent: 'Sent ✓',
+        feat5Badge: 'Coming soon · قريباً',
+        feat5SoonToast: 'Coming soon 👀',
         feat5ContactNote: 'Secure in-app chat',
 
         feat6Badge: 'Coming soon · قريباً',
@@ -1078,8 +1083,9 @@
       document.getElementById('feat5-seller').textContent = s.feat5Seller;
       document.getElementById('feat5-price').textContent  = s.feat5Price;
       document.getElementById('feat5-note').textContent   = s.feat5ContactNote;
+      document.getElementById('feat5-badge').textContent  = s.feat5Badge;
       const feat5Btn = document.getElementById('feat5-contact-btn');
-      feat5Btn.textContent = feat5Btn.classList.contains('is-active') ? s.feat5ContactSent : s.feat5ContactBtn;
+      if (!feat5Btn.dataset.toastShowing) feat5Btn.textContent = s.feat5ContactBtn;
 
       document.getElementById('feat6-badge').textContent = s.feat6Badge;
       document.getElementById('feat6-soon-note').textContent = s.feat6SoonNote;
@@ -1398,14 +1404,20 @@
       }, 800);
     });
 
-    // Feature 5 mini-widget — tap Contact to send (a demo confirmation,
-    // no real message sent).
+    // Feature 5 mini-widget — marketplace isn't live yet, so tapping
+    // Contact never pretends a message went to a real seller; it just
+    // confirms "coming soon" for a moment, same honesty rule as feat6.
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('#feat5-contact-btn');
       if (!btn) return;
+      if (btn.dataset.toastShowing) return;
       const s = strings[currentLang];
-      const active = btn.classList.toggle('is-active');
-      btn.textContent = active ? s.feat5ContactSent : s.feat5ContactBtn;
+      btn.dataset.toastShowing = '1';
+      btn.textContent = s.feat5SoonToast;
+      setTimeout(() => {
+        delete btn.dataset.toastShowing;
+        btn.textContent = strings[currentLang].feat5ContactBtn;
+      }, 1600);
     });
 
     // Feature 6 mini-widget — damage assessment isn't live yet, so tapping
