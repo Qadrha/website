@@ -165,48 +165,6 @@
     #main-nav { transition: padding 0.35s ease, background-color 0.35s ease; }
     #main-nav.nav-condensed .nav-inner { height: 4.5rem; }
 
-    /* How-it-works pinned stage — Apple/Mac-Studio pattern: the visual
-       stays fixed in the viewport (position: sticky) while the three step
-       cards scroll past beside it, each lighting up the matching stage
-       item as it crosses the viewport centre (JS below, IntersectionObserver
-       only — never scroll-position math, so there's no tall artificial
-       spacer element and so no risk of the big empty-scroll dead zone a
-       hand-rolled scroll-hijack pin can produce).
-       Mobile/narrow (<900px): no side-by-side room for this, so the stage
-       is hidden and each card shows its own inline visual instead — both
-       are always in the markup, CSS purely picks which one is visible,
-       never JS, so nothing depends on the observer running. */
-    .hiw-grid { display: flex; flex-direction: column; gap: 2rem; width: 100%; max-width: 640px; margin: 0 auto; }
-    .hiw-stage { display: none; }
-    @media (min-width: 900px) {
-      .hiw-grid { flex-direction: row; align-items: flex-start; max-width: 72rem; margin: 0 auto; gap: 4rem; }
-      #steps-row { flex: 1 1 0; max-width: 42rem; }
-      .step-visual-inline { display: none !important; }
-      .hiw-stage {
-        display: block; position: sticky; top: 110px; flex: 1 1 0; max-width: 26rem;
-        height: 420px; align-self: flex-start;
-      }
-      .hiw-stage .stage-item {
-        position: absolute; inset: 0; opacity: 0; transform: translateY(16px) scale(0.97);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        display: flex; align-items: center; justify-content: center;
-      }
-      /* The mobile copies of these widgets get Tailwind's w-full; the stage
-         copies never did, so they shrank to their own content width and sat
-         centered in the middle of the (much wider) sticky box — looking
-         small and stranded with a huge gap to the steps beside it. Force
-         every stage widget to fill the box instead. */
-      .hiw-stage .stage-item > * { width: 100%; }
-      .hiw-stage .stage-item img { max-height: 420px; width: auto; max-width: 100%; object-fit: contain; }
-      .hiw-stage .stage-item.is-active { opacity: 1; transform: translateY(0) scale(1); }
-      .step-card { transition: border-color 0.35s, background-color 0.35s, opacity 0.35s; opacity: 0.55; }
-      .step-card.is-current { opacity: 1; border-color: rgba(0,180,220,0.5); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hiw-stage .stage-item { transition: opacity 0.01ms; transform: none; }
-      .step-card { transition: none; }
-    }
-
     /* Hover lift on feature cards and the AI/passport/business panels —
        plain custom CSS, not a Tailwind utility class, because the page no
        longer runs Tailwind's JIT compiler (see the precompiled stylesheet
@@ -238,53 +196,8 @@
        rather than just read a caption next to a static picture. Tokens match
        the app's actual NightGlass/cyan system, not generic Tailwind grays. */
 
-    /* Add-car scan demo — a real recreation of the app's own onboarding
-       scan-and-reveal moment, not a generic "tap to verify" mockup. Three
-       phases, one visible at a time via the [data-phase] attribute; the
-       idle button is the default (never hidden pending JS). */
-    .vscan-btn, .vscan-replay { all: unset; box-sizing: border-box; -webkit-tap-highlight-color: transparent; cursor: pointer; }
-    .vscan-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 1.1rem; border: 1.5px dashed rgba(0,180,220,0.35); border-radius: 1.5rem; color: #4FD6F4; font-size: 13px; font-weight: 600; transition: border-color 0.2s, background-color 0.2s; }
-    .vscan-btn:hover, .vscan-btn:focus-visible { border-color: rgba(0,180,220,0.6); background: rgba(0,180,220,0.06); }
-    .vscan-btn-icon { width: 18px; height: 18px; flex-shrink: 0; }
-    .vscan-captions { display: none; flex-direction: column; gap: 0.75rem; padding: 2rem 0.5rem; background: #0D1219; border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; }
-    .vscan-caption { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; font-size: 13px; font-weight: 500; color: rgba(210,228,242,0.75); text-align: center; margin: 0; }
-    .vscan-caption.is-visible { opacity: 1; transform: translateY(0); }
-    .vscan-result { display: none; background: #0D1219; border-radius: 1.5rem; padding: 1.25rem; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-    .vscan-replay { display: block; width: 100%; text-align: center; font-size: 10.5px; color: rgba(210,228,242,0.45); margin-top: 0.6rem; }
-    .vscan[data-phase="scanning"] .vscan-btn { display: none; }
-    .vscan[data-phase="scanning"] .vscan-captions { display: flex; }
-    .vscan[data-phase="revealed"] .vscan-btn, .vscan[data-phase="revealed"] .vscan-captions { display: none; }
-    .vscan[data-phase="revealed"] .vscan-result { display: block; animation: pop-in 0.5s ease; }
-    @media (prefers-reduced-motion: reduce) {
-      .vscan-caption { transition: none; }
-    }
-
-    /* Maintenance checklist */
-    .maint-card { background: #0D1219; border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; padding: 1.25rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-    .maint-header { display: flex; justify-content: flex-end; margin-bottom: 0.9rem; }
+    /* Warranty status chip — reused by the warranty feature card (feat2). */
     .maint-warranty-chip { font-size: 11px; font-weight: 600; color: #4FD6F4; background: rgba(0,180,220,0.1); border: 1px solid rgba(0,180,220,0.3); padding: 0.3rem 0.7rem; border-radius: 999px; }
-    .maint-item { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 0.7rem; width: 100%; padding: 0.65rem 0.25rem; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.06); -webkit-tap-highlight-color: transparent; }
-    .maint-item:last-of-type { border-bottom: none; }
-    .maint-item-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-    .maint-item.is-verified .maint-item-dot { background: #00B4DC; }
-    .maint-item.is-current .maint-item-dot { background: #4FD6F4; box-shadow: 0 0 8px 2px rgba(79,214,244,0.6); }
-    .maint-item.is-upcoming .maint-item-dot { background: transparent; border: 1.5px solid rgba(210,228,242,0.35); }
-    .maint-item-text { flex: 1; display: flex; flex-direction: column; text-align: right; gap: 2px; }
-    .maint-item-title { font-size: 13.5px; font-weight: 600; color: #EDF4FA; }
-    .maint-item-meta { font-size: 11px; color: rgba(210,228,242,0.55); }
-    .maint-item-chevron { width: 14px; height: 14px; flex-shrink: 0; color: rgba(210,228,242,0.4); transition: transform 0.3s ease; }
-    .maint-item.is-open .maint-item-chevron { transform: rotate(180deg); }
-    .maint-item-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.35s ease; opacity: 0; padding: 0 0.25rem; }
-    .maint-item-detail p { font-size: 11.5px; color: rgba(210,228,242,0.6); line-height: 1.5; margin: 0; padding-bottom: 0.6rem; }
-    .maint-item-detail.is-open { max-height: 80px; opacity: 1; }
-
-    /* Step 3 visual — no stats here anymore (the score/value/warranty
-       numbers now live once, in the finale, instead of being repeated at
-       every stage of the story). Just an icon and a short line naming
-       what feeds the score. */
-    .s3-visual { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem; padding: 2.5rem 1rem; }
-    .s3-visual-icon { width: 56px; height: 56px; color: var(--cyan-bright); opacity: 0.9; }
-    .s3-visual-caption { font-size: 0.85rem; color: rgba(210,228,242,0.55); text-align: center; max-width: 18rem; line-height: 1.6; margin: 0; }
 
     /* Warranty tooltip (feat2) — the info-button/tooltip pattern used on
        the warranty feature card. */
@@ -313,7 +226,7 @@
     .ai-input-send { width: 26px; height: 26px; border-radius: 50%; background: rgba(0,180,220,0.15); color: #4FD6F4; display: flex; align-items: center; justify-content: center; font-size: 13px; }
 
     @media (prefers-reduced-motion: reduce) {
-      .maint-item-detail, .score-tooltip { transition: none; }
+      .score-tooltip { transition: none; }
       .ai-typing-dots span { animation: none; opacity: 0.7; }
     }
 
@@ -537,7 +450,7 @@
         <button id="hero-cta-primary" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00B4DC] text-[#070A16] font-bold text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,180,220,0.35)]">
           حمل التطبيق مجاناً
         </button>
-        <a href="#how-it-works" id="hero-cta-secondary" class="text-sm font-semibold text-gray-400 hover:text-white transition flex items-center gap-2">
+        <a href="#features" id="hero-cta-secondary" class="text-sm font-semibold text-gray-400 hover:text-white transition flex items-center gap-2">
           كيف يعمل؟
           <svg id="hero-arrow" class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         </a>
@@ -545,164 +458,6 @@
       <p class="hero-anim text-xs text-gray-500 mt-5">نسخة تجريبية مبكرة عبر TestFlight · Early beta access</p>
     </header>
   </div>
-
-  <!-- ── HOW IT WORKS (dark zone) — Apple-style pinned stage: the visual
-       sticks in place while the three steps scroll past it and take turns
-       lighting up, instead of a static side-by-side row (Mac Studio's
-       "Choose your superpower" section is the reference). Desktop/tablet
-       only — on narrow screens there isn't enough side-by-side room for a
-       sticky stage to read as anything but cramped, so #hiw-stage is
-       display:none below the breakpoint and every step's own inline visual
-       (.step-visual-inline) is what mobile shows instead — the CSS is
-       below. Both are always in the DOM and visible by default (no
-       JS-gated hidden state); IntersectionObserver only decides which
-       stage item gets .is-active, never whether anything is shown. ── -->
-  <section id="how-it-works" class="py-20 px-6 max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <h2 id="hiw-title" class="text-4xl md:text-5xl font-bold mb-4 text-[#f4f7fb]">ابدأ في ثلاث خطوات</h2>
-      <p id="hiw-sub" class="text-xl text-gray-400">من رفع الإستمارة إلى معرفة القيمة الحقيقية</p>
-    </div>
-
-    <div id="hiw-grid" class="hiw-grid">
-      <div id="steps-row" class="flex flex-col gap-6 justify-center items-stretch w-full">
-
-        <!-- Step 1 — Add Car -->
-        <div class="step-card reveal is-current bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00B4DC]/50 transition-colors group" data-step="0">
-          <div class="w-12 h-12 rounded-full bg-[#00B4DC]/10 border-2 border-[#00B4DC] text-[#00B4DC] flex items-center justify-center font-bold text-xl mb-6" style="font-family:'IBM Plex Sans',sans-serif">1</div>
-          <h3 id="s1-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">أضف سيارتك</h3>
-          <p id="s1-body" class="text-[rgba(210,228,242,0.65)] text-sm leading-relaxed mb-10">ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.</p>
-          <!-- Scan demo, mobile copy — a real recreation of the app's own
-               onboarding: tap to scan, watch the OCR captions reveal one at
-               a time (matches IstimaraUploadScreen's actual scanning
-               copy/timing), then the extracted vehicle card appears. -->
-          <div class="vscan step-visual-inline" data-phase="idle">
-            <button type="button" class="vscan-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="vscan-btn-icon"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-              <span id="s1-scan-btn">امسح الاستمارة</span>
-            </button>
-            <div class="vscan-captions">
-              <p class="vscan-caption" id="s1-caption-1">قراءة الوثيقة…</p>
-              <p class="vscan-caption" id="s1-caption-2">التعرف على السيارة…</p>
-              <p class="vscan-caption" id="s1-caption-3">استخراج البيانات…</p>
-            </div>
-            <div class="vscan-result">
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-xs text-[#00B4DC] font-semibold bg-[#00B4DC]/10 px-2 py-1 rounded-lg" style="font-family:'IBM Plex Sans',sans-serif">2025</span>
-                <svg class="w-4 h-4 text-[#4FD6F4]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <p id="s1-car-name" class="text-white font-bold text-lg leading-tight mb-1">تويوتا كامري</p>
-              <p class="text-[#00B4DC] font-semibold text-xs tracking-wider" style="font-family:'IBM Plex Sans',sans-serif">ABC-1234 ← ن م م</p>
-              <button type="button" class="vscan-replay" id="s1-replay-btn"><span id="s1-replay">امسح مرة أخرى</span></button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2 — Maintenance: interactive checklist, mobile copy. Tap a
-             row to expand its detail — same behaviour as the desktop stage
-             copy, wired once in JS via the shared .maint-item class. -->
-        <div class="step-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00B4DC]/50 transition-colors group" data-step="1">
-          <div class="w-12 h-12 rounded-full bg-white/[0.05] border-2 border-white/[0.15] text-[rgba(210,228,242,0.65)] flex items-center justify-center font-bold text-xl mb-6 group-hover:border-[#00B4DC] group-hover:text-[#00B4DC] transition-colors" style="font-family:'IBM Plex Sans',sans-serif">2</div>
-          <h3 id="s2-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">تتبع الصيانة والضمان</h3>
-          <p id="s2-body" class="text-[rgba(210,228,242,0.65)] text-sm leading-relaxed mb-10">سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.</p>
-          <div class="step-visual-inline maint-card w-full mt-auto">
-            <div class="maint-header">
-              <span class="maint-warranty-chip" id="maint-warranty-1">الضمان: ساري ✓</span>
-            </div>
-            <button type="button" class="maint-item is-verified" data-detail="maint-d1-1">
-              <span class="maint-item-dot"></span>
-              <span class="maint-item-text"><span class="maint-item-title" id="maint-t1-1">تغيير الزيت والفلتر</span><span class="maint-item-meta" id="maint-m1-1">40,000 كم · موثّق</span></span>
-              <svg class="maint-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="maint-item-detail" id="maint-d1-1"><p id="maint-det1-1">آخر تحديث قبل 3 أشهر — فاتورة من كراج المصمك</p></div>
-            <button type="button" class="maint-item is-current" data-detail="maint-d1-2">
-              <span class="maint-item-dot"></span>
-              <span class="maint-item-text"><span class="maint-item-title" id="maint-t1-2">فحص الفرامل وسائل التبريد</span><span class="maint-item-meta" id="maint-m1-2">50,000 كم · أنت هنا</span></span>
-              <svg class="maint-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="maint-item-detail" id="maint-d1-2"><p id="maint-det1-2">مستحقة الآن — احجز خلال 7 أيام لتفادي التأخير</p></div>
-            <button type="button" class="maint-item is-upcoming" data-detail="maint-d1-3">
-              <span class="maint-item-dot"></span>
-              <span class="maint-item-text"><span class="maint-item-title" id="maint-t1-3">فحص شامل — 50 نقطة</span><span class="maint-item-meta" id="maint-m1-3">60,000 كم · قادم</span></span>
-              <svg class="maint-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="maint-item-detail" id="maint-d1-3"><p id="maint-det1-3">متبقٍ تقريباً 10,000 كم</p></div>
-          </div>
-        </div>
-
-        <!-- Step 3 — mobile copy. No score/value stats here on purpose:
-             the actual numbers only appear once, in the finale, instead
-             of being repeated at every step of the story. -->
-        <div class="step-card reveal bg-white/[0.07] border border-white/[0.16] rounded-[2.5rem] p-8 flex flex-col items-center text-center hover:border-[#00B4DC]/50 transition-colors group" data-step="2">
-          <div class="w-12 h-12 rounded-full bg-white/[0.05] border-2 border-white/[0.15] text-[rgba(210,228,242,0.65)] flex items-center justify-center font-bold text-xl mb-6 group-hover:border-[#00B4DC] group-hover:text-[#00B4DC] transition-colors" style="font-family:'IBM Plex Sans',sans-serif">3</div>
-          <h3 id="s3-title" class="text-2xl font-bold mb-3 text-[#EDF4FA]">اعرف قيمة سيارتك الحقيقية</h3>
-          <p id="s3-body" class="text-[rgba(210,228,242,0.65)] text-sm leading-relaxed mb-10">هنا تتكوّن قدرها سكور — من سجل صيانتك الموثّق، لتكشف قيمتها السوقية الحقيقية.</p>
-          <div class="step-visual-inline s3-visual w-full mt-auto">
-            <svg class="s3-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg>
-            <p class="s3-visual-caption" id="s3-caption-m">من صيانتك الموثّقة وضمانك وتاريخها الكامل</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pinned stage — desktop/tablet only, see CSS. One item per step,
-           stacked on top of each other; IntersectionObserver toggles
-           .is-active as each step-card scrolls through the viewport centre. -->
-      <div id="hiw-stage" class="hiw-stage">
-        <div class="stage-item is-active" data-step="0">
-          <div class="vscan" data-phase="idle">
-            <button type="button" class="vscan-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="vscan-btn-icon"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-              <span id="s1-scan-btn-stage">امسح الاستمارة</span>
-            </button>
-            <div class="vscan-captions">
-              <p class="vscan-caption" id="s1-caption-1-stage">قراءة الوثيقة…</p>
-              <p class="vscan-caption" id="s1-caption-2-stage">التعرف على السيارة…</p>
-              <p class="vscan-caption" id="s1-caption-3-stage">استخراج البيانات…</p>
-            </div>
-            <div class="vscan-result">
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-xs text-[#00B4DC] font-semibold bg-[#00B4DC]/10 px-2 py-1 rounded-lg" style="font-family:'IBM Plex Sans',sans-serif">2025</span>
-                <svg class="w-4 h-4 text-[#4FD6F4]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <p id="s1-car-name-stage" class="text-white font-bold text-lg leading-tight mb-1">تويوتا كامري</p>
-              <p class="text-[#00B4DC] font-semibold text-xs tracking-wider" style="font-family:'IBM Plex Sans',sans-serif">ABC-1234 ← ن م م</p>
-              <button type="button" class="vscan-replay" id="s1-replay-btn-stage"><span id="s1-replay-stage">امسح مرة أخرى</span></button>
-            </div>
-          </div>
-        </div>
-        <div class="stage-item" data-step="1">
-          <div class="maint-card">
-            <div class="maint-header">
-              <span class="maint-warranty-chip" id="maint-warranty-2">الضمان: ساري ✓</span>
-            </div>
-            <button type="button" class="maint-item is-verified" data-detail="maint-d2-1">
-              <span class="maint-item-dot"></span>
-              <span class="maint-item-text"><span class="maint-item-title" id="maint-t2-1">تغيير الزيت والفلتر</span><span class="maint-item-meta" id="maint-m2-1">40,000 كم · موثّق</span></span>
-              <svg class="maint-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="maint-item-detail" id="maint-d2-1"><p id="maint-det2-1">آخر تحديث قبل 3 أشهر — فاتورة من كراج المصمك</p></div>
-            <button type="button" class="maint-item is-current" data-detail="maint-d2-2">
-              <span class="maint-item-dot"></span>
-              <span class="maint-item-text"><span class="maint-item-title" id="maint-t2-2">فحص الفرامل وسائل التبريد</span><span class="maint-item-meta" id="maint-m2-2">50,000 كم · أنت هنا</span></span>
-              <svg class="maint-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="maint-item-detail" id="maint-d2-2"><p id="maint-det2-2">مستحقة الآن — احجز خلال 7 أيام لتفادي التأخير</p></div>
-            <button type="button" class="maint-item is-upcoming" data-detail="maint-d2-3">
-              <span class="maint-item-dot"></span>
-              <span class="maint-item-text"><span class="maint-item-title" id="maint-t2-3">فحص شامل — 50 نقطة</span><span class="maint-item-meta" id="maint-m2-3">60,000 كم · قادم</span></span>
-              <svg class="maint-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="maint-item-detail" id="maint-d2-3"><p id="maint-det2-3">متبقٍ تقريباً 10,000 كم</p></div>
-          </div>
-        </div>
-        <div class="stage-item" data-step="2">
-          <div class="s3-visual">
-            <svg class="s3-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg>
-            <p class="s3-visual-caption" id="s3-caption-stage">من صيانتك الموثّقة وضمانك وتاريخها الكامل</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ── FEATURES (light zone — matches the app's "content lives in the light lower zone") ── -->
   <section id="features" class="py-20 px-6 max-w-7xl mx-auto">
@@ -1044,39 +799,6 @@
         heroCTASecondary: 'كيف يعمل؟',
         heroArrowClass: 'w-4 h-4 rotate-180',
 
-        hiwTitle: 'ابدأ في ثلاث خطوات',
-        hiwSub: 'من رفع الإستمارة إلى معرفة القيمة الحقيقية',
-
-        s1Title: 'أضف سيارتك',
-        s1Body: 'ارفع صورة الاستمارة وسنستخرج بيانات سيارتك تلقائياً بالذكاء الاصطناعي.',
-        s1CarName: 'تويوتا كامري',
-        s1ScanBtn: 'امسح الاستمارة',
-        s1Caption1: 'قراءة الوثيقة…',
-        s1Caption2: 'التعرف على السيارة…',
-        s1Caption3: 'استخراج البيانات…',
-        s1Replay: 'امسح مرة أخرى',
-
-        s2Title: 'تتبع الصيانة والضمان',
-        s2Body: 'سجّل خدمات الصيانة، ارفع الفواتير، وتحقق من وضع ضمانك — كل شيء في مكان واحد.',
-        s2M1: '40,000 كم — موثّق',
-        s2M2: '50,000 كم — أنت هنا',
-        s2M3: '60,000 كم — قادم',
-
-        s3Title: 'اعرف قيمة سيارتك الحقيقية',
-        s3Body: 'هنا تتكوّن قدرها سكور — من سجل صيانتك الموثّق، لتكشف قيمتها السوقية الحقيقية.',
-        s3Caption: 'من صيانتك الموثّقة وضمانك وتاريخها الكامل',
-
-        hiw2WarrantyChip: 'الضمان: ساري ✓',
-        hiw2Item1Title: 'تغيير الزيت والفلتر',
-        hiw2Item1Meta: '40,000 كم · موثّق',
-        hiw2Item1Detail: 'آخر تحديث قبل 3 أشهر — فاتورة من كراج المصمك',
-        hiw2Item2Title: 'فحص الفرامل وسائل التبريد',
-        hiw2Item2Meta: '50,000 كم · أنت هنا',
-        hiw2Item2Detail: 'مستحقة الآن — احجز خلال 7 أيام لتفادي التأخير',
-        hiw2Item3Title: 'فحص شامل — 50 نقطة',
-        hiw2Item3Meta: '60,000 كم · قادم',
-        hiw2Item3Detail: 'متبقٍ تقريباً 10,000 كم',
-
 
         aiChip1: 'ليه ضوء المحرك مضوي؟',
         aiChip2: 'هل صيانتي المتأخرة تؤثر على ضماني؟',
@@ -1116,6 +838,7 @@
         feat1Item2: 'تغيير الزيت — خلال 45 يوم',
         feat1Item3: 'فحص شامل — خلال 3 أشهر',
 
+        feat2WarrantyChip: 'الضمان: ساري ✓',
         feat2Remaining: 'متبقي 8 أشهر من 36',
         feat2InfoTooltip: 'صيانة متأخرة قد تمنح الوكالة سبباً لرفض مطالبة محددة مرتبطة بها فقط — لا تُسقط الضمان بالكامل.',
 
@@ -1190,40 +913,6 @@
         heroCTASecondary: 'How it works',
         heroArrowClass: 'w-4 h-4',
 
-        hiwTitle: 'Get Started in Three Steps',
-        hiwSub: 'From uploading your Istimara to knowing your car\'s true value',
-
-        s1Title: 'Add Your Car',
-        s1Body: 'Upload your Istimara photo and our AI extracts your car\'s data automatically.',
-        s1CarName: 'Toyota Camry',
-        s1ScanBtn: 'Scan the Istimara',
-        s1Caption1: 'Reading the document…',
-        s1Caption2: 'Identifying the vehicle…',
-        s1Caption3: 'Extracting the details…',
-        s1Replay: 'Scan again',
-
-        s2Title: 'Track Maintenance & Warranty',
-        s2Body: 'Log service history, upload receipts, and check your warranty status — all in one place.',
-        s2M1: '40,000 km — Verified',
-        s2M2: '50,000 km — You are here',
-        s2M3: '60,000 km — Upcoming',
-
-        s3Title: 'Know Your Car\'s Real Value',
-        s3Body: 'This is where the Qadrha Score comes together — built from your documented service history, revealing your car\'s true market value.',
-        s3Caption: 'From your documented maintenance, warranty, and full history',
-
-        hiw2WarrantyChip: 'Warranty: Active ✓',
-        hiw2Item1Title: 'Oil & Filter Change',
-        hiw2Item1Meta: '40,000 km · Verified',
-        hiw2Item1Detail: 'Last updated 3 months ago — invoice from Al-Musaimeer garage',
-        hiw2Item2Title: 'Brake & Coolant Check',
-        hiw2Item2Meta: '50,000 km · You are here',
-        hiw2Item2Detail: 'Due now — book within 7 days to avoid a gap',
-        hiw2Item3Title: 'Full 50-Point Inspection',
-        hiw2Item3Meta: '60,000 km · Upcoming',
-        hiw2Item3Detail: 'About 10,000 km remaining',
-
-
         aiChip1: 'Why is my check-engine light on?',
         aiChip2: 'Does my overdue maintenance affect my warranty?',
         aiChip3: "What's my car worth right now?",
@@ -1262,6 +951,7 @@
         feat1Item2: 'Oil change — due in 45 days',
         feat1Item3: 'Full inspection — due in 3 months',
 
+        feat2WarrantyChip: 'Warranty: Active ✓',
         feat2Remaining: '8 of 36 months remaining',
         feat2InfoTooltip: 'Delayed maintenance can give the dealer grounds to deny a specific related claim only — it doesn\'t void the whole warranty.',
 
@@ -1351,32 +1041,6 @@
       document.getElementById('hero-cta-secondary').childNodes[0].textContent = s.heroCTASecondary + ' ';
       document.getElementById('hero-arrow').className          = s.heroArrowClass;
 
-      document.getElementById('hiw-title').textContent = s.hiwTitle;
-      document.getElementById('hiw-sub').textContent   = s.hiwSub;
-      document.getElementById('steps-row').style.direction = lang === 'ar' ? 'rtl' : 'ltr';
-
-      document.getElementById('s1-title').textContent   = s.s1Title;
-      document.getElementById('s1-body').textContent    = s.s1Body;
-      document.getElementById('s1-car-name').textContent = s.s1CarName;
-      document.getElementById('s1-car-name-stage').textContent = s.s1CarName;
-
-      document.getElementById('s2-title').textContent = s.s2Title;
-      document.getElementById('s2-body').textContent  = s.s2Body;
-      ['1','2'].forEach(v => {
-        document.getElementById('maint-warranty-'+v).textContent = s.hiw2WarrantyChip;
-        [['1','1'],['2','2'],['3','3']].forEach(([n]) => {
-          document.getElementById(`maint-t${v}-${n}`).textContent = s[`hiw2Item${n}Title`];
-          document.getElementById(`maint-m${v}-${n}`).textContent = s[`hiw2Item${n}Meta`];
-          document.getElementById(`maint-det${v}-${n}`).textContent = s[`hiw2Item${n}Detail`];
-        });
-      });
-
-      document.getElementById('s3-title').textContent       = s.s3Title;
-      document.getElementById('s3-body').textContent        = s.s3Body;
-      ['m','stage'].forEach(v => {
-        document.getElementById(`s3-caption-${v}`).textContent = s.s3Caption;
-      });
-
       document.getElementById('feat-title').textContent = s.featTitle;
       document.getElementById('feat-sub').textContent   = s.featSub;
       ['feat1','feat2','feat3','feat4','feat5','feat6'].forEach(id => {
@@ -1392,7 +1056,7 @@
       const feat1Items = [s.feat1Item1, s.feat1Item2, s.feat1Item3];
       document.getElementById('feat1-item').textContent = feat1Items[parseInt(feat1Widget.dataset.cycleIndex, 10) || 0];
 
-      document.getElementById('feat2-chip').textContent = s.hiw2WarrantyChip;
+      document.getElementById('feat2-chip').textContent = s.feat2WarrantyChip;
       document.getElementById('feat2-remaining').textContent = s.feat2Remaining;
       document.getElementById('feat2-tooltip').textContent = s.feat2InfoTooltip;
 
@@ -1449,14 +1113,6 @@
       document.getElementById('ai-chip-2').textContent = s.aiChip2;
       document.getElementById('ai-chip-3').textContent = s.aiChip3;
       document.getElementById('ai-input-ph').textContent = s.aiInputPh;
-
-      ['', '-stage'].forEach(suffix => {
-        document.getElementById('s1-scan-btn' + suffix).textContent = s.s1ScanBtn;
-        document.getElementById('s1-caption-1' + suffix).textContent = s.s1Caption1;
-        document.getElementById('s1-caption-2' + suffix).textContent = s.s1Caption2;
-        document.getElementById('s1-caption-3' + suffix).textContent = s.s1Caption3;
-        document.getElementById('s1-replay' + suffix).textContent = s.s1Replay;
-      });
 
       document.getElementById('biz-badge').textContent = s.bizBadge;
       document.getElementById('biz-title').textContent = s.bizTitle;
@@ -1665,12 +1321,9 @@
     document.querySelectorAll('.hero-anim').forEach(el => el.classList.add('is-visible'));
 
     // Every other .reveal section/card (features, passport, AI spotlight,
-    // business form, and — now that there's no pin — the how-it-works step
-    // cards too, which get .reveal added right here): fade in via a plain
-    // IntersectionObserver. If this API is ever unavailable, the catch
-    // below just marks everything visible immediately — still correct,
-    // just un-animated.
-    document.querySelectorAll('.step-card').forEach(c => c.classList.add('reveal'));
+    // business form): fade in via a plain IntersectionObserver. If this API
+    // is ever unavailable, the catch below just marks everything visible
+    // immediately — still correct, just un-animated.
     try {
       if (!reduceMotion && 'IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
@@ -1689,74 +1342,11 @@
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
     }
 
-    // How-it-works pinned stage — which step is "current" while the stage
-    // sticks in place. Pure IntersectionObserver (rootMargin narrows the
-    // trigger band to the viewport's vertical centre), never scroll-position
-    // math, so there's nothing to get wrong on resize/orientation change.
-    // Step 1 is already marked current/active in the HTML, so if this
-    // observer never runs (old browser, thrown error) the section still
-    // reads correctly — just without the crossfade as you scroll.
-    try {
-      const stepCards = Array.from(document.querySelectorAll('.step-card[data-step]'));
-      const stageItems = Array.from(document.querySelectorAll('#hiw-stage .stage-item'));
-      if (stepCards.length && stageItems.length && 'IntersectionObserver' in window) {
-        const setCurrent = (step) => {
-          stepCards.forEach(c => c.classList.toggle('is-current', c.dataset.step === step));
-          stageItems.forEach(s => s.classList.toggle('is-active', s.dataset.step === step));
-        };
-        const hiwIo = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) setCurrent(entry.target.dataset.step);
-          });
-        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-        stepCards.forEach(c => hiwIo.observe(c));
-      }
-    } catch (e) {
-      // Leave step 1's default current/active state as-is.
-    }
-
-    // Add-car scan demo — tap to scan, watch the captions reveal one at a
-    // time (same stagger the real app's scanning screen uses: each caption
-    // fades+slides in complete, 750ms apart, never typed letter-by-letter),
-    // then the extracted vehicle card appears. Event delegation covers both
-    // the mobile and desktop copies with one handler each.
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.vscan-btn');
-      if (!btn) return;
-      const vscan = btn.closest('.vscan');
-      if (vscan.dataset.phase !== 'idle') return;
-      vscan.dataset.phase = 'scanning';
-      const captions = Array.from(vscan.querySelectorAll('.vscan-caption'));
-      captions.forEach(c => c.classList.remove('is-visible'));
-      if (reduceMotion) {
-        vscan.dataset.phase = 'revealed';
-        return;
-      }
-      captions.forEach((c, i) => setTimeout(() => c.classList.add('is-visible'), i * 750));
-      setTimeout(() => { vscan.dataset.phase = 'revealed'; }, captions.length * 750 + 900);
-    });
-
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.vscan-replay');
-      if (!btn) return;
-      btn.closest('.vscan').dataset.phase = 'idle';
-    });
-
-    // Maintenance checklist — tap a row to expand its detail.
-    document.addEventListener('click', (e) => {
-      const item = e.target.closest('.maint-item');
-      if (!item) return;
-      const detail = document.getElementById(item.dataset.detail);
-      if (!detail) return;
-      const open = item.classList.toggle('is-open');
-      detail.classList.toggle('is-open', open);
-    });
-
-    // Score gauge info tooltip — tap "؟" to show/hide the explanation.
+    // Warranty tooltip (feat2) — tap "؟" to show/hide the explanation.
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.score-info-btn');
       if (!btn) return;
-      const tooltip = btn.closest('.score-card, .step-visual-inline, .mini-widget').querySelector('.score-tooltip');
+      const tooltip = btn.closest('.mini-widget').querySelector('.score-tooltip');
       if (tooltip) tooltip.classList.toggle('is-open');
     });
 
