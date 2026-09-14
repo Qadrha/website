@@ -429,7 +429,7 @@
           <span id="lang-toggle-label">EN</span>
         </button>
 
-        <button id="cta-btn" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00B4DC] text-[#070A16] font-bold text-sm px-6 py-2 rounded-full hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,180,220,0.3)]">
+        <button id="cta-btn" onclick="downloadApp()" class="bg-[#00B4DC] text-[#070A16] font-bold text-sm px-6 py-2 rounded-full hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,180,220,0.3)]">
           حمل التطبيق
         </button>
       </div>
@@ -452,7 +452,7 @@
       </p>
 
       <div class="hero-anim flex flex-col sm:flex-row gap-4 items-center">
-        <button id="hero-cta-primary" onclick="window.open('https://testflight.apple.com/join/FKnm42f2','_blank')" class="bg-[#00B4DC] text-[#070A16] font-bold text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,180,220,0.35)]">
+        <button id="hero-cta-primary" onclick="downloadApp()" class="bg-[#00B4DC] text-[#070A16] font-bold text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,180,220,0.35)]">
           حمل التطبيق مجاناً
         </button>
         <a href="#features" id="hero-cta-secondary" class="text-sm font-semibold text-gray-400 hover:text-white transition flex items-center gap-2">
@@ -790,6 +790,17 @@
 
     </div>
   </footer>
+
+  <!-- ── DOWNLOAD BUTTON: routes by device (Android → APK, everything else → TestFlight) ── -->
+  <script>
+    function downloadApp() {
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      var url = isAndroid
+        ? 'https://expo.dev/artifacts/eas/M5iqQUYWhxwvEO8RNjzlfyddRUSAvdxWCpnHtMPPntM.apk'
+        : 'https://testflight.apple.com/join/FKnm42f2';
+      window.open(url, '_blank');
+    }
+  </script>
 
   <!-- ── LANGUAGE TOGGLE LOGIC ──────────────────────────────────────────── -->
   <script>
