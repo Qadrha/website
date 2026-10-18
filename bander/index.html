@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bander Binkhlaif — Qadrha</title>
+<meta name="description" content="Qadrha — the AI car companion, designed and built in Saudi Arabia. Bander Binkhlaif, Founder, Sima Labs.">
+<meta name="theme-color" content="#060d1c">
+<meta property="og:title" content="Bander Binkhlaif · Qadrha قدرها">
+<meta property="og:description" content="The AI car companion — designed and built in Saudi Arabia.">
+<meta property="og:image" content="https://qadrha.com/favicon.png">
+<meta property="og:url" content="https://qadrha.com/bander">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--base:#060d1c;--surface:#0c1a2e;--ice:#c8dff0;--cyan:#00c4ff;--green:#34d399;--muted:#7d98b3}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--base)}
+body{min-height:100vh;font-family:"Tajawal","SF Pro Display",-apple-system,"Helvetica Neue",system-ui,sans-serif;color:var(--ice);
+ background:radial-gradient(120% 70% at 85% -10%,rgba(0,150,255,.30) 0%,rgba(6,13,28,0) 60%),radial-gradient(90% 60% at -10% 100%,rgba(124,58,237,.20) 0%,rgba(6,13,28,0) 60%),var(--base);
+ padding:max(20px,env(safe-area-inset-top)) 18px max(28px,env(safe-area-inset-bottom));display:flex;justify-content:center;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(111,184,232,.11) 1px,transparent 1.2px);background-size:30px 30px;pointer-events:none;mask-image:linear-gradient(180deg,#000,transparent 85%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.wrap{position:relative;width:100%;max-width:440px}
+.lang{display:flex;justify-content:flex-end;gap:6px;margin-bottom:6px}
+[dir=rtl] .lang{justify-content:flex-start}
+.lang button{font:inherit;font-size:13px;font-weight:700;color:var(--muted);background:rgba(17,34,64,.6);border:1px solid rgba(0,196,255,.18);border-radius:999px;padding:7px 14px;cursor:pointer}
+.lang button.on{color:#04121f;background:var(--cyan);border-color:var(--cyan)}
+.hero{text-align:center;padding:14px 0 6px}
+.mark{position:relative;width:132px;height:132px;margin:0 auto}
+.mark:before{content:"";position:absolute;inset:-34px;border-radius:50%;background:radial-gradient(circle,rgba(0,170,255,.45),rgba(0,170,255,0) 65%);filter:blur(6px);animation:breathe 5s ease-in-out infinite}
+.mark svg{position:relative;width:100%;height:100%;overflow:visible}
+.arc{stroke-dasharray:140;stroke-dashoffset:140;animation:draw 1.4s .15s cubic-bezier(.3,.7,.2,1) forwards}
+.tail{opacity:0;animation:pop .5s 1.2s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+@keyframes breathe{50%{transform:scale(1.12);opacity:.8}}
+h1{font-size:34px;font-weight:900;color:#fff;margin-top:20px;letter-spacing:-.5px;line-height:1.15}
+.role{font-size:16px;color:var(--cyan);font-weight:700;margin-top:6px}
+.loc{font-size:13.5px;color:var(--muted);margin-top:4px}
+.pill{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 16px;border-radius:999px;border:1px solid rgba(0,196,255,.3);background:rgba(0,196,255,.08);color:#7fe0ff;font-size:13.5px;font-weight:700}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.desc{margin:16px auto 0;max-width:36ch;font-size:15px;line-height:1.7;color:#a9c3da;text-align:center}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:17px;border-radius:18px;border:0;font:inherit;font-size:17px;font-weight:800;color:#04121f;background:linear-gradient(180deg,#19d0ff,#00aef0);box-shadow:0 14px 34px rgba(0,196,255,.30);text-decoration:none;cursor:pointer;transition:transform .15s}
+.cta:active{transform:scale(.98)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.btn{display:flex;align-items:center;gap:11px;padding:15px 16px;border-radius:16px;text-decoration:none;color:#e6f2fb;font-size:15px;font-weight:700;background:linear-gradient(180deg,rgba(21,42,72,.78),rgba(13,28,50,.78));border:1px solid rgba(0,196,255,.16);transition:transform .15s,border-color .2s}
+.btn:active{transform:scale(.98)}.btn:hover{border-color:rgba(0,196,255,.45)}
+.ic{width:21px;height:21px;color:var(--cyan);flex:none}.cta .ic{color:#04121f}
+.hook{margin-top:22px;padding:20px 18px;border-radius:24px;background:linear-gradient(160deg,rgba(26,56,96,.85),rgba(10,24,46,.9));border:1px solid rgba(0,196,255,.28);display:flex;align-items:center;gap:18px;box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 40px rgba(0,196,255,.10)}
+.ring{position:relative;width:104px;height:104px;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:ltr}
+.ring b{font-size:34px;font-weight:900;color:#fff;line-height:1;letter-spacing:-1px}
+.ring small{font-size:7px;letter-spacing:1.1px;color:#6fdcff;font-weight:800;margin-top:3px}
+.hook p{font-size:19px;font-weight:900;color:#fff;line-height:1.35}
+.hook p span{display:block;color:var(--cyan)}
+.hook a{display:inline-block;margin-top:9px;font-size:13.5px;font-weight:800;color:#7fe0ff;text-decoration:none}
+.share{margin-top:22px;padding:20px;border-radius:22px;background:rgba(12,26,46,.65);border:1px solid rgba(0,196,255,.14);display:flex;align-items:center;gap:18px}
+.qrbox{padding:9px;background:#fff;border-radius:14px;flex:none;line-height:0}
+.qr{width:104px;height:104px}
+.share .t{flex:1}
+.share .t small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.share button{margin-top:11px;display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:800;color:#e6f2fb;background:rgba(0,196,255,.10);border:1px solid rgba(0,196,255,.3);border-radius:999px;padding:9px 16px;cursor:pointer}
+.share button .ic{width:17px;height:17px}
+.foot{margin-top:24px;text-align:center;font-size:12px;color:#5f7a94;letter-spacing:.4px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;background:#102a46;color:#fff;border:1px solid rgba(0,196,255,.4);padding:11px 18px;border-radius:999px;font-size:14px;font-weight:700;transition:.3s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.rise{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.arc{stroke-dashoffset:0}.tail,.rise{opacity:1;transform:none}}
+[dir=rtl] .btn,[dir=rtl] .share{flex-direction:row}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="lang"><button data-l="en" class="on">EN</button><button data-l="ar">عربي</button></div>
+
+  <section class="hero">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path class="arc" pathLength="140" d="M84 50 A34 34 0 1 0 67 79" fill="none" stroke="#C8DFF0" stroke-width="6" stroke-linecap="round"/><g class="tail"><path d="M67 79 L79 90" fill="none" stroke="#00C4FF" stroke-width="6" stroke-linecap="round"/><circle cx="79" cy="90" r="3.6" fill="#00C4FF"/></g></svg>
+    </div>
+    <h1 data-k="name" class="rise" style="animation-delay:.5s"></h1>
+    <div class="role rise" data-k="role" style="animation-delay:.6s"></div>
+    <div class="loc rise" data-k="loc" style="animation-delay:.65s"></div>
+    <div class="rise" style="animation-delay:.75s"><span class="pill"><i></i><span data-k="pill"></span></span></div>
+    <p class="desc rise" data-k="desc" style="animation-delay:.85s"></p>
+  </section>
+
+  <a class="cta rise" id="save" href="bander-binkhlaif.vcf" download style="animation-delay:.95s"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg><span data-k="save"></span></a>
+
+  <div class="grid rise" style="animation-delay:1.05s">
+    <a class="btn" href="mailto:hello@qadrha.com"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z M4 7l8 6 8-6"/></svg><span data-k="email"></span></a>
+    <a class="btn" href="tel:+966531454375"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4h3l1.5 4-2 1.3a10 10 0 0 0 5.7 5.7L16 13l4 1.5v3a2 2 0 0 1-2 2A14 14 0 0 1 4.5 6a2 2 0 0 1 2-2z"/></svg><span data-k="call"></span></a><a class="btn" href="https://wa.me/966531454375"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8z M9 9.5c.3 2.6 2.4 4.7 5 5l1.2-1.2-1.8-1-.9.7a3.5 3.5 0 0 1-1.7-1.7l.7-.9-1-1.8z"/></svg><span data-k="wa"></span></a>
+    <a class="btn" href="https://qadrha.com"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.7 5.2 3.7 8.5s-1.2 6.2-3.7 8.5C9.5 18.2 8.3 15.3 8.3 12S9.5 5.8 12 3.5z"/></svg><span data-k="site"></span></a>
+    <a class="btn" id="deck" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6 M10 17h6"/></svg><span data-k="deck"></span></a>
+    <a class="btn" href="https://qadrha.com/invite.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg><span data-k="app"></span></a>
+  </div>
+
+  <section class="hook rise" style="animation-delay:1.15s">
+    <div class="ring" aria-hidden="true">
+      <svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="41" fill="rgba(5,14,30,.7)" stroke="#16304e" stroke-width="9"/><circle id="arc87" cx="48" cy="48" r="41" fill="none" stroke="#00c4ff" stroke-width="9" stroke-linecap="round" stroke-dasharray="0 999" style="filter:drop-shadow(0 0 6px rgba(0,196,255,.8))"/></svg>
+      <div class="num"><b id="n">0</b><small data-k="score"></small></div>
+    </div>
+    <div><p><span style="color:#fff;display:block" data-k="hook1"></span><span data-k="hook2"></span></p><a href="https://qadrha.com/invite.html" data-k="app" id="hookLink"></a></div>
+  </section>
+
+  <section class="share rise" style="animation-delay:1.25s">
+    <div class="qrbox"><svg class="qr" role="img" aria-label="QR code for this card" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h25v25H0z"/><path stroke="#06101f" d="M0 0.5h7m3 0h4m2 0h1m1 0h7M0 1.5h1m5 0h1m4 0h1m2 0h3m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m4 0h1m1 0h1m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h2m2 0h2m4 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h4m1 0h4m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h2m2 0h1m1 0h1M0 8.5h1m1 0h5m2 0h2m1 0h4m2 0h5M4 9.5h2m1 0h3m2 0h1m3 0h1m2 0h1m3 0h1M0 10.5h2m1 0h2m1 0h1m1 0h2m3 0h1m1 0h1m2 0h2m1 0h1m1 0h2M1 11.5h5m1 0h1m2 0h2m4 0h3m5 0h1M0 12.5h3m3 0h3m1 0h5m2 0h4m1 0h3M0 13.5h1m2 0h1m1 0h1m3 0h2m8 0h1m1 0h1m1 0h1M0 14.5h1m1 0h2m2 0h1m4 0h2m2 0h7m1 0h2M0 15.5h1m2 0h1m4 0h2m1 0h1m2 0h2m2 0h3m3 0h1M0 16.5h1m2 0h2m1 0h1m3 0h11m1 0h1M8 17.5h1m1 0h1m1 0h2m1 0h2m3 0h2M0 18.5h7m2 0h1m2 0h3m1 0h1m1 0h1m1 0h1m1 0h3M0 19.5h1m5 0h1m1 0h1m1 0h3m3 0h1m3 0h2m1 0h2M0 20.5h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h8m1 0h1M0 21.5h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h1m1 0h2m1 0h5M0 22.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h4m3 0h2m1 0h1M0 23.5h1m5 0h1m2 0h2m4 0h2m1 0h4m2 0h1M0 24.5h7m1 0h3m1 0h3m4 0h6"/></svg>
+</div>
+    <div class="t"><b style="font-size:16px;color:#fff" data-k="scan"></b><small>qadrha.com/bander</small>
+      <button id="shareBtn" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6"/></svg><span data-k="share"></span></button></div>
+  </section>
+
+  <div class="foot" data-k="foot"></div>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+var D={"en":{"name":"Bander Binkhlaif","role":"Founder · Sima Labs","loc":"Riyadh, Saudi Arabia","pill":"The AI car companion","desc":"One verified record of your car — recalls, warranty, value and a Car Passport — with an advisor that speaks Saudi dialect. Designed and built in Saudi Arabia.","save":"Save contact","email":"Email","call":"Call","wa":"WhatsApp","site":"Website","deck":"Get the deck","app":"Try the app","hook1":"Your car has a score.","hook2":"Ask me what yours is.","score":"QADRHA SCORE","share":"Share this card","scan":"Scan to open","copied":"Link copied","foot":"Designed and built in Saudi Arabia","deckSubject":"Qadrha deck request","deckBody":"Hello, I'd like to receive the Qadrha company deck."},"ar":{"name":"بندر بن خليف","role":"المؤسس · سيما لابس","loc":"الرياض، المملكة العربية السعودية","pill":"رفيقك الذكي لسيارتك","desc":"سجلّ موثّق واحد لسيارتك — الاستدعاءات والضمان والقيمة وجواز السيارة — مع مستشار يتحدث باللهجة السعودية. صُمّم وبُني في المملكة.","save":"حفظ جهة الاتصال","email":"البريد","call":"اتصال","wa":"واتساب","site":"الموقع","deck":"اطلب العرض","app":"جرّب التطبيق","hook1":"لسيارتك تقييم.","hook2":"اسألني كم تقييم سيارتك.","score":"تقييم قدرها","share":"شارك البطاقة","scan":"امسح للفتح","copied":"تم نسخ الرابط","foot":"صُمّم وبُني في المملكة","deckSubject":"طلب العرض التعريفي لقدرها","deckBody":"السلام عليكم، أرغب في استلام العرض التعريفي لقدرها."}};
+var lang="en";
+try{var s=localStorage.getItem("lang");if(s)lang=s;else if((navigator.language||"").toLowerCase().indexOf("ar")===0)lang="ar";}catch(e){if((navigator.language||"").toLowerCase().indexOf("ar")===0)lang="ar";}
+function apply(l){
+  lang=l;var d=D[l];
+  document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-k]").forEach(function(e){e.textContent=d[e.getAttribute("data-k")];});
+  document.querySelectorAll(".lang button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-l")===l);});
+  document.getElementById("deck").href="mailto:hello@qadrha.com?subject="+encodeURIComponent(d.deckSubject)+"&body="+encodeURIComponent(d.deckBody);
+  document.title=d.name+" — Qadrha";
+  try{localStorage.setItem("lang",l);}catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){apply(b.getAttribute("data-l"));});});
+apply(lang);
+// score count-up
+var C=2*Math.PI*41,arc=document.getElementById("arc87"),n=document.getElementById("n"),t0=null,T=1600,reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/T,1),e=1-Math.pow(1-p,3),v=87*e;n.textContent=Math.round(v);arc.setAttribute("stroke-dasharray",(C*v/100)+" 999");if(p<1)requestAnimationFrame(step);}
+if(reduce){n.textContent=87;arc.setAttribute("stroke-dasharray",(C*.87)+" 999");}else{setTimeout(function(){requestAnimationFrame(step);},1300);}
+// share
+var toast=document.getElementById("toast");
+function say(m){toast.textContent=m;toast.classList.add("on");setTimeout(function(){toast.classList.remove("on");},1800);}
+document.getElementById("shareBtn").addEventListener("click",function(){
+  var data={title:D[lang].name+" · Qadrha",text:D[lang].pill+" — qadrha.com",url:"https://qadrha.com/bander"};
+  if(navigator.share){navigator.share(data).catch(function(){});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(data.url).then(function(){say(D[lang].copied);});}
+});
+})();
+</script>
+</body>
+</html>

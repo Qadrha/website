@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=utf-8:Binkhlaif;Bander;;;
+FN;CHARSET=utf-8:Bander Binkhlaif
+ORG;CHARSET=utf-8:Qadrha — Sima Labs
+TITLE;CHARSET=utf-8:Founder
+EMAIL;TYPE=WORK:hello@qadrha.com
+TEL;TYPE=CELL:+966531454375
+URL:https://qadrha.com
+URL;TYPE=card:https://qadrha.com/bander
+ADR;TYPE=WORK;CHARSET=utf-8:;;;Riyadh;;;Saudi Arabia
+NOTE;CHARSET=utf-8:Qadrha — the AI car companion. Designed and built in Saudi Arabia.
+END:VCARD
