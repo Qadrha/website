@@ -411,6 +411,47 @@
     .ref-cta { display: inline-block; margin-top: 1.2rem; background: var(--cyan); color: #070A16; font-weight: 800; font-size: 15px; padding: 0.8rem 2rem; border-radius: 999px; border: 0; cursor: pointer; box-shadow: 0 0 20px rgba(0,180,220,0.35); transition: transform .2s; }
     .ref-cta:hover { transform: scale(1.04); }
     @media (max-width: 640px) { .sit-list { grid-template-columns: 1fr; } .hero-duo { margin-top: 2.2rem; } }
+
+    /* ── Hero v2 ── */
+    .hero2 { position: relative; overflow: hidden; padding-top: 5.5rem; }
+    .hero2-aurora { position: absolute; z-index: 0; inset: -20% -10% auto -10%; height: 90%; pointer-events: none; filter: blur(70px); opacity: .9;
+      background: radial-gradient(40% 55% at 78% 40%, rgba(0,150,255,.28), transparent 70%), radial-gradient(34% 45% at 18% 70%, rgba(124,58,237,.20), transparent 70%), radial-gradient(30% 40% at 55% 10%, rgba(0,196,255,.14), transparent 70%);
+      animation: aurora 16s ease-in-out infinite alternate; }
+    @keyframes aurora { to { transform: translate3d(2.5%, 3%, 0) scale(1.06); } }
+    .hero2-grid { position: relative; z-index: 10; max-width: 1320px; margin: 0 auto; padding: 1.5rem 1.5rem 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; align-items: center; text-align: center; }
+    .hero2-copy { display: flex; flex-direction: column; align-items: center; }
+    .hero2-eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; color: #9fe6fb; padding: .45rem 1rem; border-radius: 999px; background: rgba(0,180,220,.08); border: 1px solid rgba(0,180,220,.28); backdrop-filter: blur(8px); margin-bottom: 1.6rem; }
+    .hero2-eyebrow i, .hero2-beta i { width: 7px; height: 7px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399; animation: pulse-dot 2.4s ease-in-out infinite; flex: none; }
+    @keyframes pulse-dot { 50% { opacity: .45; transform: scale(.8); } }
+    .hero2-h1 { font-size: clamp(2.5rem, 5.2vw, 4.6rem); line-height: 1.18; font-weight: 800; letter-spacing: -.02em; color: #f4f7fb; margin-bottom: 1.3rem; }
+    .hero2-h1 span { background-image: linear-gradient(100deg, #4FD6F4 0%, #00B4DC 40%, #9bf0ff 55%, #00B4DC 70%, #4FD6F4 100%); background-size: 240% 100%; animation: shine 7s linear infinite; -webkit-background-clip: text; background-clip: text; }
+    @keyframes shine { to { background-position: -240% 0; } }
+    .hero2-sub { font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.8; color: #9fb2c6; font-weight: 500; max-width: 34rem; margin-bottom: 2rem; }
+    .hero2-cta { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; justify-content: center; }
+    .hero2-btn { background: linear-gradient(180deg, #19d0ff, #00aee8); color: #04121f; font-weight: 800; font-size: 1rem; padding: .95rem 2.2rem; border-radius: 999px; border: 0; cursor: pointer; box-shadow: 0 12px 34px rgba(0,180,220,.38), inset 0 1px 0 rgba(255,255,255,.35); transition: transform .25s ease, box-shadow .25s ease; }
+    .hero2-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 18px 44px rgba(0,180,220,.5), inset 0 1px 0 rgba(255,255,255,.35); }
+    .hero2-link { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; font-weight: 700; color: #b9c9da; transition: color .2s; }
+    .hero2-link:hover { color: #fff; }
+    .hero2-beta { margin-top: 1.4rem; display: inline-flex; align-items: center; gap: .55rem; font-size: 12px; color: #7e92a8; }
+    .hero2-art { position: relative; width: 100%; margin-top: .5rem; }
+    .hero2-float { animation: floaty 9s ease-in-out infinite; will-change: transform; }
+    @keyframes floaty { 50% { transform: translateY(-14px); } }
+    .hero2-tilt { transform: perspective(1800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+    .hero2-tilt img { width: 100%; height: auto; display: block; -webkit-box-reflect: below -6% linear-gradient(transparent 68%, rgba(255,255,255,.10)); filter: drop-shadow(0 40px 70px rgba(0,0,0,.45)); }
+    .hero2-art .duo-note { margin-top: .2rem; }
+    .hero2-trust { position: relative; z-index: 10; max-width: 1100px; margin: 2.2rem auto 0; padding: 1.3rem 1.5rem 2.4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; border-top: 1px solid rgba(255,255,255,.08); }
+    .hero2-trust div { padding: .3rem .8rem; font-size: 13.5px; color: #b9c9da; }
+    .hero2-trust div + div { border-inline-start: 1px solid rgba(255,255,255,.08); }
+    .hero2-trust b { font-weight: 700; letter-spacing: .01em; }
+    @media (min-width: 1024px) {
+      .hero2 { padding-top: 6rem; }
+      .hero2-grid { grid-template-columns: minmax(0, .92fr) minmax(0, 1.28fr); gap: 1.5rem; text-align: start; padding-top: 2.2rem; }
+      .hero2-copy { align-items: flex-start; }
+      .hero2-cta { justify-content: flex-start; }
+      .hero2-art { margin-top: 0; margin-inline-end: -4%; }
+    }
+    @media (max-width: 640px) { .hero2-trust { grid-template-columns: 1fr 1fr; row-gap: .8rem; } .hero2-trust div:nth-child(3) { border-inline-start: 0; } .hero2-h1 { font-size: 2.3rem; } }
+    @media (prefers-reduced-motion: reduce) { .hero2-aurora, .hero2-float, .hero2-h1 span, .hero2-eyebrow i, .hero2-beta i { animation: none !important; } .hero2-tilt { transition: none; transform: none !important; } }
   </style>
 </head>
 
@@ -464,35 +505,45 @@
     </div>
   </nav>
 
-  <!-- ── HERO ───────────────────────────────────────────────────────────── -->
-  <div class="relative overflow-hidden">
+  <!-- ── HERO (v2, Oct 2026): product above the fold, compact headline, floating iPhone Duo ── -->
+  <div class="hero2">
     <div class="hero-glow" id="hero-glow"></div>
-    <header class="pt-40 pb-20 px-6 flex flex-col items-center text-center max-w-5xl mx-auto relative z-10">
-      <div class="hero-anim q-accent mb-8 shadow-[0_0_15px_#00B4DC]"></div>
-      <h1 id="hero-h1" class="hero-anim text-6xl md:text-[7rem] font-bold leading-[1.1] tracking-tight mb-8 text-[#f4f7fb]">
-        وكيل اصطناعي يعرف سيارتك<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00B4DC] to-[#008CB0]">افضل من الوكالة نفسها.</span>
-      </h1>
-      <p id="hero-sub" class="hero-anim text-xl md:text-2xl text-gray-400 font-medium max-w-2xl mb-12 leading-relaxed">
-        من فجوات الضمان إلى استدعاءات لا تعرفها —<br>
-        كل التفاصيل، فورية ودقيقة.
-      </p>
-
-      <div class="hero-anim flex flex-col sm:flex-row gap-4 items-center">
-        <button id="hero-cta-primary" onclick="downloadApp()" class="bg-[#00B4DC] text-[#070A16] font-bold text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,180,220,0.35)]">
-          حمل التطبيق مجاناً
-        </button>
-        <a href="#features" id="hero-cta-secondary" class="text-sm font-semibold text-gray-400 hover:text-white transition flex items-center gap-2">
-          كيف يعمل؟
-          <svg id="hero-arrow" class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        </a>
+    <div class="hero2-aurora" aria-hidden="true"></div>
+    <header class="hero2-grid">
+      <div class="hero2-copy">
+        <span class="hero2-eyebrow hero-anim"><i></i><span data-i18n="x_heroEyebrow">صُمّم وبُني في المملكة العربية السعودية</span></span>
+        <h1 id="hero-h1" class="hero2-h1 hero-anim">
+          وكيل اصطناعي يعرف سيارتك<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00B4DC] to-[#008CB0]">افضل من الوكالة نفسها.</span>
+        </h1>
+        <p id="hero-sub" class="hero2-sub hero-anim">
+          من فجوات الضمان إلى استدعاءات لا تعرفها —<br>
+          كل التفاصيل، فورية ودقيقة.
+        </p>
+        <div class="hero2-cta hero-anim">
+          <button id="hero-cta-primary" onclick="downloadApp()" class="hero2-btn">
+            حمل التطبيق مجاناً
+          </button>
+          <a href="#features" id="hero-cta-secondary" class="hero2-link">
+            كيف يعمل؟
+            <svg id="hero-arrow" class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          </a>
+        </div>
+        <p class="hero2-beta hero-anim"><i></i>نسخة تجريبية مبكرة عبر TestFlight · Early beta access</p>
       </div>
-      <p class="hero-anim text-xs text-gray-500 mt-5">نسخة تجريبية مبكرة عبر TestFlight · Early beta access</p>
-      <div class="hero-duo hero-anim">
-        <img src="assets/hero-duo.webp" width="1700" height="1169" alt="Qadrha on iPhone Duo — car dashboard and the AI advisor side by side, with the recall check on the cover screen" fetchpriority="high">
+      <div class="hero2-art hero-anim">
+        <div class="hero2-float"><div class="hero2-tilt">
+          <img src="assets/hero-duo.webp" width="1700" height="1169" alt="Qadrha on iPhone Duo — car dashboard and the AI advisor side by side, with the recall check on the cover screen" fetchpriority="high">
+        </div></div>
         <p class="duo-note" data-i18n="x_duoNote">عرض توضيحي · بيانات تجريبية</p>
       </div>
     </header>
+    <div class="hero2-trust hero-anim">
+      <div><b data-i18n="x_trust1">سجل الاستدعاءات الرسمي</b></div>
+      <div><b data-i18n="x_trust2">عربي وإنجليزي</b></div>
+      <div><b data-i18n="x_trust3">صُنع في الرياض</b></div>
+      <div><b data-i18n="x_trust4">ابدأ مجاناً</b></div>
+    </div>
   </div>
 
   <!-- ── FEATURES (light zone — matches the app's "content lives in the light lower zone") ── -->
@@ -912,6 +963,8 @@
         aiTypingLabel: 'يكتب...',
         aiInputPh: 'اسأل عن سيارتك...',
         x_duoNote: 'عرض توضيحي · بيانات تجريبية',
+        x_heroEyebrow: 'صُمّم وبُني في المملكة العربية السعودية',
+        x_trust1: 'سجل الاستدعاءات الرسمي', x_trust2: 'عربي وإنجليزي', x_trust3: 'صُنع في الرياض', x_trust4: 'ابدأ مجاناً',
         x_passportTag: 'متاح الآن',
         x_urgentLabel: 'مواقف طارئة:',
         aiChip4: 'السيارة طفّت على الطريق السريع',
@@ -1053,6 +1106,8 @@
         aiTypingLabel: 'Typing...',
         aiInputPh: 'Ask about your car...',
         x_duoNote: 'Illustrative · sample data',
+        x_heroEyebrow: 'Designed and built in Saudi Arabia',
+        x_trust1: 'Official recall registry', x_trust2: 'Arabic & English', x_trust3: 'Built in Riyadh', x_trust4: 'Free to start',
         x_passportTag: 'Live now',
         x_urgentLabel: 'Serious situations:',
         aiChip4: 'My car died on the highway',
@@ -1482,6 +1537,20 @@
     // Hero: reveal immediately on load (not scroll-gated at all — it's the
     // first thing on the page, there's nothing to "trigger").
     document.querySelectorAll('.hero-anim').forEach(el => el.classList.add('is-visible'));
+    // Hero v2: gentle pointer tilt on the iPhone Duo (desktop pointers only; skipped for reduced motion).
+    (function () {
+      const art = document.querySelector('.hero2-art');
+      const tilt = art && art.querySelector('.hero2-tilt');
+      if (!tilt || reduceMotion || !window.matchMedia('(hover: hover)').matches) return;
+      art.addEventListener('pointermove', function (e) {
+        const r = art.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        tilt.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+        tilt.style.setProperty('--rx', (-y * 5).toFixed(2) + 'deg');
+      });
+      art.addEventListener('pointerleave', function () { tilt.style.setProperty('--ry', '0deg'); tilt.style.setProperty('--rx', '0deg'); });
+    })();
+
 
     // Every other .reveal section/card (features, passport, AI spotlight,
     // business form): fade in via a plain IntersectionObserver. If this API
